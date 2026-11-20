@@ -1,60 +1,92 @@
-import { defineAstroPaperConfig } from "@/config/schema";
+import {
+  defineConfig,
+  envField,
+  fontProviders,
+  svgoOptimizer,
+} from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import { rehypeHeadingIds, unified } from "@astrojs/markdown-remark";
+import rehypeCallouts from "rehype-callouts";
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
+import { transformerFileName } from "./src/utils/transformers/fileName";
+import { rehypeTableWrapper } from "./src/utils/rehypeTableWrapper";
+import {
+  inlineTocDeprecation,
+  rehypeInlineToc,
+} from "./src/utils/rehypeInlineToc";
+import config from "./astro-paper.config";
 
-export default defineAstroPaperConfig({
-  site: {
-    url: "https://learn.fanidharcapital.com/",
-    author: "Shree Fanidhar Capital",
-    profile: "https://fanidharcapital.com/",
-    desc: "Structured Stock Market Education Series by Shree Fanidhar Capital — market structure, settlement mechanics, volatility, and risk governance for education and training purposes.",
-    title: "Shree Fanidhar Capital — Learning Series",
-    ogImage: "astropaper-og.jpg",
-    lang: "en",
-    dir: "ltr",
-    timezone: "Asia/Kolkata",
-  },
-  posts: {
-    perPage: 6,
-    perPageIndex: 4,
-    scheduledPostMargin: 15 * 60 * 1000,
-    showBackButton: true,
-    showArchives: true,
-    editPost: {
-      enabled: false,
-      text: "Edit page",
-      url: "https://github.com/fanidharcapital/fanidharcapital-learn/edit/main/",
+export default defineConfig({
+  site: config.site.url,
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: page =>
+        config.features?.showArchives !== false || !/\/archives\/?$/.test(page),
+    }),
+    inlineTocDeprecation(),
+  ],
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false,
     },
   },
-  features: {
-    lightAndDarkMode: true,
-    dynamicOgImage: true,
-    search: "pagefind",
+  markdown: {
+    // Deprecated: the theme no longer uses remark-toc or remark-collapse. They
+    // stay in package.json so a customised config importing them still builds,
+    // and are removed in v8.
+    processor: unified({
+      rehypePlugins: [
+        rehypeHeadingIds,
+        rehypeInlineToc,
+        rehypeCallouts,
+        rehypeTableWrapper,
+      ],
+    }),
+    shikiConfig: {
+      themes: { light: "min-light", dark: "night-owl" },
+      defaultColor: false,
+      wrap: false,
+      transformers: [
+        transformerFileName({ style: "v2", hideDot: false }),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+        transformerNotationDiff({ matchAlgorithm: "v3" }),
+      ],
+    },
   },
-  socials: [
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  fonts: [
     {
-      name: "mail",
-      url: "mailto:sachin@fanidharcapital.com",
+      name: "Google Sans Code",
+      cssVariable: "--font-google-sans-code",
+      provider: fontProviders.google(),
+      fallbacks: ["monospace"],
+      weights: [300, 400, 500, 600, 700],
+      styles: ["normal", "italic"],
+      formats: ["woff", "ttf"],
     },
   ],
-  shareLinks: [
-    {
-      name: "whatsapp",
-      url: "https://wa.me/?text=",
+  env: {
+    schema: {
+      PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
     },
-    {
-      name: "linkedin",
-      url: "https://www.linkedin.com/sharing/share-offsite/?url=",
-    },
-    {
-      name: "x",
-      url: "https://x.com/intent/post?url=",
-    },
-    {
-      name: "telegram",
-      url: "https://t.me/share/url?url=",
-    },
-    {
-      name: "mail",
-      url: "mailto:?subject=See%20this%20learning%20note&body=",
-    },
-  ],
+  },
+  experimental: {
+    svgOptimizer: svgoOptimizer(),
+  },
 });
