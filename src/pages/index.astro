@@ -1,21 +1,18 @@
     <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Shree Fanidhar Capital — Learning Series
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      <div class="my-4 flex items-center gap-3 sm:my-8">
+        <h1 class="text-4xl font-bold sm:text-5xl">
+          Shree Fanidhar Capital — Learning Series
+        </h1>
+        <a
+          target="_blank"
+          href="/rss.xml"
+          class="text-sm font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
+          aria-label="rss feed"
+          title="RSS Feed"
+        >
+          RSS
+        </a>
+      </div>
 
       <p>
         Structured market education notes on Indian equity market structure,
@@ -23,21 +20,13 @@
         governance.
       </p>
       <p class="mt-2">
-        Published strictly for educational and training purposes by
-        <LinkButton
+        Published strictly for educational and training purposes by{" "}
+        <a
           class="underline decoration-dashed underline-offset-4 hover:text-accent"
           href="https://fanidharcapital.com/"
         >
           Shree Fanidhar Capital
-        </LinkButton>. Not SEBI-registered investment advice or a security
-        recommendation.
+        </a>
+        . Not SEBI-registered investment advice or a security recommendation.
       </p>
-      {
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Connect:</div>
-            <Socials />
-          </div>
-        )
-      }
     </section>
