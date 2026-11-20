@@ -7,25 +7,26 @@ export default {
     title: "Shree Fanidhar Capital — Learning Series",
     ogImage: "astropaper-og.jpg",
     lang: "en",
-    dir: "ltr",
+    dir: "ltr" as const,
     timezone: "Asia/Kolkata",
   },
   posts: {
     perPage: 6,
-    perPageIndex: 4,
+    perIndex: 4,
     scheduledPostMargin: 15 * 60 * 1000,
-    showBackButton: true,
+  },
+  features: {
+    lightAndDarkMode: true,
+    dynamicOgImage: true,
     showArchives: true,
+    showBackButton: true,
     editPost: {
       enabled: false,
       text: "Edit page",
       url: "https://github.com/fanidharcapital/fanidharcapital-learn/edit/main/",
     },
-  },
-  features: {
-    lightAndDarkMode: true,
-    dynamicOgImage: true,
-    search: "pagefind",
+    search: "pagefind" as const,
+    toc: true,
   },
   socials: [
     {
