@@ -1,45 +1,60 @@
-import { defineAstroPaperConfig } from "./src/types/config";
+import { defineAstroPaperConfig } from "@/config/schema";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://astro-paper.pages.dev/",
-    title: "AstroPaper",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
-    author: "Sat Naing",
-    profile: "https://satna.ing",
-    ogImage: "default-og.jpg",
+    url: "https://learn.fanidharcapital.com/",
+    author: "Shree Fanidhar Capital",
+    profile: "https://fanidharcapital.com/",
+    desc: "Structured Stock Market Education Series by Shree Fanidhar Capital — market structure, settlement mechanics, volatility, and risk governance for education and training purposes.",
+    title: "Shree Fanidhar Capital — Learning Series",
+    ogImage: "astropaper-og.jpg",
     lang: "en",
-    timezone: "Asia/Bangkok",
     dir: "ltr",
+    timezone: "Asia/Kolkata",
   },
   posts: {
-    perPage: 4,
-    perIndex: 4,
+    perPage: 6,
+    perPageIndex: 4,
+    scheduledPostMargin: 15 * 60 * 1000,
+    showBackButton: true,
+    showArchives: true,
+    editPost: {
+      enabled: false,
+      text: "Edit page",
+      url: "https://github.com/fanidharcapital/fanidharcapital-learn/edit/main/",
+    },
   },
   features: {
     lightAndDarkMode: true,
     dynamicOgImage: true,
-    showArchives: true,
-    showBackButton: true,
-    editPost: {
-      enabled: true,
-      url: "https://github.com/satnaing/astro-paper/edit/main/",
-    },
     search: "pagefind",
-    toc: true,
   },
   socials: [
-    { name: "github",   url: "https://github.com/satnaing/astro-paper" },
-    { name: "x",        url: "https://x.com/username" },
-    { name: "linkedin", url: "https://www.linkedin.com/in/username/" },
-    { name: "mail",     url: "mailto:yourmail@gmail.com" },
+    {
+      name: "mail",
+      url: "mailto:sachin@fanidharcapital.com",
+    },
   ],
   shareLinks: [
-    { name: "whatsapp", url: "https://wa.me/?text=" },
-    { name: "facebook", url: "https://www.facebook.com/sharer.php?u=" },
-    { name: "x",        url: "https://x.com/intent/post?url=" },
-    { name: "telegram", url: "https://t.me/share/url?url=" },
-    { name: "pinterest", url: "https://pinterest.com/pin/create/button/?url=" },
-    { name: "mail",     url: "mailto:?subject=See%20this%20post&body=" },
+    {
+      name: "whatsapp",
+      url: "https://wa.me/?text=",
+    },
+    {
+      name: "linkedin",
+      url: "https://www.linkedin.com/sharing/share-offsite/?url=",
+    },
+    {
+      name: "x",
+      url: "https://x.com/intent/post?url=",
+    },
+    {
+      name: "telegram",
+      url: "https://t.me/share/url?url=",
+    },
+    {
+      name: "mail",
+      url: "mailto:?subject=See%20this%20learning%20note&body=",
+    },
   ],
 });
