@@ -4,15 +4,14 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
-import Hr from "@/components/Hr.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
-import { SITE } from "@/config";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import SITE from "@/config";
 
-const posts = await getCollection("blog");
-
+const posts = await getCollection("posts", ({ data }) => !data.draft);
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const limit = SITE.posts?.perIndex ?? SITE.postPerIndex ?? 4;
 ---
 
 <Layout>
@@ -51,7 +50,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </p>
     </section>
 
-    <Hr />
+    <hr class="border-border" />
 
     {
       featuredPosts.length > 0 && (
@@ -59,12 +58,12 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <section id="featured" class="pt-12 pb-6">
             <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
             <ul>
-              {featuredPosts.map(data => (
-                <Card variant="h3" {...data} />
+              {featuredPosts.map(post => (
+                <Card variant="h3" {...post} />
               ))}
             </ul>
           </section>
-          {recentPosts.length > 0 && <Hr />}
+          {recentPosts.length > 0 && <hr class="border-border" />}
         </>
       )
     }
@@ -74,10 +73,11 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <section id="recent-posts" class="pt-12 pb-6">
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
+            {recentPosts
+              .slice(0, limit)
+              .map(post => (
+                <Card variant="h3" {...post} />
+              ))}
           </ul>
         </section>
       )
