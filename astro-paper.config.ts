@@ -1,6 +1,4 @@
-import { defineAstroPaperConfig } from "@/config/schema";
-
-export default defineAstroPaperConfig({
+export default {
   site: {
     url: "https://learn.fanidharcapital.com/",
     author: "Shree Fanidhar Capital",
@@ -57,4 +55,4 @@ export default defineAstroPaperConfig({
       url: "mailto:?subject=See%20this%20learning%20note&body=",
     },
   ],
-});
+};
