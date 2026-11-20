@@ -3,12 +3,14 @@ export default {
     url: "https://learn.fanidharcapital.com/",
     author: "Shree Fanidhar Capital",
     profile: "https://fanidharcapital.com/",
-    desc: "Structured Stock Market Education Series by Shree Fanidhar Capital — market structure, settlement mechanics, volatility, and risk governance for education and training purposes.",
+    description:
+      "Structured Stock Market Education Series by Shree Fanidhar Capital — market structure, settlement mechanics, volatility, and risk governance for education and training purposes.",
     title: "Shree Fanidhar Capital — Learning Series",
     ogImage: "astropaper-og.jpg",
     lang: "en",
     dir: "ltr" as const,
     timezone: "Asia/Kolkata",
+    googleVerification: "",
   },
   posts: {
     perPage: 6,
