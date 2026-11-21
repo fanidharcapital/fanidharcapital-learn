@@ -43,28 +43,28 @@ const isActive = (path: string) => {
       <div class="flex items-center gap-4 font-medium sm:gap-6">
         <a
           href="/posts/"
-          class:list={["hover:text-accent", { "active-nav": isActive("/posts") }]}
+          class:list={[
+            "nav-straight-link hover:text-accent",
+            { "nav-active": isActive("/posts") },
+          ]}
         >
           Lessons
         </a>
         <a
           href="/curriculum/"
           class:list={[
-            "hover:text-accent",
-            { "active-nav": isActive("/curriculum") },
+            "nav-straight-link hover:text-accent",
+            { "nav-active": isActive("/curriculum") },
           ]}
         >
           Curriculum
         </a>
         <a
-          href="/tags/"
-          class:list={["hover:text-accent", { "active-nav": isActive("/tags") }]}
-        >
-          Tags
-        </a>
-        <a
           href="/about/"
-          class:list={["hover:text-accent", { "active-nav": isActive("/about") }]}
+          class:list={[
+            "nav-straight-link hover:text-accent",
+            { "nav-active": isActive("/about") },
+          ]}
         >
           About
         </a>
@@ -75,8 +75,8 @@ const isActive = (path: string) => {
         <LinkButton
           href="/archives/"
           class:list={[
-            "focus-outline p-1.5 hover:text-accent",
-            { "active-nav": isActive("/archives") },
+            "nav-straight-link focus-outline p-1.5 hover:text-accent",
+            { "nav-active": isActive("/archives") },
           ]}
           aria-label="archives"
           title="Archives"
@@ -88,8 +88,8 @@ const isActive = (path: string) => {
         <LinkButton
           href="/search/"
           class:list={[
-            "focus-outline p-1.5 hover:text-accent",
-            { "active-nav": isActive("/search") },
+            "nav-straight-link focus-outline p-1.5 hover:text-accent",
+            { "nav-active": isActive("/search") },
           ]}
           aria-label="search"
           title="Search"
@@ -148,6 +148,22 @@ const isActive = (path: string) => {
     </nav>
   </div>
 </header>
+
+<style>
+  .nav-straight-link {
+    text-decoration-style: solid !important;
+    text-decoration-line: none;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  .nav-active {
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+</style>
 
 <script>
   function toggleNav() {
