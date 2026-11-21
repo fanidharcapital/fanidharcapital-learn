@@ -6,7 +6,8 @@ import { getSortedPosts } from "@/utils/getSortedPosts";
 const posts = await getCollection("posts", ({ data }) => !data.draft);
 const lessons = getSortedPosts(posts)
   .reverse()
-  .map(post => ({
+  .map((post, index) => ({
+    number: String(index + 1).padStart(2, "0"),
     title: post.data.title,
     url: getPostUrl(post.id, post.filePath, Astro.currentLocale),
   }));
@@ -16,33 +17,43 @@ const lessons = getSortedPosts(posts)
   lessons.length > 0 && (
     <section
       aria-label="Education Series Lessons"
-      class="w-full overflow-hidden border-b border-[#c9a45a]/50 bg-[#08241b] py-3 text-[#f8f3e8]"
+      class="w-full overflow-hidden border-b border-[#c9a45a]/30 bg-background py-4"
     >
       <div class="marquee-wrapper flex w-max">
-        <div class="marquee-track flex shrink-0 items-center gap-10 px-5">
+        {/* Track 1 */}
+        <div class="marquee-track flex shrink-0 items-center gap-4 px-2">
           {lessons.map(lesson => (
             <a
               href={lesson.url}
-              class="inline-flex items-center gap-2.5 whitespace-nowrap text-xs font-semibold tracking-wide text-[#f8f3e8] transition hover:text-[#e6c885] sm:text-sm"
+              class="group flex items-center gap-3 whitespace-nowrap rounded-xl border border-[#c9a45a] bg-[#0c3024] px-4 py-2.5 text-[#f8f3e8] shadow-sm transition hover:-translate-y-0.5 hover:border-[#e6c885] hover:bg-[#123d2f]"
             >
-              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a45a]" />
-              <span>{lesson.title}</span>
+              <span class="rounded-md border border-[#c9a45a]/60 bg-[#144233] px-2 py-0.5 text-[11px] font-bold tracking-wider text-[#e6c885]">
+                #{lesson.number}
+              </span>
+              <span class="text-xs font-semibold tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885] sm:text-sm">
+                {lesson.title}
+              </span>
             </a>
           ))}
         </div>
 
+        {/* Track 2 (seamless duplicate loop) */}
         <div
           aria-hidden="true"
-          class="marquee-track flex shrink-0 items-center gap-10 px-5"
+          class="marquee-track flex shrink-0 items-center gap-4 px-2"
         >
           {lessons.map(lesson => (
             <a
               href={lesson.url}
               tabindex="-1"
-              class="inline-flex items-center gap-2.5 whitespace-nowrap text-xs font-semibold tracking-wide text-[#f8f3e8] transition hover:text-[#e6c885] sm:text-sm"
+              class="group flex items-center gap-3 whitespace-nowrap rounded-xl border border-[#c9a45a] bg-[#0c3024] px-4 py-2.5 text-[#f8f3e8] shadow-sm transition hover:-translate-y-0.5 hover:border-[#e6c885] hover:bg-[#123d2f]"
             >
-              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a45a]" />
-              <span>{lesson.title}</span>
+              <span class="rounded-md border border-[#c9a45a]/60 bg-[#144233] px-2 py-0.5 text-[11px] font-bold tracking-wider text-[#e6c885]">
+                #{lesson.number}
+              </span>
+              <span class="text-xs font-semibold tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885] sm:text-sm">
+                {lesson.title}
+              </span>
             </a>
           ))}
         </div>
@@ -53,7 +64,7 @@ const lessons = getSortedPosts(posts)
 
 <style>
   .marquee-track {
-    animation: lesson-scroll 15s linear infinite;
+    animation: lesson-scroll 18s linear infinite;
   }
 
   .marquee-wrapper:hover .marquee-track,
