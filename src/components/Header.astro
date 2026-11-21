@@ -1,6 +1,31 @@
-<header class="border-b border-border/60 bg-background/95">
+---
+import IconX from "@/assets/icons/IconX.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconArchive from "@/assets/icons/IconArchive.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import LinkButton from "./LinkButton.astro";
+import { SITE } from "@/config";
+
+const { pathname } = Astro.url;
+
+const currentPath =
+  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+---
+
+<header
+  id="main-header"
+  class="border-b border-border/60 bg-background/95"
+>
   <div class="mx-auto flex max-w-5xl flex-col gap-2.5 px-4 py-3 sm:px-6">
-    <!-- Line 1: Full Brand Title with "Series" -->
+    <!-- Line 1: Full Brand Title -->
     <div class="flex items-center justify-between">
       <a
         href="/"
@@ -10,41 +35,151 @@
       </a>
     </div>
 
-    <!-- Line 2: Navigation Links + Right-Side Controls / 3-Bar Menu -->
+    <!-- Line 2: Navigation + Working 3-Bar Menu Toggle -->
     <nav
+      id="nav-menu"
       aria-label="Primary"
-      class="flex items-center justify-between gap-2 border-t border-border/40 pt-2 text-sm"
+      class="flex flex-wrap items-center justify-between gap-2 border-t border-border/40 pt-2 text-sm"
     >
-      <div class="flex flex-wrap items-center gap-3.5 font-medium sm:gap-6">
-        <a href="/posts/" class="hover:text-accent">Lessons</a>
-        <a href="/curriculum/" class="hover:text-accent">Curriculum</a>
-        <a href="/tags/" class="hover:text-accent">Tags</a>
-        <a href="/about/" class="hover:text-accent">About</a>
+      <div class="flex items-center gap-4 font-medium sm:gap-6">
+        <a
+          href="/posts/"
+          class:list={["hover:text-accent", { "active-nav": isActive("/posts") }]}
+        >
+          Lessons
+        </a>
+        <a
+          href="/curriculum/"
+          class:list={[
+            "hover:text-accent",
+            { "active-nav": isActive("/curriculum") },
+          ]}
+        >
+          Curriculum
+        </a>
+        <a
+          href="/tags/"
+          class:list={["hover:text-accent", { "active-nav": isActive("/tags") }]}
+        >
+          Tags
+        </a>
+        <a
+          href="/about/"
+          class:list={["hover:text-accent", { "active-nav": isActive("/about") }]}
+        >
+          About
+        </a>
       </div>
 
-      <div class="flex shrink-0 items-center gap-2 sm:gap-3">
-        <!-- Keep your existing Archives, Search, and Dark/Light theme buttons here -->
-        <button
-          type="button"
-          aria-label="Menu"
-          class="inline-flex items-center justify-center rounded-md p-1.5 text-foreground hover:bg-muted"
+      <!-- Right-side action icons + 3-bar button -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        {
+          SITE.showArchives && (
+            <LinkButton
+              href="/archives/"
+              class:list={[
+                "focus-outline p-1.5 hover:text-accent",
+                { "active-nav": isActive("/archives") },
+              ]}
+              ariaLabel="archives"
+              title="Archives"
+            >
+              <IconArchive class="inline-block size-5" />
+              <span class="sr-only">Archives</span>
+            </LinkButton>
+          )
+        }
+
+        <LinkButton
+          href="/search/"
+          class:list={[
+            "focus-outline p-1.5 hover:text-accent",
+            { "active-nav": isActive("/search") },
+          ]}
+          ariaLabel="search"
+          title="Search"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
+          <IconSearch class="inline-block size-5" />
+          <span class="sr-only">Search</span>
+        </LinkButton>
+
+        {
+          SITE.lightAndDarkMode && (
+            <button
+              id="theme-btn"
+              class="focus-outline relative size-8 p-1.5 hover:text-accent"
+              title="Toggles light & dark"
+              aria-label="auto"
+              aria-live="polite"
+            >
+              <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+              <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+            </button>
+          )
+        }
+
+        <button
+          id="menu-btn"
+          class="focus-outline p-1.5 hover:text-accent"
+          aria-label="Open Menu"
+          aria-expanded="false"
+          aria-controls="menu-items"
+        >
+          <IconX id="close-icon" class="hidden size-5" />
+          <IconMenuDeep id="menu-icon" class="size-5" />
         </button>
       </div>
+
+      <!-- Collapsible Drawer opened by 3-bar button -->
+      <ul
+        id="menu-items"
+        class="hidden w-full flex-col gap-2 border-t border-border/40 pt-2.5 pb-1 font-medium"
+      >
+        <li>
+          <a href="/posts/" class="block py-1 hover:text-accent">All Lessons</a>
+        </li>
+        <li>
+          <a href="/curriculum/" class="block py-1 hover:text-accent">Curriculum</a>
+        </li>
+        <li>
+          <a href="/tags/" class="block py-1 hover:text-accent">Browse by Tags</a>
+        </li>
+        <li>
+          <a href="/archives/" class="block py-1 hover:text-accent">Archives</a>
+        </li>
+        <li>
+          <a href="/search/" class="block py-1 hover:text-accent">Search</a>
+        </li>
+        <li>
+          <a href="/about/" class="block py-1 hover:text-accent">About</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </header>
+
+<script>
+  function toggleNav() {
+    const menuBtn = document.querySelector("#menu-btn");
+    const menuItems = document.querySelector("#menu-items");
+    const menuIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+
+    if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
+
+    menuBtn.addEventListener("click", () => {
+      const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
+
+      menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
+      menuBtn.setAttribute("aria-label", openMenu ? "Open Menu" : "Close Menu");
+
+      menuItems.classList.toggle("hidden");
+      menuItems.classList.toggle("flex");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  toggleNav();
+  document.addEventListener("astro:after-swap", toggleNav);
+</script>
