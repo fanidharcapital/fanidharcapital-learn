@@ -12,85 +12,108 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const limit = SITE.posts?.perIndex ?? 4;
+
+const learningPath = [
+  { range: "01–30", title: "Market foundations", detail: "How India’s equity markets work, from shares and indices to order types." },
+  { range: "31–60", title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and the systems behind each trade." },
+  { range: "61–90", title: "Fundamental analysis", detail: "Understand businesses, financial statements, valuation, and key ratios." },
+  { range: "91–120", title: "Technical analysis", detail: "Read charts, trends, support and resistance, and common indicators." },
+  { range: "121–150", title: "Price action", detail: "Build a structured approach to candles, market structure, and context." },
+  { range: "151–180", title: "Futures market", detail: "Learn contracts, margin, expiry, basis, and futures risk." },
+  { range: "181–210", title: "Options market", detail: "Explore calls, puts, payoff profiles, and option-chain terminology." },
+  { range: "211–240", title: "Greeks & strategies", detail: "Understand sensitivity measures and how multi-leg positions behave." },
+  { range: "241–270", title: "Risk & psychology", detail: "Study position sizing, risk limits, discipline, and decision-making." },
+  { range: "271–300", title: "Institutions & macro", detail: "Connect economic data, global cues, and institutional activity." },
+  { range: "301–330", title: "Advanced concepts", detail: "Explore market structure, volatility, and more complex frameworks." },
+  { range: "331–365", title: "Case studies", detail: "Apply the concepts through educational examples and review exercises." },
+];
 ---
 
 <Layout>
   <Header />
-  <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
-      <div class="my-4 flex items-center gap-3 sm:my-8">
-        <h1 class="text-4xl font-bold sm:text-5xl">
-          Shree Fanidhar Capital — Learning Series
-        </h1>
-        <a
-          target="_blank"
-          href="/rss.xml"
-          class="text-sm font-medium underline decoration-dashed underline-offset-4 hover:text-accent"
-          aria-label="rss feed"
-          title="RSS Feed"
-        >
-          RSS
-        </a>
+  <main id="main-content" data-layout="index" class="app-layout">
+    <section class="relative isolate overflow-hidden rounded-3xl border border-border bg-[#0c3024] px-6 py-10 text-[#f8f3e8] shadow-sm sm:px-10 sm:py-14 lg:px-14">
+      <div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full border border-[#c9a45a]/30 sm:h-96 sm:w-96"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute -right-5 -top-9 h-56 w-56 rounded-full border border-[#c9a45a]/20 sm:h-80 sm:w-80"></div>
+      <div class="relative max-w-3xl">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#d8bd7b]">Shree Fanidhar Capital · Learning</p>
+        <h1 class="max-w-2xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">Build your market knowledge, one lesson at a time.</h1>
+        <p class="mt-5 max-w-2xl text-base leading-7 text-[#e5ece7] sm:text-lg">A structured 365-day learning path covering Indian markets, analysis, derivatives, risk, and practical case studies—designed to make complex concepts easier to understand.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#start-learning" class="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d8bd7b] px-6 py-3 text-sm font-semibold text-[#173426] transition hover:bg-[#e7d39d]">Start learning <span aria-hidden="true" class="ml-2">→</span></a>
+          <a href="#curriculum" class="inline-flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Explore the curriculum</a>
+        </div>
+        <p class="mt-7 text-xs leading-5 text-[#c8d5cd]">Learn at your own pace · Beginner-friendly explanations · Educational content</p>
       </div>
-
-      <p>
-        Structured market education notes on Indian equity market structure,
-        clearing and T+1 settlement mechanics, volatility regimes, and risk
-        governance.
-      </p>
-      <p class="mt-2">
-        Published strictly for educational and training purposes by{" "}
-        <a
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://fanidharcapital.com/"
-        >
-          Shree Fanidhar Capital
-        </a>
-        . Not SEBI-registered investment advice or a security recommendation.
-      </p>
     </section>
 
-    <hr class="border-border" />
+    <section id="start-learning" class="py-12 sm:py-16">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Your learning journey</p>
+          <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Start with the first lesson</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Begin with the structure of Indian equity markets and the T+1 settlement cycle. Each lesson builds on the concepts introduced before it.</p>
+        </div>
+        <a href="/posts/" class="text-sm font-semibold text-accent underline decoration-dashed underline-offset-4">Browse all lessons ↗</a>
+      </div>
+      {
+        featuredPosts.length > 0 ? (
+          <ul class="grid gap-5 md:grid-cols-2">
+            {featuredPosts.map(post => <Card variant="h3" {...post} />)}
+          </ul>
+        ) : (
+          <div class="rounded-2xl border border-border bg-muted/40 p-6">
+            <p class="font-semibold">Lesson 01 is ready to explore</p>
+            <p class="mt-2 text-sm text-muted-foreground">Visit the posts archive to open the first published learning note.</p>
+            <a href="/posts/" class="mt-4 inline-block text-sm font-semibold text-accent underline underline-offset-4">Open lesson archive →</a>
+          </div>
+        )
+      }
+    </section>
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map(post => (
-                <Card variant="h3" {...post} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <hr class="border-border" />}
-        </>
-      )
-    }
+    <section id="curriculum" class="border-t border-border py-12 sm:py-16">
+      <div class="mb-8 max-w-2xl">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">The 365-day curriculum</p>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">A clear path from fundamentals to application</h2>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">Twelve learning modules organize the series into manageable stages. The curriculum is a roadmap; lessons will be published progressively.</p>
+        <a href="/curriculum/" class="mt-4 inline-flex text-sm font-semibold text-accent underline decoration-dashed underline-offset-4">View the full curriculum and published lessons ↗</a>
+      </div>
+      <ol class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {learningPath.map((module, index) => (
+          <li class="group rounded-2xl border border-border bg-background p-5 transition hover:-translate-y-0.5 hover:border-[#c9a45a]/70 hover:shadow-md">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">Module {String(index + 1).padStart(2, "0")}</span>
+              <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Days {module.range}</span>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">{module.title}</h3>
+            <p class="mt-2 text-sm leading-6 text-muted-foreground">{module.detail}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
-            {recentPosts
-              .slice(0, limit)
-              .map(post => (
-                <Card variant="h3" {...post} />
-              ))}
+        <section id="recent-posts" class="border-t border-border py-12 sm:py-16">
+          <div class="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Keep exploring</p>
+              <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Latest learning notes</h2>
+            </div>
+            <a href="/posts/" class="text-sm font-semibold text-accent underline decoration-dashed underline-offset-4">All lessons ↗</a>
+          </div>
+          <ul class="grid gap-5 md:grid-cols-2">
+            {recentPosts.slice(0, limit).map(post => <Card variant="h3" {...post} />)}
           </ul>
         </section>
       )
     }
 
-    <div class="my-8 text-center">
-      <a
-        href="/posts/"
-        class="inline-block underline decoration-dashed underline-offset-4 hover:text-accent"
-      >
-        All Posts &rarr;
-      </a>
-    </div>
+    <section class="mb-12 rounded-2xl border border-[#c9a45a]/40 bg-[#f5f0e4] p-6 text-[#23382d] sm:mb-16 sm:p-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#80632b]">A note on learning</p>
+      <h2 class="mt-2 text-xl font-semibold">Knowledge first. Decisions remain yours.</h2>
+      <p class="mt-3 max-w-3xl text-sm leading-6">This series is for education and general market awareness. It is not investment advice, a recommendation to buy or sell securities, or a promise of market outcomes. Learn concepts carefully and consider your own circumstances before making financial decisions.</p>
+    </section>
   </main>
   <Footer />
 </Layout>
