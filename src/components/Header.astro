@@ -1,5 +1,5 @@
 ---
-import { SITE } from "@/config";
+import SITE from "@/config";
 
 const { pathname } = Astro.url;
 const currentPath =
@@ -73,9 +73,9 @@ const isActive = (path: string) => {
         ]}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect width="20" height="5" x="2" y="3" rx="1" />
-          <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
-          <path d="M10 12h4" />
+          <rect width="20" height="5" x="2" y="3" rx="1"></rect>
+          <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
+          <path d="M10 12h4"></path>
         </svg>
       </a>
 
@@ -89,8 +89,8 @@ const isActive = (path: string) => {
         ]}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
         </svg>
       </a>
 
@@ -102,7 +102,7 @@ const isActive = (path: string) => {
         class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/80 transition-colors hover:bg-muted hover:text-accent sm:h-9 sm:w-9"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
         </svg>
       </button>
 
@@ -114,4 +114,47 @@ const isActive = (path: string) => {
         aria-label="Toggle menu"
         class="inline-flex h-8 items-center gap-1 rounded-md border border-border px-2 text-xs font-medium text-foreground transition-colors hover:bg-muted sm:h-9 sm:px-2.5 md:hidden"
       >
-        
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+        <span>Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav-drawer"
+    aria-label="Mobile navigation"
+    class="hidden border-t border-border bg-background px-4 py-3 md:hidden"
+  >
+    <div class="mx-auto flex max-w-5xl flex-col gap-1">
+      <a href="/posts" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
+        Lessons
+      </a>
+      <a href="/curriculum" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
+        Curriculum
+      </a>
+      <a href="/tags" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
+        Tags
+      </a>
+      <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
+        About
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById("mobile-menu-btn");
+    const drawer = document.getElementById("mobile-nav-drawer");
+    if (!btn || !drawer) return;
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      drawer.classList.toggle("hidden", expanded);
+    });
+  })();
+</script>
