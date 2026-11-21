@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
+import LessonMarquee from "@/components/LessonMarquee.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import SITE from "@/config";
 
@@ -51,6 +52,8 @@ const learningPath = [
       </div>
     </div>
   </section>
+
+  <LessonMarquee />
 
   <main id="main-content" data-layout="index" class="app-layout pb-10">
     <section id="start-learning" class="py-12 sm:py-16">
