@@ -1,16 +1,29 @@
 ---
 import { getCollection } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
-import { getSortedPosts } from "@/utils/getSortedPosts";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
-const lessons = getSortedPosts(posts)
-  .reverse()
-  .map((post, index) => ({
-    number: String(index + 1).padStart(2, "0"),
-    title: post.data.title,
-    url: getPostUrl(post.id, post.filePath, Astro.currentLocale),
-  }));
+
+const lessons = posts
+  .map(post => {
+    const match =
+      post.data.title.match(/#(\d+)/) || post.id.match(/day-(\d+)/i);
+    const num = match ? parseInt(match[1], 10) : 999;
+    const number =
+      num !== 999 ? String(num).padStart(2, "0") : "—";
+    const cleanTitle = post.data.title.replace(
+      /^Education Series #\d+:\s*/i,
+      ""
+    );
+
+    return {
+      num,
+      number,
+      title: cleanTitle,
+      url: getPostUrl(post.id, post.filePath, Astro.currentLocale),
+    };
+  })
+  .sort((a, b) => a.num - b.num);
 ---
 
 {
