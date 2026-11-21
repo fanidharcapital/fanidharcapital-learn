@@ -1,22 +1,35 @@
 import type { CollectionEntry } from "astro:content";
-import { postFilter } from "./postFilter";
+import postFilter from "./postFilter";
 
-/**
- * Returns posts that are eligible to be shown to users, sorted by “last updated”
- * descending (uses `modDatetime` when present, otherwise `pubDatetime`).
- *
- * Note: filtering respects drafts and scheduled posts via `postFilter()`.
- */
-export function getSortedPosts(posts: CollectionEntry<"posts">[]) {
+const getLessonNumber = (title: string, id: string): number => {
+  const match =
+    title.match(/#(\d+)/) ||
+    title.match(/Lesson\s*(\d+)/i) ||
+    id.match(/series-(\d+)/i) ||
+    id.match(/(\d+)/);
+  return match ? parseInt(match[1], 10) : Number.MAX_SAFE_INTEGER;
+};
+
+const getSortedPosts = (posts: CollectionEntry<"blog">[]) => {
   return posts
     .filter(postFilter)
-    .sort(
-      (a, b) =>
-        Math.floor(
-          new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() / 1000
-        ) -
+    .sort((a, b) => {
+      const numA = getLessonNumber(a.data.title, a.id);
+      const numB = getLessonNumber(b.data.title, b.id);
+
+      if (numA !== numB) {
+        return numA - numB; // Always 01 -> 02 -> 03 -> ... -> 365
+      }
+
+      return (
         Math.floor(
           new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime() / 1000
+        ) -
+        Math.floor(
+          new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() / 1000
         )
-    );
-}
+      );
+    });
+};
+
+export default getSortedPosts;
