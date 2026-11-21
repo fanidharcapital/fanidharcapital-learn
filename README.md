@@ -15,10 +15,3 @@ Educational platform and structured lesson series covering Indian equity markets
 - `src/components/Header.astro` — Two-line responsive header and navigation menu
 - `src/utils/getSortedPosts.ts` — Lesson sorting utility ordering lessons sequentially by lesson number
 
----
-
-## Local Development
-
-```bash
-pnpm install
-pnpm run dev
