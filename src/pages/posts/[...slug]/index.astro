@@ -180,4 +180,8 @@ const ogImage = ogImageUrl
   <Footer />
 </PostLayout>
 
-<script is:inline
+<script is:inline data-astro-rerun>
+  document.addEventListener("astro:after-swap", () => {
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  });
+</script>
