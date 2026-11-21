@@ -1,29 +1,49 @@
 <header class="border-b border-border/60 bg-background/95">
-  <div class="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3.5 sm:px-6">
-    <!-- Line 1: Full Brand Title -->
+  <div class="mx-auto flex max-w-5xl flex-col gap-2.5 px-4 py-3 sm:px-6">
+    <!-- Line 1: Full Brand Title with "Series" -->
     <div class="flex items-center justify-between">
       <a
         href="/"
-        class="text-lg font-bold tracking-tight text-foreground sm:text-xl md:text-2xl"
+        class="text-base font-bold tracking-tight text-foreground sm:text-xl md:text-2xl"
       >
-        Shree Fanidhar Capital - Learning
+        Shree Fanidhar Capital - Learning Series
       </a>
     </div>
 
-    <!-- Line 2: Navigation Links + Action Icons -->
+    <!-- Line 2: Navigation Links + Right-Side Controls / 3-Bar Menu -->
     <nav
       aria-label="Primary"
-      class="flex flex-wrap items-center justify-between gap-3 border-t border-border/40 pt-2.5 text-sm"
+      class="flex items-center justify-between gap-2 border-t border-border/40 pt-2 text-sm"
     >
-      <div class="flex flex-wrap items-center gap-4 sm:gap-6 font-medium">
+      <div class="flex flex-wrap items-center gap-3.5 font-medium sm:gap-6">
         <a href="/posts/" class="hover:text-accent">Lessons</a>
         <a href="/curriculum/" class="hover:text-accent">Curriculum</a>
         <a href="/tags/" class="hover:text-accent">Tags</a>
         <a href="/about/" class="hover:text-accent">About</a>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex shrink-0 items-center gap-2 sm:gap-3">
         <!-- Keep your existing Archives, Search, and Dark/Light theme buttons here -->
+        <button
+          type="button"
+          aria-label="Menu"
+          class="inline-flex items-center justify-center rounded-md p-1.5 text-foreground hover:bg-muted"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
       </div>
     </nav>
   </div>
