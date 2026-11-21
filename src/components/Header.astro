@@ -6,7 +6,6 @@ import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
-import SITE from "@/config";
 
 const { pathname } = Astro.url;
 
@@ -73,22 +72,18 @@ const isActive = (path: string) => {
 
       <!-- Right-side action icons + 3-bar button -->
       <div class="flex items-center gap-2 sm:gap-3">
-        {
-          SITE.showArchives && (
-            <LinkButton
-              href="/archives/"
-              class:list={[
-                "focus-outline p-1.5 hover:text-accent",
-                { "active-nav": isActive("/archives") },
-              ]}
-              aria-label="archives"
-              title="Archives"
-            >
-              <IconArchive class="inline-block size-5" />
-              <span class="sr-only">Archives</span>
-            </LinkButton>
-          )
-        }
+        <LinkButton
+          href="/archives/"
+          class:list={[
+            "focus-outline p-1.5 hover:text-accent",
+            { "active-nav": isActive("/archives") },
+          ]}
+          aria-label="archives"
+          title="Archives"
+        >
+          <IconArchive class="inline-block size-5" />
+          <span class="sr-only">Archives</span>
+        </LinkButton>
 
         <LinkButton
           href="/search/"
@@ -103,20 +98,16 @@ const isActive = (path: string) => {
           <span class="sr-only">Search</span>
         </LinkButton>
 
-        {
-          SITE.lightAndDarkMode && (
-            <button
-              id="theme-btn"
-              class="focus-outline relative size-8 p-1.5 hover:text-accent"
-              title="Toggles light & dark"
-              aria-label="auto"
-              aria-live="polite"
-            >
-              <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-              <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-            </button>
-          )
-        }
+        <button
+          id="theme-btn"
+          class="focus-outline relative size-8 p-1.5 hover:text-accent"
+          title="Toggles light & dark"
+          aria-label="auto"
+          aria-live="polite"
+        >
+          <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+          <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        </button>
 
         <button
           id="menu-btn"
