@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+// Reverse getSortedPosts (newest-first) so lessons scroll in sequence: #01 -> #02 -> #03...
+const lessons = getSortedPosts(posts)
+  .reverse()
+  .map(post => ({
+    title: post.data.title,
+    url: getPostUrl(post.id, post.filePath, Astro.currentLocale),
+  }));
+---
+
+{
+  lessons.length > 0 && (
+    <section
+      aria-label="Education Series Lessons"
+      class="my-6 overflow-hidden rounded-xl border border-[#c9a45a] bg-[#0c3024] py-3 text-[#f8f3e8]"
+    >
+      <div class="marquee-wrapper flex w-max">
+        {/* Track 1 */}
+        <div class="marquee-track flex shrink-0 items-center gap-8 px-4">
+          {lessons.map(lesson => (
+            <a
+              href={lesson.url}
+              class="inline-flex items-center gap-2.5 whitespace-nowrap text-xs font-semibold tracking-wide text-[#f8f3e8] transition hover:text-[#e6c885] sm:text-sm"
+            >
+              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a45a]" />
+              <span>{lesson.title}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Track 2 (seamless duplicate loop) */}
+        <div
+          aria-hidden="true"
+          class="marquee-track flex shrink-0 items-center gap-8 px-4"
+        >
+          {lessons.map(lesson => (
+            <a
+              href={lesson.url}
+              tabindex="-1"
+              class="inline-flex items-center gap-2.5 whitespace-nowrap text-xs font-semibold tracking-wide text-[#f8f3e8] transition hover:text-[#e6c885] sm:text-sm"
+            >
+              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#c9a45a]" />
+              <span>{lesson.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .marquee-track {
+    animation: lesson-scroll 15s linear infinite;
+  }
+
+  .marquee-wrapper:hover .marquee-track,
+  .marquee-wrapper:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes lesson-scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>
