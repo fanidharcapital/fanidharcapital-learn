@@ -2,7 +2,7 @@
 title: "Education Series #01: Anatomy of Indian Equity Markets & T+1 Settlement"
 description: "How Indian stock exchanges, brokers, clearing corporations, depositories, and the T+1 settlement cycle work together from order placement to share delivery."
 pubDatetime: 2026-11-20T10:00:00+05:30
-modDatetime: 2026-11-21T11:55:00+05:30
+modDatetime: 2026-11-21T12:15:00+05:30
 featured: true
 draft: false
 tags:
@@ -38,7 +38,7 @@ Under **T+1** settlement, trades executed on **Trade Day (`T`)** are settled on 
 2. **Trade Confirmation & Clearing (`Day T`):** Executed trades flow to the clearing corporation, which confirms trade details, calculates net obligations, and enforces margin requirements.
 3. **Pay-In, Pay-Out & Demat Credit (`Day T+1`):** Funds and securities obligations are settled on `T+1`, with eligible shares credited to the buyer's demat account and sale proceeds credited/settled according to clearing and broker settlement rules.
 
-![Anatomy of an Indian Equity Trade (T to T+1)](/images/lessons/lesson-01-settlement-flow.svg)
+![Anatomy of an Indian Equity Trade (T to T+1)](/images/lessons/1795243231270.png)
 
 ---
 
