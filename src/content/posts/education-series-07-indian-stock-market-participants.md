@@ -12,7 +12,7 @@ tags:
   - sebi
 ---
 
-![Who Participates in the Indian Stock Market](/images/lessons/lesson-06.png)
+![Who Participates in the Indian Stock Market](/images/lessons/lesson-07.png)
 
 Every price tick on the **National Stock Exchange (NSE)** or **Bombay Stock Exchange (BSE)** is the result of millions of orders interacting in real time. Understanding **who** is placing those orders—and **why**—helps explain why markets rally, why sharp sell-offs occur even when company fundamentals look unchanged, and how market infrastructure keeps transactions safe.
 
