@@ -10,22 +10,51 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, tags = [], ogImage, ...props } = data;
+const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
+const coverSrc =
+  typeof ogImage === "string"
+    ? ogImage
+    : ogImage && typeof ogImage === "object" && "src" in ogImage
+      ? ogImage.src
+      : undefined;
 ---
 
-<li class="my-6">
+<li class="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-background transition hover:-translate-y-0.5 hover:border-[#c9a45a]/75 hover:shadow-md">
   <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
+    href={postUrl}
+    class="block overflow-hidden border-b border-border bg-[#0c3024]"
+    aria-label={`Open lesson: ${title}`}
   >
-    <Heading transition:name={toTransitionName(id)}>
-      {title}
-    </Heading>
+    {
+      coverSrc ? (
+        <div class="aspect-video w-full overflow-hidden bg-[#0c3024]">
+          <img
+            src={coverSrc}
+            alt={title}
+            loading="lazy"
+            class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+          />
+        </div>
+      ) : (
+        <div class="relative flex aspect-video w-full flex-col justify-between overflow-hidden bg-[#0c3024] p-5 text-[#f8f3e8]">
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full border border-[#c9a45a]/30"
+          />
+          <span class="w-fit rounded-full border border-[#c9a45a]/40 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#d8bd7b]">
+            Shree Fanidhar Capital · Visual Note
+          </span>
+          <p class="line-clamp-2 max-w-md text-base font-semibold leading-snug text-[#f8f3e8]">
+            {title}
+          </p>
+        </div>
+      )
+    }
   </a>
-  <Datetime {...props} />
-  <p>{description}</p>
-</li>
+
+  <div class="flex flex-1 flex-col justify-between p-5 sm:p-6">
+    <div>
+      {
+        tags.length > 0 && (
+          <div class="mb
