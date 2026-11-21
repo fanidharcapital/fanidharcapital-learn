@@ -1,8 +1,8 @@
 ---
 title: "Education Series #02: Shares, Market Indices & How Price Discovery Works"
 description: "How equity shares, primary vs. secondary markets, and benchmark indices like NIFTY 50 and SENSEX measure Indian market movement."
-pubDatetime: 2026-11-22T09:00:00+05:30
-modDatetime: 2026-11-22T09:00:00+05:30
+pubDatetime: 2026-11-21T09:30:00+05:30
+modDatetime: 2026-11-21T09:30:00+05:30
 featured: false
 draft: false
 tags:
