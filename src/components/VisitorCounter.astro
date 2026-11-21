@@ -1,0 +1,43 @@
+---
+// Tracks total visits across learn.fanidharcapital.com
+---
+
+<div
+  class="inline-flex items-center gap-2 rounded-full border border-[#c9a45a]/60 bg-[#0c3024] px-3.5 py-1.5 text-xs font-medium text-[#f8f3e8]"
+>
+  <span class="h-2 w-2 animate-pulse rounded-full bg-[#c9a45a]"></span>
+  <span class="text-[#d9e5df]">Learners Reached:</span>
+  <span id="visitor-count" class="font-bold tracking-wide text-[#e6c885]">
+    ...
+  </span>
+</div>
+
+<script>
+  async function updateVisitorCount() {
+    const el = document.getElementById("visitor-count");
+    if (!el) return;
+
+    try {
+      const storageKey = "sfc_learn_counted";
+      const alreadyCounted = sessionStorage.getItem(storageKey);
+      const endpoint = alreadyCounted
+        ? "https://api.counterapi.dev/v1/fanidharcapital-learn/visits"
+        : "https://api.counterapi.dev/v1/fanidharcapital-learn/visits/up";
+
+      const res = await fetch(endpoint);
+      if (!res.ok) throw new Error("Counter unavailable");
+      const data = await res.json();
+
+      if (!alreadyCounted) {
+        sessionStorage.setItem(storageKey, "1");
+      }
+
+      el.textContent = Number(data.count || 0).toLocaleString("en-IN");
+    } catch {
+      el.textContent = "—";
+    }
+  }
+
+  updateVisitorCount();
+  document.addEventListener("astro:after-swap", updateVisitorCount);
+</script>
