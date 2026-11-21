@@ -1,5 +1,5 @@
 ---
-![Education Series #03: Order Types & Execution Mechanics](/images/lessons/lesson-03.png)
+Education Series #03: Order Types & Execution Mechanics](/images/lessons/lesson-03.png)
 title: "Education Series #03: Order Types & Execution Mechanics"
 description: "How Market, Limit, Stop-Loss (SL & SL-M) orders work on Indian exchanges, and how order selection controls execution price and slippage."
 pubDatetime: 2026-11-21T10:30:00+05:30
