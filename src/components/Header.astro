@@ -6,7 +6,7 @@ import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
-import { SITE } from "@/config";
+import SITE from "@/config";
 
 const { pathname } = Astro.url;
 
@@ -81,7 +81,7 @@ const isActive = (path: string) => {
                 "focus-outline p-1.5 hover:text-accent",
                 { "active-nav": isActive("/archives") },
               ]}
-              ariaLabel="archives"
+              aria-label="archives"
               title="Archives"
             >
               <IconArchive class="inline-block size-5" />
@@ -96,7 +96,7 @@ const isActive = (path: string) => {
             "focus-outline p-1.5 hover:text-accent",
             { "active-nav": isActive("/search") },
           ]}
-          ariaLabel="search"
+          aria-label="search"
           title="Search"
         >
           <IconSearch class="inline-block size-5" />
