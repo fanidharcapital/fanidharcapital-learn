@@ -48,89 +48,31 @@ const isActive = (path: string) => {
       class="flex flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-2.5 text-sm"
     >
       <div class="flex items-center gap-4 font-medium sm:gap-6">
-        <a
-          href="/posts/"
-          class:list={[
-            "nav-straight-link hover:text-accent",
-            { "nav-active": isActive("/posts") },
-          ]}
-        >
-          Lessons
-        </a>
-        <a
-          href="/curriculum/"
-          class:list={[
-            "nav-straight-link hover:text-accent",
-            { "nav-active": isActive("/curriculum") },
-          ]}
-        >
-          Curriculum
-        </a>
-        <a
-          href="/about/"
-          class:list={[
-            "nav-straight-link hover:text-accent",
-            { "nav-active": isActive("/about") },
-          ]}
-        >
-          About
-        </a>
+        <a href="/posts/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/posts") }]}>Lessons</a>
+        <a href="/curriculum/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/curriculum") }]}>Curriculum</a>
+        <a href="/about/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/about") }]}>About</a>
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <LinkButton
-          href="/archives/"
-          class:list={[
-            "nav-straight-link focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent",
-            { "nav-active": isActive("/archives") },
-          ]}
-          aria-label="archives"
-          title="Archives"
-        >
+        <LinkButton href="/archives/" class:list={["nav-straight-link focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent", { "nav-active": isActive("/archives") }]} aria-label="archives" title="Archives">
           <IconArchive class="inline-block size-5" />
           <span class="sr-only">Archives</span>
         </LinkButton>
-
-        <LinkButton
-          href="/search/"
-          class:list={[
-            "nav-straight-link focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent",
-            { "nav-active": isActive("/search") },
-          ]}
-          aria-label="search"
-          title="Search"
-        >
+        <LinkButton href="/search/" class:list={["nav-straight-link focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent", { "nav-active": isActive("/search") }]} aria-label="search" title="Search">
           <IconSearch class="inline-block size-5" />
           <span class="sr-only">Search</span>
         </LinkButton>
-
-        <button
-          id="theme-btn"
-          class="focus-outline relative size-8 rounded-lg p-1.5 hover:bg-muted hover:text-accent"
-          title="Toggles light & dark"
-          aria-label="auto"
-          aria-live="polite"
-        >
+        <button id="theme-btn" class="focus-outline relative size-8 rounded-lg p-1.5 hover:bg-muted hover:text-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite">
           <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%]] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+          <IconSunHigh class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
         </button>
-
-        <button
-          id="menu-btn"
-          class="focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent"
-          aria-label="Open Menu"
-          aria-expanded="false"
-          aria-controls="menu-items"
-        >
+        <button id="menu-btn" class="focus-outline rounded-lg p-1.5 hover:bg-muted hover:text-accent" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
           <IconX id="close-icon" class="hidden size-5" />
           <IconMenuDeep id="menu-icon" class="size-5" />
         </button>
       </div>
 
-      <ul
-        id="menu-items"
-        class="hidden w-full flex-col gap-2 border-t border-border/40 pt-2.5 pb-1 font-medium"
-      >
+      <ul id="menu-items" class="hidden w-full flex-col gap-2 border-t border-border/40 pt-2.5 pb-1 font-medium">
         <li><a href="/posts/" class="block py-1 hover:text-accent">All Lessons</a></li>
         <li><a href="/curriculum/" class="block py-1 hover:text-accent">Curriculum</a></li>
         <li><a href="/tags/" class="block py-1 hover:text-accent">Browse by Tags</a></li>
@@ -169,10 +111,8 @@ const isActive = (path: string) => {
 
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
-
       menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
       menuBtn.setAttribute("aria-label", openMenu ? "Open Menu" : "Close Menu");
-
       menuItems.classList.toggle("hidden");
       menuItems.classList.toggle("flex");
       menuIcon.classList.toggle("hidden");
