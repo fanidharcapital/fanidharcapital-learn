@@ -1,158 +1,30 @@
----
-const { pathname } = Astro.url;
-const currentPath =
-  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+<header class="border-b border-border/60 bg-background/95">
+  <div class="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3.5 sm:px-6">
+    <!-- Line 1: Full Brand Title -->
+    <div class="flex items-center justify-between">
+      <a
+        href="/"
+        class="text-lg font-bold tracking-tight text-foreground sm:text-xl md:text-2xl"
+      >
+        Shree Fanidhar Capital - Learning
+      </a>
+    </div>
 
-const isActive = (path: string) => {
-  const cleanPath =
-    path.endsWith("/") && path !== "/" ? path.slice(0, -1) : path;
-  if (path === "/") return currentPath === path;
-  return currentPath === cleanPath || currentPath.startsWith(cleanPath + "/");
-};
----
-
-<header class="w-full border-b border-border bg-background/95 backdrop-blur-sm">
-  <div class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-3 py-2.5 sm:px-6 sm:py-4">
-    <a
-      href="/"
-      class="min-w-0 flex-1 text-xs leading-snug font-bold tracking-tight text-foreground sm:truncate sm:text-xl"
-      title="Shree Fanidhar Capital - Learning Series"
+    <!-- Line 2: Navigation Links + Action Icons -->
+    <nav
+      aria-label="Primary"
+      class="flex flex-wrap items-center justify-between gap-3 border-t border-border/40 pt-2.5 text-sm"
     >
-      Shree Fanidhar Capital - Learning Series
-    </a>
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6 font-medium">
+        <a href="/posts/" class="hover:text-accent">Lessons</a>
+        <a href="/curriculum/" class="hover:text-accent">Curriculum</a>
+        <a href="/tags/" class="hover:text-accent">Tags</a>
+        <a href="/about/" class="hover:text-accent">About</a>
+      </div>
 
-    <div class="flex shrink-0 items-center gap-0.5 sm:gap-2">
-      <nav aria-label="Main navigation" class="mr-2 hidden items-center gap-4 md:flex">
-        <a
-          href="/posts"
-          class:list={[
-            "text-sm font-medium transition-colors hover:text-accent",
-            { "text-accent underline underline-offset-4": isActive("/posts") },
-          ]}
-        >
-          Lessons
-        </a>
-        <a
-          href="/curriculum"
-          class:list={[
-            "text-sm font-medium transition-colors hover:text-accent",
-            { "text-accent underline underline-offset-4": isActive("/curriculum") },
-          ]}
-        >
-          Curriculum
-        </a>
-        <a
-          href="/tags"
-          class:list={[
-            "text-sm font-medium transition-colors hover:text-accent",
-            { "text-accent underline underline-offset-4": isActive("/tags") },
-          ]}
-        >
-          Tags
-        </a>
-        <a
-          href="/about"
-          class:list={[
-            "text-sm font-medium transition-colors hover:text-accent",
-            { "text-accent underline underline-offset-4": isActive("/about") },
-          ]}
-        >
-          About
-        </a>
-      </nav>
-
-      <a
-        href="/archives"
-        aria-label="Archives"
-        title="Archives"
-        class:list={[
-          "inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/80 transition-colors hover:bg-muted hover:text-accent sm:h-9 sm:w-9",
-          { "text-accent": isActive("/archives") },
-        ]}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect width="20" height="5" x="2" y="3" rx="1"></rect>
-          <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
-          <path d="M10 12h4"></path>
-        </svg>
-      </a>
-
-      <a
-        href="/search"
-        aria-label="Search"
-        title="Search"
-        class:list={[
-          "inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/80 transition-colors hover:bg-muted hover:text-accent sm:h-9 sm:w-9",
-          { "text-accent": isActive("/search") },
-        ]}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-      </a>
-
-      <button
-        id="theme-btn"
-        type="button"
-        aria-label="Toggle color theme"
-        title="Toggle color theme"
-        class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground/80 transition-colors hover:bg-muted hover:text-accent sm:h-9 sm:w-9"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
-      </button>
-
-      <button
-        id="mobile-menu-btn"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-nav-drawer"
-        aria-label="Toggle menu"
-        class="inline-flex h-8 items-center gap-1 rounded-md border border-border px-2 text-xs font-medium text-foreground transition-colors hover:bg-muted sm:h-9 sm:px-2.5 md:hidden"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="4" x2="20" y1="12" y2="12"></line>
-          <line x1="4" x2="20" y1="6" y2="6"></line>
-          <line x1="4" x2="20" y1="18" y2="18"></line>
-        </svg>
-        <span>Menu</span>
-      </button>
-    </div>
+      <div class="flex items-center gap-3">
+        <!-- Keep your existing Archives, Search, and Dark/Light theme buttons here -->
+      </div>
+    </nav>
   </div>
-
-  <nav
-    id="mobile-nav-drawer"
-    aria-label="Mobile navigation"
-    class="hidden border-t border-border bg-background px-4 py-3 md:hidden"
-  >
-    <div class="mx-auto flex max-w-5xl flex-col gap-1">
-      <a href="/posts" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
-        Lessons
-      </a>
-      <a href="/curriculum" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
-        Curriculum
-      </a>
-      <a href="/tags" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
-        Tags
-      </a>
-      <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">
-        About
-      </a>
-    </div>
-  </nav>
 </header>
-
-<script is:inline>
-  (() => {
-    const btn = document.getElementById("mobile-menu-btn");
-    const drawer = document.getElementById("mobile-nav-drawer");
-    if (!btn || !drawer) return;
-    btn.addEventListener("click", () => {
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!expanded));
-      drawer.classList.toggle("hidden", expanded);
-    });
-  })();
-</script>
