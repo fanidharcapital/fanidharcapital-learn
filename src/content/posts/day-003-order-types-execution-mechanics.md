@@ -1,80 +1,53 @@
 ---
-Education Series #03: Order Types & Execution Mechanics](/images/lessons/lesson-03.png)
 title: "Education Series #03: Order Types & Execution Mechanics"
-description: "How Market, Limit, Stop-Loss (SL & SL-M) orders work on Indian exchanges, and how order selection controls execution price and slippage."
-pubDatetime: 2026-11-21T10:30:00+05:30
-modDatetime: 2026-11-21T10:30:00+05:30
+author: "Shree Fanidhar Capital"
+pubDatetime: 2026-11-21T10:30:00Z
+slug: "day-003-order-types-execution-mechanics"
 featured: false
 draft: false
 tags:
-  - module-01
-  - market-foundations
-  - order-types
+  - equities
   - execution
+  - order-types
+description: "Understand core equity order types, order validity modifiers, and how exchange matching engines execute trades using price-time priority."
 ---
 
-## Overview
+![Education Series #03: Order Types & Execution Mechanics](/images/lessons/lesson-03.png)
 
-In **Lesson 02**, we saw how prices form where the **best bid** and **best ask** meet on an electronic limit order book. Knowing where price sits is only half the picture—the second half is **how you instruct the exchange to execute your order**.
+## Introduction
 
-In **Lesson 03** of **Module 01: Market Foundations**, we examine the core order types used across Indian equity and derivative markets (**Market**, **Limit**, **Stop-Loss Limit**, and **Stop-Loss Market**), order validity rules, and how execution choices directly govern **slippage**.
+Knowing what a share is and how price discovery works is only half the picture. To participate in Indian equity markets effectively, you also need to understand **how orders are structured**, what rules govern when and at what price they execute, and how exchanges match incoming orders in real time.
 
----
+## 1. Core Order Types
 
-## 1. Market Order vs. Limit Order: Speed vs. Price Control
+When placing an equity order through a stockbroker on exchanges such as the **NSE** or **BSE**, the order type defines the trade-off between **price certainty** and **execution certainty**:
 
-Every standard order balances two competing priorities: **certainty of execution** versus **certainty of price**.
+* **Limit Order:** An instruction to buy or sell at a **specific price or better**. A buy limit executes at or below your limit price; a sell limit executes at or above your limit price. It gives **price certainty**, though execution is not guaranteed if the market does not reach your price.
+* **Market Order:** An instruction to buy or sell immediately at the **best available price** currently in the order book. It prioritizes **execution speed**, though the final fill price can vary (slippage) during fast-moving or thinly traded conditions.
+* **Stop-Loss Order (SL-M):** Remains inactive until the stock reaches your specified **trigger price**, at which point it enters the market as a market order. Commonly used to cap downside on an open position or enter a breakout.
+* **Stop-Limit Order (SL):** Uses both a **trigger price** and a **limit price**. Once the trigger price is hit, a limit order is placed—giving tighter control over the worst acceptable execution price compared to a plain stop-market order.
 
-* **Market Order:** Instructs the exchange matching engine to fill immediately at the best available price in the order book.
-  * *Strength:* High fill probability in liquid counters.
-  * *Risk:* In fast-moving or thin order books, a large market order can walk through multiple price levels, causing **slippage** (filling worse than the Last Traded Price).
-* **Limit Order:** Specifies the **maximum price** you are willing to pay (for a buy order) or the **minimum price** you are willing to accept (for a sell order).
-  * *Strength:* Strict price control—never fills worse than your specified limit price.
-  * *Risk:* If the market moves away before reaching your limit price, the order remains pending or unfilled.
+## 2. Order Attributes & Modifiers
 
----
+Beyond price and quantity, orders carry validity and disclosure instructions that control how long they stay active and how they appear in the order book:
 
-## 2. Stop-Loss Orders: SL (Limit) vs. SL-M (Market)
+* **Time-in-Force (Validity):**
+  * **DAY:** Remains valid until the end of the current regular trading session; any unfilled quantity cancels automatically at market close.
+  * **IOC (Immediate or Cancel):** Executes whatever quantity can be matched immediately and cancels any remaining unfilled shares right away.
+  * **GTC / GTT (Good 'Til Cancelled / Good 'Til Triggered):** Broker-supported standing instructions that keep a price condition active across trading sessions until triggered, filled, or cancelled.
+* **Disclosed Quantity (Iceberg Orders):** Allows a trader placing a large order to display only a smaller portion of the total quantity in the public order book at a time, releasing subsequent tranches automatically as earlier tranches fill.
+* **Minimum Fill / All-or-None (Subject to Exchange Availability):** Specifies whether partial fills are acceptable or if a minimum quantity threshold applies where supported by the exchange segment.
 
-Stop-loss orders remain passive in the system until the market reaches a predefined **Trigger Price**, at which point they activate into a live order:
+## 3. Execution Mechanics & Price-Time Priority
 
-1. **Stop-Loss Limit (`SL`):** Uses **two prices**—a **Trigger Price** and a **Limit Price**. Once the trigger price is hit, a limit order is placed at your specified limit price. It caps slippage, though in a sharp gap or circuit move the limit order may remain unexecuted if price jumps past the limit band.
-2. **Stop-Loss Market (`SL-M`):** Uses **one price**—the **Trigger Price**. Once triggered, it converts into a market order for immediate exit/entry. It prioritizes execution certainty over exact fill price (subject to exchange market-protection / dummy-circuit bands).
+Once your broker routes a validated order to the exchange, the **central order matching engine** processes it electronically without human intervention:
 
-| Order Type | Price Inputs | Priority | Primary Trade-Off |
-| :--- | :--- | :--- | :--- |
-| **Market** | None (Best Available) | Immediate fill | Vulnerable to spread & slippage |
-| **Limit** | Limit Price | Exact price cap/floor | May not fill if price moves away |
-| **SL (Limit)** | Trigger + Limit Price | Triggered entry/exit with price cap | Risk of non-fill on sharp gaps |
-| **SL-M (Market)** | Trigger Price | Triggered exit/entry priority | Fill price varies with book depth |
-
----
-
-## 3. Order Validity & Execution Conditions
-
-Beyond price instructions, exchanges enforce time and quantity conditions on how long an order stays active:
-
-* **DAY Order:** Remains active in the order book until filled, modified, cancelled, or expired at the end of the regular trading session.
-* **IOC (Immediate or Cancel):** Attempts to fill immediately upon entry (in full or in part); any unfilled quantity is cancelled automatically rather than resting in the book.
-* **AMO (After Market Order):** Queued outside regular market hours to be routed when the next pre-open or regular session begins.
+* **Order Book Matching:** Incoming buy orders (bids) are matched against resting sell orders (asks) whenever the highest bid meets or exceeds the lowest ask.
+* **Price-Time Priority Logic:**
+  1. **Best Price First:** Orders with the most competitive price (highest bid for buyers, lowest ask for sellers) always execute ahead of less competitive prices.
+  2. **Time of Entry Second:** If two orders sit at the exact same price level, the order that arrived at the exchange earlier (earlier timestamp) gets filled first.
+* **Trade Confirmation & Post-Trade Update:** Once matched, the exchange updates the live order book, broadcasts the new Last Traded Price (LTP), sends trade confirmation back to the broker, and passes the trade to the clearing corporation for **T+1 settlement**.
 
 ---
 
-## Visual Infographic Brief (For Your JPG / Diagram)
-
-If you pair this lesson with a visual card or diagram in your emerald & gold palette:
-* **Left Column — Entry Control:** `Market Order (Speed First)` vs. `Limit Order (Price First)`.
-* **Center Flow — Stop-Loss Trigger:** `Price Hits Trigger` → `SL (Activates Limit Order)` or `SL-M (Activates Market Order)`.
-* **Right Callout — Execution Rule:** `Liquid Book + Limit Buffer = Controlled Slippage`.
-
----
-
-## Key Takeaways
-
-* **Market orders** guarantee speed in liquid instruments but surrender price control; **Limit orders** protect price at the cost of fill certainty.
-* **SL** and **SL-M** orders automate predefined exit or breakout levels without manual hesitation.
-* Checking **bid-ask spread and top-five market depth** before choosing an order type is a core habit of disciplined execution.
-
----
-
-*Educational Note: This lesson is published by Shree Fanidhar Capital strictly for educational and informational purposes and does not constitute investment advice or a recommendation to buy or sell any security.*
+*Educational note: This lesson is provided by **Shree Fanidhar Capital** strictly for market education and informational purposes and is not investment advice or a solicitation to buy or sell any security.*
