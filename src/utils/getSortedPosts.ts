@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import postFilter from "./postFilter";
+import { postFilter } from "./postFilter";
 
 const getLessonNumber = (title: string, id: string): number => {
   const match =
@@ -10,7 +10,7 @@ const getLessonNumber = (title: string, id: string): number => {
   return match ? parseInt(match[1], 10) : Number.MAX_SAFE_INTEGER;
 };
 
-const getSortedPosts = (posts: CollectionEntry<"blog">[]) => {
+export const getSortedPosts = (posts: CollectionEntry<"posts">[]) => {
   return posts
     .filter(postFilter)
     .sort((a, b) => {
@@ -18,7 +18,7 @@ const getSortedPosts = (posts: CollectionEntry<"blog">[]) => {
       const numB = getLessonNumber(b.data.title, b.id);
 
       if (numA !== numB) {
-        return numA - numB; // Always 01 -> 02 -> 03 -> ... -> 365
+        return numA - numB;
       }
 
       return (
