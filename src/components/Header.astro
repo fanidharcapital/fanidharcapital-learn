@@ -1,6 +1,4 @@
 ---
-import SITE from "@/config";
-
 const { pathname } = Astro.url;
 const currentPath =
   pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
@@ -18,9 +16,9 @@ const isActive = (path: string) => {
     <a
       href="/"
       class="min-w-0 flex-1 truncate text-sm font-bold tracking-tight text-foreground sm:text-xl"
-      title={SITE.title}
+      title="Shree Fanidhar Capital - Learning Series"
     >
-      {SITE.title}
+      Shree Fanidhar Capital - Learning Series
     </a>
 
     <div class="flex shrink-0 items-center gap-0.5 sm:gap-2">
