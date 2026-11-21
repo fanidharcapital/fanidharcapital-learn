@@ -42,7 +42,7 @@ const learningPath = [
       </div>
       <ol class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {learningPath.map((module, index) => (
-          <li class="rounded-2xl border border-border bg-background p-5">
+          <li id={`module-${index + 1}`} class="scroll-mt-24 rounded-2xl border border-border bg-background p-5">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">Module {String(index + 1).padStart(2, "0")}</span>
               <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Days {module.range}</span>
