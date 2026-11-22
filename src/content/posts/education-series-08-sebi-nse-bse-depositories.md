@@ -11,6 +11,7 @@ tags:
   - exchanges
   - depositories
 ---
+Welcome to **Lesson 08** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![SEBI, NSE, BSE & Depositories — Who Does What?](/images/lessons/lesson-08.png)
 
