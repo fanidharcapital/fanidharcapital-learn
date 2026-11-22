@@ -14,6 +14,8 @@ tags:
 Welcome to **Lesson 01** and the start of **Module 01: Market foundation** 
 (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
+![Anatomy of an Indian Equity Trade (T to T+1)](/images/lessons/1795243231270.png)
+
 ## Overview
 
 Every equity trade on an Indian stock exchange depends on a coordinated chain of market infrastructure institutions. Understanding who does what—and what happens after an order is matched—is essential before studying price discovery, order types, or risk management.
@@ -40,7 +42,7 @@ Under **T+1** settlement, trades executed on **Trade Day (`T`)** are settled on 
 2. **Trade Confirmation & Clearing (`Day T`):** Executed trades flow to the clearing corporation, which confirms trade details, calculates net obligations, and enforces margin requirements.
 3. **Pay-In, Pay-Out & Demat Credit (`Day T+1`):** Funds and securities obligations are settled on `T+1`, with eligible shares credited to the buyer's demat account and sale proceeds credited/settled according to clearing and broker settlement rules.
 
-![Anatomy of an Indian Equity Trade (T to T+1)](/images/lessons/1795243231270.png)
+
 
 ---
 
