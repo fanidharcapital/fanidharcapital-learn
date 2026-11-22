@@ -11,6 +11,7 @@ tags:
   - market-depth
   - order-execution
 ---
+Welcome to **Lesson 10** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![How to Read a Stock Quote — Price, Volume, Bid, Ask & Market Depth](/images/lessons/lesson-10.png)
 
