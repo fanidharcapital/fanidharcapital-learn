@@ -25,7 +25,7 @@ const lessons = posts
   })
   .sort((a, b) => a.num - b.num);
 
-// 4 seconds per lesson card (e.g., 20 lessons = 80s) so speed stays consistent as you add more lessons
+// 4 seconds per lesson box so reading pace remains comfortable
 const scrollDuration = Math.max(40, lessons.length * 4);
 ---
 
@@ -33,25 +33,31 @@ const scrollDuration = Math.max(40, lessons.length * 4);
   lessons.length > 0 && (
     <section
       aria-label="Education Series Lessons"
-      class="w-full overflow-hidden border-b border-[#c9a45a]/30 bg-background py-4"
+      class="w-full overflow-hidden border-b border-[#c9a45a]/30 bg-background py-5"
     >
       <div
         class="marquee-wrapper flex w-max"
         style={`--scroll-duration: ${scrollDuration}s;`}
       >
         {/* Track 1 */}
-        <div class="marquee-track flex shrink-0 items-center gap-4 px-2">
+        <div class="marquee-track flex shrink-0 items-stretch gap-4 px-2">
           {lessons.map(lesson => (
             <a
               href={lesson.url}
-              class="group flex items-center gap-3 whitespace-nowrap rounded-xl border border-[#c9a45a] bg-[#0c3024] px-4 py-2.5 text-[#f8f3e8] shadow-sm transition hover:-translate-y-0.5 hover:border-[#e6c885] hover:bg-[#123d2f]"
+              class="group flex h-36 w-44 shrink-0 flex-col justify-between rounded-lg border border-[#c9a45a] bg-[#0c3024] p-3.5 text-[#f8f3e8] shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#e6c885] hover:bg-[#123d2f] hover:shadow-md"
             >
-              <span class="rounded-md border border-[#c9a45a]/60 bg-[#144233] px-2 py-0.5 text-[11px] font-bold tracking-wider text-[#e6c885]">
-                #{lesson.number}
-              </span>
-              <span class="text-xs font-semibold tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885] sm:text-sm">
+              <div class="flex items-center justify-between border-b border-[#c9a45a]/25 pb-2">
+                <span class="rounded border border-[#c9a45a]/70 bg-[#144233] px-2 py-0.5 text-xs font-bold tracking-wider text-[#e6c885]">
+                  #{lesson.number}
+                </span>
+                <span class="text-[10px] font-medium uppercase tracking-widest text-[#c9a45a]/80">
+                  Lesson
+                </span>
+              </div>
+
+              <p class="line-clamp-3 text-xs font-semibold leading-snug tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885]">
                 {lesson.title}
-              </span>
+              </p>
             </a>
           ))}
         </div>
@@ -59,20 +65,26 @@ const scrollDuration = Math.max(40, lessons.length * 4);
         {/* Track 2 (seamless duplicate loop) */}
         <div
           aria-hidden="true"
-          class="marquee-track flex shrink-0 items-center gap-4 px-2"
+          class="marquee-track flex shrink-0 items-stretch gap-4 px-2"
         >
           {lessons.map(lesson => (
             <a
               href={lesson.url}
               tabindex="-1"
-              class="group flex items-center gap-3 whitespace-nowrap rounded-xl border border-[#c9a45a] bg-[#0c3024] px-4 py-2.5 text-[#f8f3e8] shadow-sm transition hover:-translate-y-0.5 hover:border-[#e6c885] hover:bg-[#123d2f]"
+              class="group flex h-36 w-44 shrink-0 flex-col justify-between rounded-lg border border-[#c9a45a] bg-[#0c3024] p-3.5 text-[#f8f3e8] shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#e6c885] hover:bg-[#123d2f] hover:shadow-md"
             >
-              <span class="rounded-md border border-[#c9a45a]/60 bg-[#144233] px-2 py-0.5 text-[11px] font-bold tracking-wider text-[#e6c885]">
-                #{lesson.number}
-              </span>
-              <span class="text-xs font-semibold tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885] sm:text-sm">
+              <div class="flex items-center justify-between border-b border-[#c9a45a]/25 pb-2">
+                <span class="rounded border border-[#c9a45a]/70 bg-[#144233] px-2 py-0.5 text-xs font-bold tracking-wider text-[#e6c885]">
+                  #{lesson.number}
+                </span>
+                <span class="text-[10px] font-medium uppercase tracking-widest text-[#c9a45a]/80">
+                  Lesson
+                </span>
+              </div>
+
+              <p class="line-clamp-3 text-xs font-semibold leading-snug tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885]">
                 {lesson.title}
-              </span>
+              </p>
             </a>
           ))}
         </div>
