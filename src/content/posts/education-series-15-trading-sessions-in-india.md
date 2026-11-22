@@ -12,6 +12,7 @@ tags:
   - closing-session
   - nse-bse
 ---
+Welcome to **Lesson 15** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Trading Sessions in India — Pre-Open, Regular Market & Closing](/images/lessons/lesson-15.png)
 
