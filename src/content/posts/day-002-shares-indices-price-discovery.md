@@ -11,8 +11,7 @@ tags:
   - indices
 description: "Understand how equity shares represent business ownership, how market indices like NIFTY 50 and SENSEX track the market, and how buyers and sellers discover prices on exchanges."
 ---
-Welcome to **Lesson 02** and the start of **Module 01: Market foundation** 
-(**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
+Welcome to **Lesson 02** of ** Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Education Series #02: Shares, Market Indices & How Price Discovery Works](/images/lessons/lesson-02.png)
 
