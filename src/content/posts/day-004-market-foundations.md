@@ -12,6 +12,7 @@ tags:
   - order-types
 description: "A consolidated foundation connecting market participants, equity shares, market indices, and core order types across Indian stock exchanges."
 ---
+Welcome to **Lesson 04** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Education Series #04: Market Foundations](/images/lessons/lesson-04.png)
 
