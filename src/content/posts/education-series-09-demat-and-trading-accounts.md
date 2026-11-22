@@ -11,6 +11,7 @@ tags:
   - trading-account
   - settlement
 ---
+Welcome to **Lesson 09** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Demat and Trading Accounts — How They Work Together](/images/lessons/lesson-09.png)
 
