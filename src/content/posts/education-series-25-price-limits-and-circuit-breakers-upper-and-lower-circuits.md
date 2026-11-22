@@ -13,6 +13,7 @@ tags:
   - risk-management
   - market-halt
 ---
+Welcome to **Lesson 25** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Price Limits and Circuit Breakers — Upper and Lower Circuits](/images/lessons/lesson-25.png)
 
