@@ -12,6 +12,7 @@ tags:
   - book-value
   - valuation
 ---
+Welcome to **Lesson 12** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Equity Shares — Face Value, Book Value & Market Price](/images/lessons/lesson-12.png)
 
