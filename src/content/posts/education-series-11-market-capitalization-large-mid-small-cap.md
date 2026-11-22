@@ -12,6 +12,7 @@ tags:
   - mid-cap
   - small-cap
 ---
+Welcome to **Lesson 11** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Market Capitalization — Large-Cap, Mid-Cap & Small-Cap](/images/lessons/lesson-11.png)
 
