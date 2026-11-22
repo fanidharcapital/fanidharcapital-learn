@@ -12,6 +12,7 @@ tags:
   - secondary-market
 description: "Understand how companies issue new shares in the primary market through IPOs and how investors trade listed shares in the secondary market."
 ---
+Welcome to **Lesson 06** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Education Series #06: Primary vs Secondary Markets](/images/lessons/lesson-06.png)
 
