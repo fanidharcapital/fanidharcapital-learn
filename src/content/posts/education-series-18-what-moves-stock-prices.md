@@ -12,6 +12,7 @@ tags:
   - market-expectations
   - fundamentals
 ---
+Welcome to **Lesson 18** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![What Moves Stock Prices? — Demand, Supply, News & Expectations](/images/lessons/lesson-18.png)
 
