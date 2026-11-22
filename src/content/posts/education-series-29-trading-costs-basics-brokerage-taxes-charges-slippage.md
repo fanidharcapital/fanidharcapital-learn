@@ -13,6 +13,7 @@ tags:
   - slippage
   - transaction-charges
 ---
+Welcome to **Lesson 29** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Trading Costs Basics — Brokerage, Taxes, Charges & Slippage](/images/lessons/lesson-29.png)
 
