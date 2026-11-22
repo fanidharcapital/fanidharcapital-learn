@@ -106,7 +106,7 @@ const learningPath = [
 
       {posts.length > 0 ? (
         <>
-          <ul id="lessons-grid" class="grid gap-5 md:grid-cols-2">
+          <ul id="lessons-grid" class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {posts.map(post => {
               const lessonNum = getLessonNumber(post);
               return (
@@ -178,7 +178,6 @@ const learningPath = [
     resetBtn?.addEventListener("click", resetFilter);
     showAllHeroBtn?.addEventListener("click", () => resetFilter());
 
-    // Read ?module=1 (or #module-1) when opened in a new tab
     const params = new URLSearchParams(window.location.search);
     const hashMatch = window.location.hash.match(/^#module-(\d+)$/);
     const modParam = params.get("module") || (hashMatch ? hashMatch[1] : null);
