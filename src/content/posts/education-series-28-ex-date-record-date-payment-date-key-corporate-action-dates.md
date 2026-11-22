@@ -13,6 +13,7 @@ tags:
   - settlement-cycle
   - dividends
 ---
+Welcome to **Lesson 28** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Ex-Date, Record Date & Payment Date — Key Corporate-Action Dates](/images/lessons/lesson-28.png)
 
