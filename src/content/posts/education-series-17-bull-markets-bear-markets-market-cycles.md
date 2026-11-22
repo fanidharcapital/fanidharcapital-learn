@@ -12,6 +12,7 @@ tags:
   - market-cycles
   - investor-psychology
 ---
+Welcome to **Lesson 17** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Bull Markets, Bear Markets & Market Cycles](/images/lessons/lesson-17.png)
 
