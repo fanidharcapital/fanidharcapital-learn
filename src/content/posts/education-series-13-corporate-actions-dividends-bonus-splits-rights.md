@@ -13,6 +13,7 @@ tags:
   - stock-split
   - rights-issue
 ---
+Welcome to **Lesson 13** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Corporate Actions — Dividends, Bonus Shares, Splits & Rights Issues](/images/lessons/lesson-13.png)
 
