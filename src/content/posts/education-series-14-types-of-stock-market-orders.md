@@ -12,6 +12,7 @@ tags:
   - limit-order
   - stop-loss
 ---
+Welcome to **Lesson 14** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Types of Stock Market Orders — Market, Limit, Stop-Loss & More](/images/lessons/lesson-14.png)
 
