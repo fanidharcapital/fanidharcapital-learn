@@ -12,6 +12,7 @@ tags:
   - sensex
   - free-float-market-cap
 ---
+Welcome to **Lesson 19** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Stock Market Indices — How Nifty 50 and Sensex Are Built](/images/lessons/lesson-19.png)
 
