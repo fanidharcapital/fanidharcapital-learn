@@ -13,6 +13,7 @@ tags:
   - nse-bse
   - sebi
 ---
+Welcome to **Lesson 30** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**. This the **last lesson of the module 01**
 
 ![Market Foundations Review — Key Concepts & Beginner Knowledge Check](/images/lessons/lesson-30.png)
 
