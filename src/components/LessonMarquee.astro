@@ -1,121 +1,57 @@
 ---
 import { getCollection } from "astro:content";
-import { getPostUrl } from "@/utils/getPostPaths";
+
+interface Props {
+  seriesUrl?: string;
+}
+
+// Change "/posts" below if your Learning Series tab uses a different route (e.g. "/lessons" or "/series")
+const { seriesUrl = "/posts" } = Astro.props;
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
-
-const lessons = posts
-  .map(post => {
-    const match =
-      post.data.title.match(/#(\d+)/) || post.id.match(/day-(\d+)/i);
-    const num = match ? parseInt(match[1], 10) : 999;
-    const number =
-      num !== 999 ? String(num).padStart(2, "0") : "—";
-    const cleanTitle = post.data.title.replace(
-      /^Education Series #\d+:\s*/i,
-      ""
-    );
-
-    return {
-      num,
-      number,
-      title: cleanTitle,
-      url: getPostUrl(post.id, post.filePath, Astro.currentLocale),
-    };
-  })
-  .sort((a, b) => a.num - b.num);
-
-// 4 seconds per lesson box so reading pace remains comfortable
-const scrollDuration = Math.max(40, lessons.length * 4);
+const totalLessons = posts.length;
 ---
 
 {
-  lessons.length > 0 && (
+  totalLessons > 0 && (
     <section
-      aria-label="Education Series Lessons"
-      class="w-full overflow-hidden border-b border-[#c9a45a]/30 bg-background py-5"
+      aria-label="Learning Series Announcement"
+      class="w-full border-b border-[#c9a45a]/40 bg-[#0c3024] px-4 py-3 text-[#f8f3e8]"
     >
-      <div
-        class="marquee-wrapper flex w-max"
-        style={`--scroll-duration: ${scrollDuration}s;`}
-      >
-        {/* Track 1 */}
-        <div class="marquee-track flex shrink-0 items-stretch gap-4 px-2">
-          {lessons.map(lesson => (
-            <a
-              href={lesson.url}
-              class="group flex h-36 w-44 shrink-0 flex-col justify-between rounded-lg border border-[#c9a45a] bg-[#0c3024] p-3.5 text-[#f8f3e8] shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#e6c885] hover:bg-[#123d2f] hover:shadow-md"
-            >
-              <div class="flex items-center justify-between border-b border-[#c9a45a]/25 pb-2">
-                <span class="rounded border border-[#c9a45a]/70 bg-[#144233] px-2 py-0.5 text-xs font-bold tracking-wider text-[#e6c885]">
-                  #{lesson.number}
-                </span>
-                <span class="text-[10px] font-medium uppercase tracking-widest text-[#c9a45a]/80">
-                  Lesson
-                </span>
-              </div>
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2.5 sm:flex-row">
+        {/* Left: Pulsing Live Badge + Dynamic Lesson Count */}
+        <div class="flex flex-wrap items-center justify-center gap-2.5 text-center sm:justify-start sm:text-left">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-[#c9a45a]/70 bg-[#144233] px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#e6c885]">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#e6c885] opacity-75" />
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-[#e6c885]" />
+            </span>
+            Curriculum Live
+          </span>
 
-              <p class="line-clamp-3 text-xs font-semibold leading-snug tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885]">
-                {lesson.title}
-              </p>
-            </a>
-          ))}
+          <p class="text-xs font-medium tracking-wide text-[#f8f3e8] sm:text-sm">
+            <strong class="font-bold text-[#e6c885]">
+              {totalLessons} {totalLessons === 1 ? "Lesson" : "Lessons"} Published
+            </strong>
+            <span class="mx-1.5 text-[#c9a45a]/60">•</span>
+            Start your structured market learning sessions now.
+          </p>
         </div>
 
-        {/* Track 2 (seamless duplicate loop) */}
-        <div
-          aria-hidden="true"
-          class="marquee-track flex shrink-0 items-stretch gap-4 px-2"
+        {/* Right: Direct CTA Button to Learning Series Tab */}
+        <a
+          href={seriesUrl}
+          class="group inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#c9a45a] bg-[#144233] px-3.5 py-1.5 text-xs font-bold tracking-wide text-[#e6c885] shadow-sm transition hover:border-[#e6c885] hover:bg-[#e6c885] hover:text-[#0c3024]"
         >
-          {lessons.map(lesson => (
-            <a
-              href={lesson.url}
-              tabindex="-1"
-              class="group flex h-36 w-44 shrink-0 flex-col justify-between rounded-lg border border-[#c9a45a] bg-[#0c3024] p-3.5 text-[#f8f3e8] shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#e6c885] hover:bg-[#123d2f] hover:shadow-md"
-            >
-              <div class="flex items-center justify-between border-b border-[#c9a45a]/25 pb-2">
-                <span class="rounded border border-[#c9a45a]/70 bg-[#144233] px-2 py-0.5 text-xs font-bold tracking-wider text-[#e6c885]">
-                  #{lesson.number}
-                </span>
-                <span class="text-[10px] font-medium uppercase tracking-widest text-[#c9a45a]/80">
-                  Lesson
-                </span>
-              </div>
-
-              <p class="line-clamp-3 text-xs font-semibold leading-snug tracking-wide text-[#f8f3e8] group-hover:text-[#e6c885]">
-                {lesson.title}
-              </p>
-            </a>
-          ))}
-        </div>
+          <span>Go to Learning Series</span>
+          <span
+            aria-hidden="true"
+            class="transition-transform duration-200 group-hover:translate-x-0.5"
+          >
+            →
+          </span>
+        </a>
       </div>
     </section>
   )
 }
-
-<style>
-  .marquee-track {
-    will-change: transform;
-    animation: lesson-scroll var(--scroll-duration, 80s) linear infinite;
-  }
-
-  .marquee-wrapper:hover .marquee-track,
-  .marquee-wrapper:focus-within .marquee-track {
-    animation-play-state: paused;
-  }
-
-  @keyframes lesson-scroll {
-    0% {
-      transform: translate3d(0%, 0, 0);
-    }
-    100% {
-      transform: translate3d(-100%, 0, 0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none;
-    }
-  }
-</style>
