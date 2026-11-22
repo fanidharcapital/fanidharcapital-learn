@@ -49,7 +49,7 @@ const learningPath = [
       <div class="mb-7 max-w-2xl">
         <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">365-day roadmap</p>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Learn in stages</h2>
-        <p class="mt-3 text-sm leading-6 text-muted-foreground">Select any module below to view its lessons in order. Modules provide a suggested learning sequence, not a deadline.</p>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">Click any module card to open its lessons in a new tab. Modules provide a suggested learning sequence, not a deadline.</p>
       </div>
       <ol class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {learningPath.map((module) => {
@@ -60,14 +60,16 @@ const learningPath = [
 
           return (
             <li id={`module-${module.number}`} class="scroll-mt-24">
-              <button
-                type="button"
-                data-module-btn
+              <a
+                href={`?module=${module.number}#published-lessons`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-module-link
                 data-module={module.number}
                 data-min={module.min}
                 data-max={module.max}
                 data-title={`Module ${String(module.number).padStart(2, "0")}: ${module.title} (Lessons ${module.range})`}
-                class="group w-full cursor-pointer rounded-2xl border border-border bg-background p-5 text-left transition hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+                class="group block w-full rounded-2xl border border-border bg-background p-5 text-left transition hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <div class="flex flex-wrap items-center justify-between gap-3">
                   <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
@@ -79,7 +81,7 @@ const learningPath = [
                 </div>
                 <h3 class="mt-4 text-lg font-semibold group-hover:text-accent">{module.title}</h3>
                 <p class="mt-2 text-sm leading-6 text-muted-foreground">{module.detail}</p>
-              </button>
+              </a>
             </li>
           );
         })}
@@ -108,9 +110,9 @@ const learningPath = [
             {posts.map(post => {
               const lessonNum = getLessonNumber(post);
               return (
-                <div data-lesson-item data-lesson-number={lessonNum}>
+                <li data-lesson-item data-lesson-number={lessonNum} class="list-none">
                   <Card variant="h3" {...post} />
-                </div>
+                </li>
               );
             })}
           </ul>
@@ -130,16 +132,15 @@ const learningPath = [
 
 <script>
   function initCurriculumFilter() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-module-btn]");
+    const links = document.querySelectorAll<HTMLAnchorElement>("[data-module-link]");
     const items = document.querySelectorAll<HTMLElement>("[data-lesson-item]");
     const heading = document.getElementById("lessons-heading");
     const subtext = document.getElementById("lessons-subtext");
     const resetBtn = document.getElementById("reset-module-filter");
     const emptyMsg = document.getElementById("empty-module-msg");
-    const section = document.getElementById("published-lessons");
     const showAllHeroBtn = document.querySelector("[data-show-all]");
 
-    function filterByModule(min: number, max: number, title: string, modNum: string, shouldScroll = true) {
+    function applyFilter(min: number, max: number, title: string, modNum: string) {
       let visibleCount = 0;
 
       items.forEach((item) => {
@@ -149,30 +150,23 @@ const learningPath = [
         if (match) visibleCount++;
       });
 
-      buttons.forEach((btn) => {
-        const active = btn.dataset.module === modNum;
-        btn.classList.toggle("border-accent", active);
-        btn.classList.toggle("ring-2", active);
-        btn.classList.toggle("ring-accent", active);
+      links.forEach((link) => {
+        const active = link.dataset.module === modNum;
+        link.classList.toggle("border-accent", active);
+        link.classList.toggle("ring-2", active);
+        link.classList.toggle("ring-accent", active);
       });
 
       if (heading) heading.textContent = title;
       if (subtext) subtext.textContent = `Showing ${visibleCount} published lesson${visibleCount === 1 ? "" : "s"} in order.`;
       if (resetBtn) resetBtn.classList.remove("hidden");
       if (emptyMsg) emptyMsg.classList.toggle("hidden", visibleCount > 0);
-
-      // Update URL hash cleanly without jumping to '#'
-      history.replaceState(null, "", `#module-${modNum}`);
-
-      if (shouldScroll && section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
     }
 
     function resetFilter() {
       items.forEach((item) => (item.style.display = ""));
-      buttons.forEach((btn) => {
-        btn.classList.remove("border-accent", "ring-2", "ring-accent");
+      links.forEach((link) => {
+        link.classList.remove("border-accent", "ring-2", "ring-accent");
       });
       if (heading) heading.textContent = "Published lessons";
       if (subtext) subtext.textContent = "Open any lesson below. New lessons will appear here as they are published.";
@@ -181,36 +175,27 @@ const learningPath = [
       history.replaceState(null, "", window.location.pathname);
     }
 
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const min = Number(btn.dataset.min);
-        const max = Number(btn.dataset.max);
-        const title = btn.dataset.title || "Published lessons";
-        const modNum = btn.dataset.module || "1";
-        filterByModule(min, max, title, modNum, true);
-      });
-    });
-
     resetBtn?.addEventListener("click", resetFilter);
     showAllHeroBtn?.addEventListener("click", () => resetFilter());
 
-    // Support direct links like /curriculum/#module-1 or /curriculum/#module-2
+    // Read ?module=1 (or #module-1) when opened in a new tab
+    const params = new URLSearchParams(window.location.search);
     const hashMatch = window.location.hash.match(/^#module-(\d+)$/);
-    if (hashMatch) {
-      const targetBtn = document.querySelector<HTMLButtonElement>(`[data-module-btn][data-module="${hashMatch[1]}"]`);
-      if (targetBtn) {
-        filterByModule(
-          Number(targetBtn.dataset.min),
-          Number(targetBtn.dataset.max),
-          targetBtn.dataset.title || "Published lessons",
-          hashMatch[1],
-          true
+    const modParam = params.get("module") || (hashMatch ? hashMatch[1] : null);
+
+    if (modParam) {
+      const targetLink = document.querySelector<HTMLAnchorElement>(`[data-module-link][data-module="${modParam}"]`);
+      if (targetLink) {
+        applyFilter(
+          Number(targetLink.dataset.min),
+          Number(targetLink.dataset.max),
+          targetLink.dataset.title || "Published lessons",
+          modParam
         );
       }
     }
   }
 
-  // Works on both initial load and Astro View Transitions
   initCurriculumFilter();
   document.addEventListener("astro:after-swap", initCurriculumFilter);
 </script>
