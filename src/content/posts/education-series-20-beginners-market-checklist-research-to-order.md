@@ -12,6 +12,7 @@ tags:
   - risk-management
   - order-types
 ---
+Welcome to **Lesson 20** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Beginner’s Market Checklist — From Research to Placing an Order](/images/lessons/lesson-20.png)
 
