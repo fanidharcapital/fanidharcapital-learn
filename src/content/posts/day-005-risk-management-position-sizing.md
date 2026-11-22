@@ -12,6 +12,7 @@ tags:
   - trading-discipline
 description: "Learn capital preservation, fixed risk per trade, position sizing math, and risk-reward discipline in Indian equity markets."
 ---
+Welcome to **Lesson 05** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Education Series #05: Risk Management & Position Sizing](/images/lessons/lesson-05.png)
 
