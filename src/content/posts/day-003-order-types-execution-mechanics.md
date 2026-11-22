@@ -11,6 +11,7 @@ tags:
   - order-types
 description: "Understand core equity order types, order validity modifiers, and how exchange matching engines execute trades using price-time priority."
 ---
+Welcome to **Lesson 03** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Education Series #03: Order Types & Execution Mechanics](/images/lessons/lesson-03.png)
 
