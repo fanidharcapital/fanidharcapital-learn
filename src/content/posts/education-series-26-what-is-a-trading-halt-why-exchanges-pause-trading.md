@@ -12,6 +12,7 @@ tags:
   - risk-management
   - regulatory-action
 ---
+Welcome to **Lesson 26** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![What Is a Trading Halt? — Why Exchanges Pause Trading](/images/lessons/lesson-26.png)
 
