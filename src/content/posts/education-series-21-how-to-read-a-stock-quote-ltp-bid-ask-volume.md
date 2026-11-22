@@ -12,6 +12,7 @@ tags:
   - ltp
   - trading-volume
 ---
+Welcome to **Lesson 21** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![How to Read a Stock Quote — LTP, Bid, Ask & Volume](/images/lessons/lesson-21.png)
 
