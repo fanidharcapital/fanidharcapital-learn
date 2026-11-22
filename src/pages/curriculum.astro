@@ -4,23 +4,34 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
-import { getSortedPosts } from "@/utils/getSortedPosts";
 import SITE from "@/config";
 
-const posts = getSortedPosts(await getCollection("posts", ({ data }) => !data.draft));
+// Extract numeric lesson number from title ("Education Series #23: ...") or slug
+function getLessonNumber(post: any): number {
+  const titleMatch = post.data.title?.match(/#(\d+)/);
+  if (titleMatch) return Number(titleMatch[1]);
+  const slugMatch = post.slug?.match(/education-series-(\d+)/i) || post.id?.match(/education-series-(\d+)/i);
+  if (slugMatch) return Number(slugMatch[1]);
+  return 9999;
+}
+
+// Fetch all non-draft lessons sorted strictly ascending (Lesson 01 -> Lesson 365)
+const rawPosts = await getCollection("posts", ({ data }) => !data.draft);
+const posts = rawPosts.sort((a, b) => getLessonNumber(a) - getLessonNumber(b));
+
 const learningPath = [
-  { range: "01–30", title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
-  { range: "31–60", title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and market infrastructure." },
-  { range: "61–90", title: "Fundamental analysis", detail: "Businesses, financial statements, valuation, and key ratios." },
-  { range: "91–120", title: "Technical analysis", detail: "Charts, trends, support and resistance, and indicators." },
-  { range: "121–150", title: "Price action", detail: "Candles, market structure, and context." },
-  { range: "151–180", title: "Futures market", detail: "Contracts, margin, expiry, basis, and futures risk." },
-  { range: "181–210", title: "Options market", detail: "Calls, puts, payoff profiles, and option-chain terminology." },
-  { range: "211–240", title: "Greeks & strategies", detail: "Sensitivity measures and multi-leg position behaviour." },
-  { range: "241–270", title: "Risk & psychology", detail: "Position sizing, risk limits, discipline, and decision-making." },
-  { range: "271–300", title: "Institutions & macro", detail: "Economic data, global cues, and institutional activity." },
-  { range: "301–330", title: "Advanced concepts", detail: "Market structure, volatility, and advanced frameworks." },
-  { range: "331–365", title: "Case studies", detail: "Educational examples, application, and review exercises." },
+  { number: 1, min: 1, max: 30, range: "01–30", title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
+  { number: 2, min: 31, max: 60, range: "31–60", title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and market infrastructure." },
+  { number: 3, min: 61, max: 90, range: "61–90", title: "Fundamental analysis", detail: "Businesses, financial statements, valuation, and key ratios." },
+  { number: 4, min: 91, max: 120, range: "91–120", title: "Technical analysis", detail: "Charts, trends, support and resistance, and indicators." },
+  { number: 5, min: 121, max: 150, range: "121–150", title: "Price action", detail: "Candles, market structure, and context." },
+  { number: 6, min: 151, max: 180, range: "151–180", title: "Futures market", detail: "Contracts, margin, expiry, basis, and futures risk." },
+  { number: 7, min: 181, max: 210, range: "181–210", title: "Options market", detail: "Calls, puts, payoff profiles, and option-chain terminology." },
+  { number: 8, min: 211, max: 240, range: "211–240", title: "Greeks & strategies", detail: "Sensitivity measures and multi-leg position behaviour." },
+  { number: 9, min: 241, max: 270, range: "241–270", title: "Risk & psychology", detail: "Position sizing, risk limits, discipline, and decision-making." },
+  { number: 10, min: 271, max: 300, range: "271–300", title: "Institutions & macro", detail: "Economic data, global cues, and institutional activity." },
+  { number: 11, min: 301, max: 330, range: "301–330", title: "Advanced concepts", detail: "Market structure, volatility, and advanced frameworks." },
+  { number: 12, min: 331, max: 365, range: "331–365", title: "Case studies", detail: "Educational examples, application, and review exercises." },
 ];
 ---
 
@@ -31,44 +42,175 @@ const learningPath = [
       <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">Shree Fanidhar Capital · Learning</p>
       <h1 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">The learning curriculum</h1>
       <p class="mt-4 max-w-2xl text-sm leading-6 text-[#e5ece7] sm:text-base">A self-paced roadmap through Indian markets, analysis, derivatives, and risk management. Read published lessons freely; new lessons will be added progressively.</p>
-      <a href="#published-lessons" class="mt-7 inline-flex min-h-11 items-center rounded-full bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#173426]">Explore published lessons <span aria-hidden="true" class="ml-2">↓</span></a>
+      <a href="#published-lessons" data-show-all class="mt-7 inline-flex min-h-11 items-center rounded-full bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#173426]">Explore published lessons <span aria-hidden="true" class="ml-2">↓</span></a>
     </section>
 
     <section class="py-12 sm:py-16">
       <div class="mb-7 max-w-2xl">
         <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">365-day roadmap</p>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Learn in stages</h2>
-        <p class="mt-3 text-sm leading-6 text-muted-foreground">Modules provide a suggested learning sequence, not a deadline. Move at a pace that supports understanding. The day ranges describe the roadmap; they do not mean every lesson is published yet.</p>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">Select any module below to view its lessons in order. Modules provide a suggested learning sequence, not a deadline.</p>
       </div>
       <ol class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {learningPath.map((module, index) => (
-          <li id={`module-${index + 1}`} class="scroll-mt-24 rounded-2xl border border-border bg-background p-5">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">Module {String(index + 1).padStart(2, "0")}</span>
-              <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Days {module.range}</span>
-            </div>
-            <h3 class="mt-4 text-lg font-semibold">{module.title}</h3>
-            <p class="mt-2 text-sm leading-6 text-muted-foreground">{module.detail}</p>
-          </li>
-        ))}
+        {learningPath.map((module) => {
+          const count = posts.filter(p => {
+            const n = getLessonNumber(p);
+            return n >= module.min && n <= module.max;
+          }).length;
+
+          return (
+            <li id={`module-${module.number}`} class="scroll-mt-24">
+              <button
+                type="button"
+                data-module-btn
+                data-module={module.number}
+                data-min={module.min}
+                data-max={module.max}
+                data-title={`Module ${String(module.number).padStart(2, "0")}: ${module.title} (Lessons ${module.range})`}
+                class="group w-full cursor-pointer rounded-2xl border border-border bg-background p-5 text-left transition hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                    Module {String(module.number).padStart(2, "0")}
+                  </span>
+                  <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+                    Days {module.range} · {count} {count === 1 ? "lesson" : "lessons"}
+                  </span>
+                </div>
+                <h3 class="mt-4 text-lg font-semibold group-hover:text-accent">{module.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-muted-foreground">{module.detail}</p>
+              </button>
+            </li>
+          );
+        })}
       </ol>
     </section>
 
-    <section id="published-lessons" class="border-t border-border py-12 sm:py-16">
-      <div class="mb-6">
-        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Available now</p>
-        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Published lessons</h2>
-        <p class="mt-2 text-sm leading-6 text-muted-foreground">Open any lesson below. New lessons will appear here as they are published.</p>
+    <section id="published-lessons" class="scroll-mt-24 border-t border-border py-12 sm:py-16">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p id="lessons-eyebrow" class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Available now</p>
+          <h2 id="lessons-heading" class="text-2xl font-semibold tracking-tight sm:text-3xl">Published lessons</h2>
+          <p id="lessons-subtext" class="mt-2 text-sm leading-6 text-muted-foreground">Open any lesson below. New lessons will appear here as they are published.</p>
+        </div>
+        <button
+          id="reset-module-filter"
+          type="button"
+          class="hidden cursor-pointer rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground hover:border-accent"
+        >
+          Show all published lessons
+        </button>
       </div>
+
       {posts.length > 0 ? (
-        <ul class="grid gap-5 md:grid-cols-2">
-          {posts.map(post => <Card variant="h3" {...post} />)}
-        </ul>
+        <>
+          <ul id="lessons-grid" class="grid gap-5 md:grid-cols-2">
+            {posts.map(post => {
+              const lessonNum = getLessonNumber(post);
+              return (
+                <div data-lesson-item data-lesson-number={lessonNum}>
+                  <Card variant="h3" {...post} />
+                </div>
+              );
+            })}
+          </ul>
+          <p id="empty-module-msg" class="hidden rounded-2xl border border-border p-6 text-sm text-muted-foreground">
+            Lessons for this module are being prepared. Check back soon or view all published lessons.
+          </p>
+        </>
       ) : (
         <p class="rounded-2xl border border-border p-6 text-sm text-muted-foreground">Lessons are being prepared. Please check back soon.</p>
       )}
     </section>
+
     <p class="mb-12 rounded-2xl border border-[#c9a45a]/40 bg-[#f5f0e4] p-6 text-sm leading-6 text-[#23382d]">Educational content only. This curriculum is not investment advice, a recommendation to buy or sell securities, or a promise of market outcomes.</p>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  function initCurriculumFilter() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-module-btn]");
+    const items = document.querySelectorAll<HTMLElement>("[data-lesson-item]");
+    const heading = document.getElementById("lessons-heading");
+    const subtext = document.getElementById("lessons-subtext");
+    const resetBtn = document.getElementById("reset-module-filter");
+    const emptyMsg = document.getElementById("empty-module-msg");
+    const section = document.getElementById("published-lessons");
+    const showAllHeroBtn = document.querySelector("[data-show-all]");
+
+    function filterByModule(min: number, max: number, title: string, modNum: string, shouldScroll = true) {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const num = Number(item.dataset.lessonNumber || 0);
+        const match = num >= min && num <= max;
+        item.style.display = match ? "" : "none";
+        if (match) visibleCount++;
+      });
+
+      buttons.forEach((btn) => {
+        const active = btn.dataset.module === modNum;
+        btn.classList.toggle("border-accent", active);
+        btn.classList.toggle("ring-2", active);
+        btn.classList.toggle("ring-accent", active);
+      });
+
+      if (heading) heading.textContent = title;
+      if (subtext) subtext.textContent = `Showing ${visibleCount} published lesson${visibleCount === 1 ? "" : "s"} in order.`;
+      if (resetBtn) resetBtn.classList.remove("hidden");
+      if (emptyMsg) emptyMsg.classList.toggle("hidden", visibleCount > 0);
+
+      // Update URL hash cleanly without jumping to '#'
+      history.replaceState(null, "", `#module-${modNum}`);
+
+      if (shouldScroll && section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function resetFilter() {
+      items.forEach((item) => (item.style.display = ""));
+      buttons.forEach((btn) => {
+        btn.classList.remove("border-accent", "ring-2", "ring-accent");
+      });
+      if (heading) heading.textContent = "Published lessons";
+      if (subtext) subtext.textContent = "Open any lesson below. New lessons will appear here as they are published.";
+      if (resetBtn) resetBtn.classList.add("hidden");
+      if (emptyMsg) emptyMsg.classList.add("hidden");
+      history.replaceState(null, "", window.location.pathname);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const min = Number(btn.dataset.min);
+        const max = Number(btn.dataset.max);
+        const title = btn.dataset.title || "Published lessons";
+        const modNum = btn.dataset.module || "1";
+        filterByModule(min, max, title, modNum, true);
+      });
+    });
+
+    resetBtn?.addEventListener("click", resetFilter);
+    showAllHeroBtn?.addEventListener("click", () => resetFilter());
+
+    // Support direct links like /curriculum/#module-1 or /curriculum/#module-2
+    const hashMatch = window.location.hash.match(/^#module-(\d+)$/);
+    if (hashMatch) {
+      const targetBtn = document.querySelector<HTMLButtonElement>(`[data-module-btn][data-module="${hashMatch[1]}"]`);
+      if (targetBtn) {
+        filterByModule(
+          Number(targetBtn.dataset.min),
+          Number(targetBtn.dataset.max),
+          targetBtn.dataset.title || "Published lessons",
+          hashMatch[1],
+          true
+        );
+      }
+    }
+  }
+
+  // Works on both initial load and Astro View Transitions
+  initCurriculumFilter();
+  document.addEventListener("astro:after-swap", initCurriculumFilter);
+</script>
