@@ -11,6 +11,7 @@ tags:
   - equities
   - sebi
 ---
+Welcome to **Lesson 07** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Who Participates in the Indian Stock Market](/images/lessons/lesson-07.png)
 
