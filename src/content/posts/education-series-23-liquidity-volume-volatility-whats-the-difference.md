@@ -12,6 +12,7 @@ tags:
   - volatility
   - risk-management
 ---
+Welcome to **Lesson 23** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Liquidity, Volume & Volatility — What’s the Difference?](/images/lessons/lesson-23.png)
 
