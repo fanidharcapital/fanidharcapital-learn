@@ -1,7 +1,7 @@
 ---
 title: "Education Series #61: Introduction to Fundamental Analysis — The Top-Down vs. Bottom-Up Approach"
 description: "Understand the core philosophy of Fundamental Analysis. Learn how to evaluate a business's intrinsic value by studying quantitative financial statements alongside qualitative pillars like economic moats and management quality, and compare the Top-Down (Macro to Micro) and Bottom-Up (Micro to Macro) research frameworks."
-pubDatetime: 2026-11-23T09:00:00+05:30
+pubDatetime: 2026-11-22T19:00:00+05:30
 featured: false
 draft: false
 image: /images/lessons/lesson-61.png
@@ -18,9 +18,7 @@ tags:
 
 Welcome to **Lesson 61**—the opening lesson of **Module 03: Fundamental Analysis** (**Lessons 61–90**) in the **Shree Fanidhar Capital Education Series**.
 
-In **Module 01**, you learned how price charts, trends, and volume reflect market psychology. In **Module 02**, you mastered the operational machinery of **NSE, BSE, Clearing Corporations, NSDL/CDSL, and SEBI**.
-
-Now, we shift focus from *how* orders execute to **what makes a business genuinely valuable**.
+In **Module 02**, you mastered the operational machinery of **NSE, BSE, Clearing Corporations, NSDL/CDSL, and SEBI**. Now, we shift focus from *how* orders execute to **what makes a business genuinely valuable**.
 
 Every stock ticker on your trading terminal represents fractional ownership in a real operating business. **Fundamental Analysis** is the discipline of evaluating a company's economic reality—its business model, competitive position, financial health, and future cash-generating power—to estimate its **Intrinsic Value**.
 
