@@ -13,6 +13,7 @@ tags:
   - liquidity
   - DOM
 ---
+Welcome to **Lesson 22** of **Module 01: Market foundation** (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ![Market Depth — Understanding Buy and Sell Orders](/images/lessons/lesson-22.png)
 
