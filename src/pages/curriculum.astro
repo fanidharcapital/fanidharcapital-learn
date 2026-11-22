@@ -59,9 +59,9 @@ const learningPath = [
           }).length;
 
           return (
-            <li id={`module-${module.number}`} class="scroll-mt-24">
+            <li class="scroll-mt-24">
               <a
-                href={`?module=${module.number}#published-lessons`}
+                href={`#module-${module.number}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-module-link
@@ -136,7 +136,6 @@ const learningPath = [
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 1.25rem;
     align-items: stretch;
-    justify-items: stretch;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -164,9 +163,7 @@ const learningPath = [
     display: flex;
     flex-direction: column;
     min-width: 0;
-    width: 100%;
     height: 100%;
-    margin: 0;
   }
 
   .lessons-row-item.is-hidden {
@@ -175,78 +172,78 @@ const learningPath = [
 
   .lessons-row-item > :global(*) {
     flex: 1 1 auto;
-    width: 100% !important;
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    width: 100%;
+    max-width: 100%;
   }
 </style>
 
 <script>
-  function initCurriculumFilter() {
+  function syncModuleFromHash() {
     const links = document.querySelectorAll<HTMLAnchorElement>("[data-module-link]");
     const items = document.querySelectorAll<HTMLElement>("[data-lesson-item]");
     const heading = document.getElementById("lessons-heading");
     const subtext = document.getElementById("lessons-subtext");
     const resetBtn = document.getElementById("reset-module-filter");
     const emptyMsg = document.getElementById("empty-module-msg");
-    const showAllHeroBtn = document.querySelector("[data-show-all]");
+    const section = document.getElementById("published-lessons");
 
-    function applyFilter(min: number, max: number, title: string, modNum: string) {
-      let visibleCount = 0;
+    const hashMatch = window.location.hash.match(/^#module-(\d+)$/);
+    const modNum = hashMatch ? hashMatch[1] : new URLSearchParams(window.location.search).get("module");
 
-      items.forEach((item) => {
-        const num = Number(item.dataset.lessonNumber || 0);
-        const match = num >= min && num <= max;
-        item.classList.toggle("is-hidden", !match);
-        if (match) visibleCount++;
-      });
-
-      links.forEach((link) => {
-        const active = link.dataset.module === modNum;
-        link.classList.toggle("border-accent", active);
-        link.classList.toggle("ring-2", active);
-        link.classList.toggle("ring-accent", active);
-      });
-
-      if (heading) heading.textContent = title;
-      if (subtext) subtext.textContent = `Showing ${visibleCount} published lesson${visibleCount === 1 ? "" : "s"} in order.`;
-      if (resetBtn) resetBtn.classList.remove("hidden");
-      if (emptyMsg) emptyMsg.classList.toggle("hidden", visibleCount > 0);
-    }
-
-    function resetFilter() {
+    if (!modNum) {
       items.forEach((item) => item.classList.remove("is-hidden"));
-      links.forEach((link) => {
-        link.classList.remove("border-accent", "ring-2", "ring-accent");
-      });
+      links.forEach((link) => link.classList.remove("border-accent", "ring-2", "ring-accent"));
       if (heading) heading.textContent = "Published lessons";
       if (subtext) subtext.textContent = "Open any lesson below. New lessons will appear here as they are published.";
       if (resetBtn) resetBtn.classList.add("hidden");
       if (emptyMsg) emptyMsg.classList.add("hidden");
-      history.replaceState(null, "", window.location.pathname);
+      return;
     }
 
-    resetBtn?.addEventListener("click", resetFilter);
-    showAllHeroBtn?.addEventListener("click", () => resetFilter());
+    const targetLink = document.querySelector<HTMLAnchorElement>(`[data-module-link][data-module="${modNum}"]`);
+    if (!targetLink) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const hashMatch = window.location.hash.match(/^#module-(\d+)$/);
-    const modParam = params.get("module") || (hashMatch ? hashMatch[1] : null);
+    const min = Number(targetLink.dataset.min);
+    const max = Number(targetLink.dataset.max);
+    const title = targetLink.dataset.title || "Published lessons";
+    let visibleCount = 0;
 
-    if (modParam) {
-      const targetLink = document.querySelector<HTMLAnchorElement>(`[data-module-link][data-module="${modParam}"]`);
-      if (targetLink) {
-        applyFilter(
-          Number(targetLink.dataset.min),
-          Number(targetLink.dataset.max),
-          targetLink.dataset.title || "Published lessons",
-          modParam
-        );
-      }
+    items.forEach((item) => {
+      const num = Number(item.dataset.lessonNumber || 0);
+      const match = num >= min && num <= max;
+      item.classList.toggle("is-hidden", !match);
+      if (match) visibleCount++;
+    });
+
+    links.forEach((link) => {
+      const active = link.dataset.module === modNum;
+      link.classList.toggle("border-accent", active);
+      link.classList.toggle("ring-2", active);
+      link.classList.toggle("ring-accent", active);
+    });
+
+    if (heading) heading.textContent = title;
+    if (subtext) subtext.textContent = `Showing ${visibleCount} published lesson${visibleCount === 1 ? "" : "s"} in order.`;
+    if (resetBtn) resetBtn.classList.remove("hidden");
+    if (emptyMsg) emptyMsg.classList.toggle("hidden", visibleCount > 0);
+
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
-  initCurriculumFilter();
-  document.addEventListener("astro:after-swap", initCurriculumFilter);
+  document.getElementById("reset-module-filter")?.addEventListener("click", () => {
+    history.replaceState(null, "", window.location.pathname);
+    syncModuleFromHash();
+  });
+
+  document.querySelector("[data-show-all]")?.addEventListener("click", () => {
+    history.replaceState(null, "", window.location.pathname);
+    syncModuleFromHash();
+  });
+
+  window.addEventListener("hashchange", syncModuleFromHash);
+  document.addEventListener("DOMContentLoaded", syncModuleFromHash);
+  document.addEventListener("astro:page-load", syncModuleFromHash);
+  syncModuleFromHash();
 </script>
