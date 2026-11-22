@@ -136,6 +136,7 @@ const learningPath = [
     grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 1.25rem;
     align-items: stretch;
+    justify-items: stretch;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -163,13 +164,21 @@ const learningPath = [
     display: flex;
     flex-direction: column;
     min-width: 0;
+    width: 100%;
     height: 100%;
+    margin: 0;
+  }
+
+  .lessons-row-item.is-hidden {
+    display: none !important;
   }
 
   .lessons-row-item > :global(*) {
     flex: 1 1 auto;
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 </style>
 
@@ -189,7 +198,7 @@ const learningPath = [
       items.forEach((item) => {
         const num = Number(item.dataset.lessonNumber || 0);
         const match = num >= min && num <= max;
-        item.style.display = match ? "" : "none";
+        item.classList.toggle("is-hidden", !match);
         if (match) visibleCount++;
       });
 
@@ -207,7 +216,7 @@ const learningPath = [
     }
 
     function resetFilter() {
-      items.forEach((item) => (item.style.display = ""));
+      items.forEach((item) => item.classList.remove("is-hidden"));
       links.forEach((link) => {
         link.classList.remove("border-accent", "ring-2", "ring-accent");
       });
