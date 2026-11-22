@@ -11,7 +11,7 @@ tags:
   - t-plus-1
   - settlement
 ---
-Welcome to **Lesson 01**—and the start of **Module 01: Market foundation** 
+Welcome to **Lesson 01** and the start of **Module 01: Market foundation** 
 (**Lessons 01–30**) in the **Shree Fanidhar Capital Education Series**.
 
 ## Overview
