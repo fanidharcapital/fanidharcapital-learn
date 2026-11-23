@@ -76,6 +76,10 @@ const {
   hideToc,
 } = post.data;
 
+const lessonNumber = title.match(/(?:lesson|education series\s*#?)\s*(\d+)/i)?.[1];
+const moduleTag = tags.find(tag => /^module-\d+$/i.test(tag));
+const moduleNumber = moduleTag?.match(/\d+/)?.[0];
+
 const { Content, headings } = await render(post);
 const tocHeadings = config.features.toc && !hideToc ? headings : [];
 
@@ -114,37 +118,73 @@ const ogImage = ogImageUrl
 
   <main
     id="main-content"
-    class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
+    class:list={[
+      "app-layout mx-auto w-full max-w-5xl",
+      { "mt-8": !config.features.showBackButton },
+    ]}
     data-pagefind-body
   >
-    <h1
-      style={{ viewTransitionName: toTransitionName(post.id) }}
-      class="text-accent inline-block text-2xl font-bold sm:text-3xl"
-    >
-      {title}
-    </h1>
+    <header class="mx-auto mb-8 w-full max-w-3xl">
+      <div class="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold tracking-wide">
+        {
+          moduleNumber && (
+            <span class="rounded-full border border-border bg-card px-3 py-1 text-accent">
+              Module {moduleNumber}
+            </span>
+          )
+        }
+        {
+          lessonNumber && (
+            <span class="rounded-full bg-accent/10 px-3 py-1 text-accent">
+              Lesson {lessonNumber}
+            </span>
+          )
+        }
+      </div>
 
-    <div class="my-2 flex items-center gap-2">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span
-        aria-hidden="true"
-        class:list={[
-          "text-muted-foreground max-sm:hidden",
-          { hidden: !config.features.editPost?.enabled || hideEditPost },
-        ]}
+      <h1
+        style={{ viewTransitionName: toTransitionName(post.id) }}
+        class="text-accent text-3xl font-bold leading-tight sm:text-4xl"
       >
-        |
-      </span>
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
-    </div>
+        {title}
+      </h1>
 
-    <div class="post-body mt-8">
+      <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+        <span
+          aria-hidden="true"
+          class:list={[
+            "text-muted-foreground max-sm:hidden",
+            { hidden: !config.features.editPost?.enabled || hideEditPost },
+          ]}
+        >
+          |
+        </span>
+        <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+      </div>
+
+      {
+        description && (
+          <section
+            aria-label="Lesson overview"
+            class="mt-6 rounded-xl border border-border bg-card/60 px-5 py-4 sm:px-6"
+          >
+            <p class="mb-1 text-xs font-bold uppercase tracking-wider text-accent">
+              Lesson focus
+            </p>
+            <p class="m-0 leading-relaxed text-muted-foreground">{description}</p>
+          </section>
+        )
+      }
+    </header>
+
+    <div class="post-body mx-auto mt-8 w-full max-w-5xl">
       <PostToc headings={tocHeadings} />
       <article
         id="article"
+        aria-label={title}
         class:list={[
-          "w-full",
-          "app-prose max-w-app",
+          "app-prose mx-auto w-full max-w-3xl",
           "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
         ]}
       >
@@ -156,7 +196,7 @@ const ogImage = ogImageUrl
 
     <BackToTopButton headings={tocHeadings} />
 
-    <div class="sm:my-8 sm:flex sm:items-start sm:justify-between sm:gap-8">
+    <div class="mx-auto w-full max-w-3xl sm:my-8 sm:flex sm:items-start sm:justify-between sm:gap-8">
       <div class="mt-4 mb-8 flex items-start justify-between gap-4 sm:my-0">
         <ul class="flex flex-wrap gap-4">
           {
@@ -171,11 +211,15 @@ const ogImage = ogImageUrl
       <ShareLinks />
     </div>
 
-    <PostEnd {post} />
+    <div class="mx-auto w-full max-w-3xl">
+      <PostEnd {post} />
 
-    <hr class="my-8 border-dashed" />
+      <hr class="my-8 border-dashed" />
 
-    <AdjacentPostNav {prevPost} {nextPost} />
+      <nav aria-label="Lesson navigation">
+        <AdjacentPostNav {prevPost} {nextPost} />
+      </nav>
+    </div>
   </main>
   <Footer />
 </PostLayout>
