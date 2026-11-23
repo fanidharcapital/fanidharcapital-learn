@@ -10,7 +10,7 @@
   --font-app: var(--font-google-sans-code);
 }
 
-/* Light theme values */
+/* Light theme values (keeps first page untouched) */
 :root,
 [data-theme="light"] {
   --background: #f7f8f6;
@@ -20,6 +20,23 @@
   --muted: #e9eeeb;
   --muted-foreground: #43544d;
   --border: #dfe5e1;
+}
+
+/* Module pages only: warm sand, soft sage & muted gold */
+:is(
+  [data-theme="light"] [data-page="module"],
+  [data-theme="light"] .module-page,
+  [data-theme="light"] .module-view,
+  [data-theme="light"] .module-detail,
+  [data-theme="light"] main:has([class*="module"])
+) {
+  --background: #faf7f0;
+  --foreground: #14261f;
+  --accent: #dceae2;
+  --accent-foreground: #132b22;
+  --muted: #edf2ee;
+  --muted-foreground: #3e544a;
+  --border: #c9d9cf;
 }
 
 /* Dark theme values */
