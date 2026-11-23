@@ -1,12 +1,15 @@
 ---
-title: "Lesson #91: Introduction to Technical Analysis — Price, Volume, Market Psychology & Limitations"
+title: "Educational Series #91: Introduction to Technical Analysis — Price, Volume, Market Psychology & Limitations"
 description: "Learn the core premises of technical analysis, how price action and volume reveal supply and demand, and where technicals have practical limits in Indian equities."
 pubDatetime: 2026-11-23T09:00:00Z
+tags:
+  - Module 04
+  - Technical Analysis
 ---
 
 In Modules 01 through 03, you focused on **Fundamental Analysis**—evaluating business quality, financial statements, valuation multiples, and forensic checks to answer *what* to buy. Starting with **Lesson #91**, Module 04 introduces **Technical Analysis**—the study of price action, volume, and market structure to answer *when* to enter, manage risk, and exit.
 
-![Lesson #91: Introduction to Technical Analysis](/images/lessons/lesson-91.png)
+![Educational Series #91: Introduction to Technical Analysis](/images/lessons/lesson-91.png)
 
 ---
 
