@@ -2,7 +2,7 @@
 title: "Educational Series #64: Corporate Governance & Management Quality — Promoter Integrity, Capital Allocation & Board Oversight"
 description: "Why even a wide economic moat fails without trustworthy leadership. Learn how to evaluate Indian promoters, assess capital allocation decisions, review board and auditor independence, and spot governance red flags early."
 pubDatetime: 2026-11-23T12:55:00+05:30
-featured: true
+featured: false
 draft: false
 image: /images/lessons/lesson-64.png
 tags:
