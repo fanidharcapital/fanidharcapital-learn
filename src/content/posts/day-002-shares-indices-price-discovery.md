@@ -3,7 +3,7 @@ title: "Education Series #02: Shares, Market Indices & How Price Discovery Works
 author: "Shree Fanidhar Capital"
 pubDatetime: 2026-11-21T10:00:00Z
 slug: "day-002-shares-indices-price-discovery"
-featured: false
+featured: true
 draft: false
 tags:
   - equities
