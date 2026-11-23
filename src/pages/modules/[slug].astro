@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+
+export async function getStaticPaths() {
+  const modules = [
+    { slug: "module-01", num: "01", range: "01–30", start: 1, end: 30, title: "Market foundations", detail: "How India’s equity markets work, from shares and indices to order types." },
+    { slug: "module-02", num: "02", range: "31–60", start: 31, end: 60, title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and the systems behind each trade." },
+    { slug: "module-03", num: "03", range: "61–90", start: 61, end: 90, title: "Fundamental analysis", detail: "Understand businesses, financial statements, valuation, and key ratios." },
+    { slug: "module-04", num: "04", range: "91–120", start: 91, end: 120, title: "Technical analysis", detail: "Read charts, trends, support and resistance, and common indicators." },
+    { slug: "module-05", num: "05", range: "121–150", start: 121, end: 150, title: "Price action", detail: "Build a structured approach to candles, market structure, and context." },
+    { slug: "module-06", num: "06", range: "151–180", start: 151, end: 180, title: "Futures market", detail: "Learn contracts, margin, expiry, basis, and futures risk." },
+    { slug: "module-07", num: "07", range: "181–210", start: 181, end: 210, title: "Options market", detail: "Explore calls, puts, payoff profiles, and option-chain terminology." },
+    { slug: "module-08", num: "08", range: "211–240", start: 211, end: 240, title: "Greeks & strategies", detail: "Understand sensitivity measures and how multi-leg positions behave." },
+    { slug: "module-09", num: "09", range: "241–270", start: 241, end: 270, title: "Risk & psychology", detail: "Study position sizing, risk limits, discipline, and decision-making." },
+    { slug: "module-10", num: "10", range: "271–300", start: 271, end: 300, title: "Institutions & macro", detail: "Connect economic data, global cues, and institutional activity." },
+    { slug: "module-11", num: "11", range: "301–330", start: 301, end: 330, title: "Advanced concepts", detail: "Explore market structure, volatility, and more complex frameworks." },
+    { slug: "module-12", num: "12", range: "331–365", start: 331, end: 365, title: "Case studies", detail: "Apply the concepts through educational examples and review exercises." },
+  ];
+
+  const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+  const sortedPosts = getSortedPosts(allPosts);
+
+  return modules.map((mod, idx) => {
+    const modulePosts = sortedPosts
+      .filter(post => {
+        const hasTag = post.data.tags?.includes(mod.slug);
+        const match = post.data.title.match(/#(\d+)/);
+        const lessonNum = match ? Number(match[1]) : null;
+        const inRange = lessonNum !== null && lessonNum >= mod.start && lessonNum <= mod.end;
+        return hasTag || inRange;
+      })
+      .sort((a, b) => {
+        const numA = Number(a.data.title.match(/#(\d+)/)?.[1] ?? 0);
+        const numB = Number(b.data.title.match(/#(\d+)/)?.[1] ?? 0);
+        return numA - numB;
+      });
+
+    return {
+      params: { slug: mod.slug },
+      props: {
+        mod,
+        modulePosts,
+        prevMod: idx > 0 ? modules[idx - 1] : null,
+        nextMod: idx < modules.length - 1 ? modules[idx + 1] : null,
+      },
+    };
+  });
+}
+
+const { mod, modulePosts, prevMod, nextMod } = Astro.props;
+---
+
+<Layout title={`Module ${mod.num}: ${mod.title} (Days ${mod.range}) | Shree Fanidhar Capital`}>
+  <Header />
+
+  <section class="relative isolate w-full overflow-hidden border-y border-[#c9a45a]/35 bg-[#0c3024] px-6 py-10 text-[#f8f3e8] sm:px-10 sm:py-14 lg:px-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-4 flex flex-wrap items-center gap-3">
+        <a href="/#curriculum" class="inline-flex items-center text-xs font-semibold uppercase tracking-[0.18em] text-[#d8bd7b] hover:underline">
+          ← All Modules
+        </a>
+        <span class="text-white/30">•</span>
+        <span class="rounded-full border border-[#c9a45a]/40 bg-white/10 px-3 py-1 text-xs font-semibold text-[#f8f3e8]">
+          Days {mod.range}
+        </span>
+      </div>
+
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8bd7b]">Module {mod.num}</p>
+      <h1 class="mt-2 max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">{mod.title}</h1>
+      <p class="mt-4 max-w-2xl text-base leading-7 text-[#e5ece7]">{mod.detail}</p>
+    </div>
+  </section>
+
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Module Lessons</p>
+        <h2 class="mt-1 text-2xl font-semibold tracking-tight">
+          {modulePosts.length > 0
+            ? `${modulePosts.length} published ${modulePosts.length === 1 ? "lesson" : "lessons"} (Days ${mod.range})`
+            : `Upcoming Module (Days ${mod.range})`}
+        </h2>
+      </div>
+      <a href="/posts/" class="inline-flex min-h-11 items-center rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-accent transition hover:border-[#c9a45a]">
+        Browse all lessons ↗
+      </a>
+    </div>
+
+    {
+      modulePosts.length > 0 ? (
+        <ul class="grid gap-5 md:grid-cols-2">
+          {modulePosts.map(post => <Card variant="h3" {...post} />)}
+        </ul>
+      ) : (
+        <div class="rounded-2xl border border-border bg-muted/40 p-8">
+          <p class="text-lg font-semibold">Lessons for Module {mod.num} are coming soon</p>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+            New lessons in the 365-Day Learning Roadmap are added sequentially. Explore the published modules in the meantime.
+          </p>
+          <a href="/#curriculum" class="mt-5 inline-flex items-center rounded-full bg-[#0c3024] px-5 py-2.5 text-sm font-semibold text-[#f8f3e8] transition hover:opacity-90">
+            ← Back to 12 Modules
+          </a>
+        </div>
+      )
+    }
+
+    <nav aria-label="Module navigation" class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8">
+      {prevMod ? (
+        <a href={`/modules/${prevMod.slug}/`} class="inline-flex flex-col rounded-xl border border-border px-5 py-3 transition hover:border-[#c9a45a]">
+          <span class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">← Previous Module</span>
+          <span class="mt-1 font-semibold text-accent">Module {prevMod.num}: {prevMod.title}</span>
+        </a>
+      ) : <div />}
+
+      {nextMod && (
+        <a href={`/modules/${nextMod.slug}/`} class="inline-flex flex-col rounded-xl border border-border px-5 py-3 text-right transition hover:border-[#c9a45a]">
+          <span class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Next Module →</span>
+          <span class="mt-1 font-semibold text-accent">Module {nextMod.num}: {nextMod.title}</span>
+        </a>
+      )}
+    </nav>
+  </main>
+
+  <Footer />
+</Layout>
