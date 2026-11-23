@@ -6,7 +6,7 @@ pubDatetime: 2026-11-23T09:00:00Z
 
 In Modules 01 through 03, you focused on **Fundamental Analysis**—evaluating business quality, financial statements, valuation multiples, and forensic checks to answer *what* to buy. Starting with **Lesson #91**, Module 04 introduces **Technical Analysis**—the study of price action, volume, and market structure to answer *when* to enter, manage risk, and exit.
 
-![Lesson #91: Introduction to Technical Analysis](/images/lesson-91.png)
+![Lesson #91: Introduction to Technical Analysis](/images/lessons/lesson-91.png)
 
 ---
 
@@ -76,4 +76,3 @@ Technical analysis is the structured evaluation of historical **price** and **vo
 1. Why do technical analysts believe that **"price discounts everything"**?
 2. What does a sharp price breakout accompanied by **below-average volume** typically warn you about?
 3. How does technical analysis complement fundamental analysis rather than replace it?
-4. 
