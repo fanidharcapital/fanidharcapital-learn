@@ -2,7 +2,7 @@
 title: "Educational Series #63: Understanding Economic Moats — Brand, Switching Costs, Network Effects & Cost Advantages"
 description: "Discover what separates temporary market leaders from enduring wealth compounders. Learn Warren Buffett’s Economic Moat concept, explore the four structural moat sources, and spot the difference between a wide moat, a narrow moat, and an illusion of competitive advantage."
 pubDatetime: 2026-11-23T12:45:00+05:30
-featured: true
+featured: false
 draft: false
 image: /images/lessons/lesson-63.png
 tags:
