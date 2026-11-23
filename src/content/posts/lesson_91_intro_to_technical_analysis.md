@@ -1,12 +1,8 @@
 ---
-lesson: 91
-module: 4
-part: 1
-title: "Introduction to Technical Analysis — Price, Volume, Market Psychology & Limitations"
-platform: "Learn.fanidharcapital.com"
+title: "Lesson #91: Introduction to Technical Analysis — Price, Volume, Market Psychology & Limitations"
+description: "Learn the core premises of technical analysis, how price action and volume reveal supply and demand, and where technicals have practical limits in Indian equities."
+pubDatetime: 2026-11-23T09:00:00Z
 ---
-
-# Lesson #91: Introduction to Technical Analysis — Price, Volume, Market Psychology & Limitations
 
 In Modules 01 through 03, you focused on **Fundamental Analysis**—evaluating business quality, financial statements, valuation multiples, and forensic checks to answer *what* to buy. Starting with **Lesson #91**, Module 04 introduces **Technical Analysis**—the study of price action, volume, and market structure to answer *when* to enter, manage risk, and exit.
 
@@ -78,3 +74,4 @@ Technical analysis is the structured evaluation of historical **price** and **vo
 1. Why do technical analysts believe that **"price discounts everything"**?
 2. What does a sharp price breakout accompanied by **below-average volume** typically warn you about?
 3. How does technical analysis complement fundamental analysis rather than replace it?
+4. 
