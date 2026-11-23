@@ -3,7 +3,7 @@ title: "Education Series #04: Market Foundations — Shares, Indices, Participan
 author: "Shree Fanidhar Capital"
 pubDatetime: 2026-11-21T11:00:00Z
 slug: "day-004-market-foundations"
-featured: false
+featured: true
 draft: false
 tags:
   - market-foundations
