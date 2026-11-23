@@ -3,7 +3,7 @@ title: "Education Series #03: Order Types & Execution Mechanics"
 author: "Shree Fanidhar Capital"
 pubDatetime: 2026-11-21T10:30:00Z
 slug: "day-003-order-types-execution-mechanics"
-featured: false
+featured: true
 draft: false
 tags:
   - equities
