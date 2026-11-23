@@ -6,6 +6,8 @@ pubDatetime: 2026-11-23T09:00:00Z
 
 In Modules 01 through 03, you focused on **Fundamental Analysis**—evaluating business quality, financial statements, valuation multiples, and forensic checks to answer *what* to buy. Starting with **Lesson #91**, Module 04 introduces **Technical Analysis**—the study of price action, volume, and market structure to answer *when* to enter, manage risk, and exit.
 
+![Lesson #91: Introduction to Technical Analysis](/images/lesson-91.png)
+
 ---
 
 ## 1. What Is Technical Analysis?
