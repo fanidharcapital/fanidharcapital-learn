@@ -2,7 +2,7 @@
 title: "Education Series #60: Module 02 Capstone Review — The End-to-End Trade Lifecycle & Market Infrastructure"
 description: "A comprehensive synthesis of Module 02: Exchanges & Operations. Review the complete trade lifecycle from Order Entry (NSE/BSE), Matching (CLOB), Clearing & Settlement (NSDL/CDSL, ICCL/NSE Clearing), to Risk Management, Surveillance (ASM/GSM/PIT), and Investor Protection. Prepare for the Module Exam."
 pubDatetime: 2026-11-22T18:52:00+05:30
-featured: true
+featured: false
 draft: false
 image: /images/lessons/lesson-60.png
 tags:
