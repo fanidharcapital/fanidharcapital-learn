@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import SITE from "@/config";
+
+function getLessonNumber(post: any): number {
+  const titleMatch = post.data.title?.match(/#(\d+)/);
+  if (titleMatch) return Number(titleMatch[1]);
+  const slugMatch =
+    post.slug?.match(/education-series-(\d+)/i) ||
+    post.id?.match(/education-series-(\d+)/i);
+  if (slugMatch) return Number(slugMatch[1]);
+  return 9999;
+}
+
+const learningPath = [
+  { number: 1, min: 1, max: 30, range: "01–30", title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
+  { number: 2, min: 31, max: 60, range: "31–60", title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and market infrastructure." },
+  { number: 3, min: 61, max: 90, range: "61–90", title: "Fundamental analysis", detail: "Businesses, financial statements, valuation, and key ratios." },
+  { number: 4, min: 91, max: 120, range: "91–120", title: "Technical analysis", detail: "Charts, trends, support and resistance, and indicators." },
+  { number: 5, min: 121, max: 150, range: "121–150", title: "Price action", detail: "Candles, market structure, and context." },
+  { number: 6, min: 151, max: 180, range: "151–180", title: "Futures market", detail: "Contracts, margin, expiry, basis, and futures risk." },
+  { number: 7, min: 181, max: 210, range: "181–210", title: "Options market", detail: "Calls, puts, payoff profiles, and option-chain terminology." },
+  { number: 8, min: 211, max: 240, range: "211–240", title: "Greeks & strategies", detail: "Sensitivity measures and multi-leg position behaviour." },
+  { number: 9, min: 241, max: 270, range: "241–270", title: "Risk & psychology", detail: "Position sizing, risk limits, discipline, and decision-making." },
+  { number: 10, min: 271, max: 300, range: "271–300", title: "Institutions & macro", detail: "Economic data, global cues, and institutional activity." },
+  { number: 11, min: 301, max: 330, range: "301–330", title: "Advanced concepts", detail: "Market structure, volatility, and advanced frameworks." },
+  { number: 12, min: 331, max: 365, range: "331–365", title: "Case studies", detail: "Educational examples, application, and review exercises." },
+];
+
+export async function getStaticPaths() {
+  const rawPosts = await getCollection("posts", ({ data }) => !data.draft);
+  const posts = rawPosts.sort((a, b) => getLessonNumber(a) - getLessonNumber(b));
+
+  return learningPath.map((module) => ({
+    params: { module: String(module.number) },
+    props: {
+      module,
+      posts: posts.filter((post) => {
+        const number = getLessonNumber(post);
+        return number >= module.min && number <= module.max;
+      }),
+    },
+  }));
+}
+
+const { module, posts } = Astro.props;
+---
+
+<Layout title={`Module ${String(module.number).padStart(2, "0")}: ${module.title} | ${SITE.site.title}`}>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 pb-12 sm:px-6 lg:px-8">
+    <a href="/curriculum/" class="mt-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-accent underline underline-offset-4">← Back to curriculum</a>
+
+    <section class="mt-5 rounded-3xl border border-border bg-[#0c3024] px-6 py-10 text-[#f8f3e8] sm:px-10 sm:py-14">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">Module {String(module.number).padStart(2, "0")} · Days {module.range}</p>
+      <h1 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">{module.title}</h1>
+      <p class="mt-4 max-w-2xl text-sm leading-6 text-[#e5ece7] sm:text-base">{module.detail}</p>
+      <p class="mt-5 text-sm font-medium text-[#e6c885]">{posts.length} published {posts.length === 1 ? "lesson" : "lessons"}</p>
+    </section>
+
+    <section class="py-10 sm:py-14" aria-labelledby="module-lessons">
+      <div class="mb-6">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Your learning path</p>
+        <h2 id="module-lessons" class="text-2xl font-semibold tracking-tight sm:text-3xl">Lessons in this module</h2>
+        <p class="mt-2 text-sm leading-6 text-muted-foreground">Open a published lesson to continue. New lessons will appear here as they are published.</p>
+      </div>
+      {posts.length > 0 ? (
+        <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => <Card variant="h3" {...post} />)}
+        </ul>
+      ) : (
+        <div class="rounded-2xl border border-border bg-muted/30 p-6">
+          <h3 class="font-semibold">Lessons are being prepared</h3>
+          <p class="mt-2 text-sm leading-6 text-muted-foreground">This module is part of the learning roadmap. Published lessons will appear here as they become available.</p>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Layout>
