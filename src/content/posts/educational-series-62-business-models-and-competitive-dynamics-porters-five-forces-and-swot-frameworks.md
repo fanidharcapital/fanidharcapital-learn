@@ -2,7 +2,7 @@
 title: "Educational Series #62: Business Models & Competitive Dynamics — Porter’s Five Forces & SWOT Frameworks"
 description: "Learn how to dissect a company's business model before reading a single financial ratio. Explore how revenues, cost structures, and working capital fit together, and apply Michael Porter’s Five Forces and SWOT Analysis to judge industry profitability and competitive positioning."
 pubDatetime: 2026-11-23T12:35:00+05:30
-featured: true
+featured: false
 draft: false
 image: /images/lessons/lesson-62.png
 tags:
