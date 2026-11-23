@@ -10,6 +10,7 @@ type Props = {
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
 const { title, description, tags = [] } = data;
+const formattedTitle = title.replace(/^Education\s+Series\s*/i, "");
 const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
 ---
 
@@ -34,7 +35,7 @@ const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
     ]}
   >
     <Heading transition:name={toTransitionName(id)}>
-      {title}
+      {formattedTitle}
     </Heading>
   </a>
 
