@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #153: Contract Specifications & Lot Sizes — Notional Value, Tick Size, Circuit Limits & Position Limits"
 description: "Learn how to read futures contract specifications—lot size, notional exposure, tick value, price bands/circuit limits, and position limits—before placing trades on NSE/BSE."
-pubDatetime: 2026-11-24T18:45:00Z
+pubDatetime: 2026-11-24T09:45:00+05:30
 tags:
   - Module 06
   - Futures Market
