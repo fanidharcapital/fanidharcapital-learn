@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #197: Option Open Interest (OI) & Change in OI — Identifying Support/Resistance Walls & Writing Zones"
 description: "Decode Option Open Interest (OI) and Change in OI (ΔOI). Learn how to use these metrics to identify major Support and Resistance levels and detect active option writing zones on NSE/BSE."
-pubDatetime: 2026-11-25T09:15:00+05:30
+pubDatetime: 2026-11-24T09:15:00+05:30
 tags:
   - Module 07
   - Options Market
