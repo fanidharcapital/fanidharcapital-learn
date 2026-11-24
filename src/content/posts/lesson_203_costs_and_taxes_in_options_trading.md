@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #203: Costs & Taxes in Options Trading — Brokerage, STT on Premium vs. Exercise, Exchange Fees, Stamp Duty & GST"
 description: "Master the comprehensive list of costs and taxes affecting options traders in India. Learn how brokerage, STT (on premium vs. exercise), SEBI fees, Stamp Duty, and GST impact your bottom line."
-pubDatetime: 2026-11-25T10:45:00+05:30
+pubDatetime: 2026-11-24T10:21:00+05:30
 tags:
   - Module 07
   - Options Market
