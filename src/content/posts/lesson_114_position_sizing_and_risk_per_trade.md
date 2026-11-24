@@ -9,6 +9,8 @@ tags:
 
 In Lesson #113, you learned how to anchor stop-losses to true chart invalidation levels and volatility buffers rather than arbitrary percentage rules. In **Lesson #114**, you connect your stop-loss distance directly to **Position Sizing & Risk per Trade**—the mathematical guardrail that ensures no single bad setup or losing streak can permanently cripple your trading capital.
 
+![Educational Series #114: Position Sizing & Risk per Trade](/images/lessons/lesson-114.png)
+
 ---
 
 ## 1. Fixed Fractional Risk: The Core Formula
