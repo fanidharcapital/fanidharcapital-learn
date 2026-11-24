@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #201: Option Liquidity, Bid-Ask Spreads & Slippage — Avoiding Illiquid Strikes & Far-OTM Traps"
 description: "Master the critical concepts of option liquidity. Learn how to analyze Bid-Ask Spreads, calculate Slippage costs, and identify illiquid strikes to protect your capital."
-pubDatetime: 2026-11-25T10:15:00+05:30
+pubDatetime: 2026-11-24T10:15:00+05:30
 tags:
   - Module 07
   - Options Market
