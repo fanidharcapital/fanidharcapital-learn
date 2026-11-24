@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #154: Mark-to-Market (MTM) & Daily Settlement — How Daily P&L Flows In and Out of Your Margin Account"
 description: "Understand how daily Mark-to-Market (MTM) settlement works in futures trading, how unrealized vs. settled P&L affects available margin, and how to prevent MTM margin shortfalls."
-pubDatetime: 2026-11-24T19:00:00Z
+pubDatetime: 2026-11-24T10:00:00+05:30
 tags:
   - Module 06
   - Futures Market
