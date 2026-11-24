@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #196: Anatomy of an Option Chain — Reading Calls (Left), Strikes (Center) & Puts (Right) on NSE/BSE"
 description: "Master the layout of the NSE/BSE option chain: Calls on the left, Puts on the right, and the critical central column of Strike Prices. Learn how to navigate live market data."
-pubDatetime: 2026-11-25T09:00:00+05:30
+pubDatetime: 2026-11-24T09:00:00+05:30
 tags:
   - Module 07
   - Options Market
