@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #198: Combining Option Price + OI + Volume — Call Writing, Put Writing, Unwinding & Short Covering"
 description: "Learn how to synthesize Option Price, Open Interest (OI), and Volume data to detect real-time market actions: aggressive writing, short covering, and long liquidation."
-pubDatetime: 2026-11-25T09:30:00+05:30
+pubDatetime: 2026-11-24T09:30:00+05:30
 tags:
   - Module 07
   - Options Market
