@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #200: Max Pain Theory — Concept, Calculation Logic & Limitations Near Expiry"
 description: "Understand the Max Pain Theory for options expiry. Learn its calculation logic, how it suggests the market gravitates toward the strike with maximum collective losses for buyers, and its limitations."
-pubDatetime: 2026-11-25T10:00:00+05:30
+pubDatetime: 2026-11-24T10:00:00+05:30
 tags:
   - Module 07
   - Options Market
