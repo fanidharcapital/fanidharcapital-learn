@@ -9,6 +9,8 @@ tags:
 
 In Lesson #112, you covered breakout and pullback entry triggers, order types, and slippage control. In **Lesson #113**, you address the protective side of every trade: **Stop-Loss Placement & Invalidation**—why a stop-loss represents the exact price where your **trade thesis is proven wrong**, and why arbitrary percentage stops often get triggered at the worst possible moment.
 
+![Educational Series #113: Stop-Loss Placement & Invalidation](/images/lessons/lesson-113.png)
+
 ---
 
 ## 1. Technical Invalidation vs. Arbitrary Percentage Stops
@@ -53,4 +55,3 @@ A **stop-loss** is not a random pain threshold—it is an objective **invalidati
 1. Why is placing a stop-loss at an **arbitrary fixed percentage** without checking chart structure risky?
 2. What should you adjust if a sound **technical invalidation stop** creates a wider rupee risk than you want—the stop price or your **position size**?
 3. Why can an exact stop-loss order fail to fill at its trigger price after a major **overnight gap-down**?
-
