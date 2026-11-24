@@ -9,6 +9,8 @@ tags:
 
 Across Part 1 and Part 2 of Module 04 (Lessons #91–#110), you built your toolkit across price action, chart patterns, volume, moving averages, momentum indicators, volatility, and divergence filters. Starting with **Lesson #111**, **Part 3** shifts focus to **Trade Execution, Risk Discipline & Synthesis**—beginning with **Top-Down Multi-Timeframe Analysis**, the habit of reading the broader battlefield before zooming in to pull the trigger.
 
+![Educational Series #111: Top-Down Multi-Timeframe Analysis](/images/lessons/lesson-111.png)
+
 ---
 
 ## 1. Why Single-Timeframe Charts Create Blind Spots
