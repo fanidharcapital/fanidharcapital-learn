@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #121: Price Action vs. Indicator Lag — Reading Raw Price, Wicks, Bodies & Range Expansion on NSE/BSE"
 description: "Learn why all indicators are lagging derivatives of price, how to read the raw language of wicks and bodies on NSE charts, and why range expansion signals true market conviction."
-pubDatetime: 2026-12-02T09:00:00Z
+pubDatetime: 2026-11-02T09:00:00Z
 tags:
   - Module 05
   - Price Action
