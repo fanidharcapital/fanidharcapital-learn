@@ -9,7 +9,7 @@ tags:
 
 In **Lesson #129**, we established how to spot valid **Swing Highs** and **Swing Lows** without getting distracted by single-candle noise. Now, in **Lesson #130**, we connect those pivots into the three primary states of market structure: **Uptrends**, **Downtrends**, and **Sideways Ranges**. Knowing which regime an NSE/BSE stock or index is currently in sets your directional bias and prevents you from forcing trend setups into range-bound tape.
 
-<Image src="image_generation_content/13160957802983771584" alt="Educational Series #130: Uptrends, Downtrends & Sideways Ranges" />
+![Educational Series #130: Uptrends, Downtrends & Sideways Ranges](/images/lessons/lesson-130.png)
 
 ---
 
@@ -67,4 +67,4 @@ Your execution mindset should shift with the structure you are looking at:
 
 ---
 
-Ready for **Lesson #131: Break of Structure (BOS) & Change of Character (CHoCH) — Spotting Trend Continuation vs. Early Trend Shifts**?
+Ready for **Lesson #131: Break of Structure (BOS) & Change of Character (CHoCH) — Spotting Trend Continuation vs. Early Trend Shifts**!
