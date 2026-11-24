@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #199: Put-Call Ratio (PCR) — OI-Based vs. Volume-Based PCR & Contrarian Context"
 description: "Decode the Put-Call Ratio (PCR). Learn how to calculate and interpret both OI-based and Volume-based PCR for Nifty/Sensex, and use them as contrarian sentiment indicators."
-pubDatetime: 2026-11-25T09:45:00+05:30
+pubDatetime: 2026-11-24T09:45:00+05:30
 tags:
   - Module 07
   - Options Market
