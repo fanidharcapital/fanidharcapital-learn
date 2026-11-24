@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #202: Option Margin & Collateral Mechanics — Option Buying Debit vs. Option Writing SPAN + Exposure Margin"
 description: "Understand the mechanics of option margins on NSE. Compare the debit model for Option Buyers versus the complex SPAN + Exposure margin requirements for Option Writers. Learn about collateral benefits."
-pubDatetime: 2026-11-25T10:30:00+05:30
+pubDatetime: 2026-11-24T10:20:00+05:30
 tags:
   - Module 07
   - Options Market
