@@ -9,6 +9,8 @@ tags:
 
 In Lesson #111, you learned how to align higher-timeframe bias with lower-timeframe structure through top-down analysis. In **Lesson #112**, you zoom right into the moment of execution: **Entry Triggers & Order Execution**—how to distinguish high-probability breakout and pullback entries, pick the right order type on NSE/BSE, and avoid unnecessary **slippage** when orders fill worse than expected.
 
+![Educational Series #112: Entry Triggers & Order Execution](/images/lessons/lesson-112.png)
+
 ---
 
 ## 1. Two Primary Entry Models: Breakouts vs. Pullbacks
@@ -55,4 +57,3 @@ Once your higher-timeframe bias and key levels are mapped, most technical setups
 1. What is the main trade-off between a **Limit Order** and a **Market Order** during a fast breakout?
 2. Why is waiting for a **trigger candle** inside a pullback zone safer than placing a blind buy order while a stock is still dropping?
 3. When is **slippage** most likely to widen on an NSE equity trade?
-
