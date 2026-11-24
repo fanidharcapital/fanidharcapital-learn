@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #155: Cash Settlement vs. Physical Settlement — Index Futures vs. Stock Futures Delivery Rules on NSE"
 description: "Learn the difference between cash settlement for index futures and physical settlement for stock futures on NSE, and understand how expiry-week delivery obligations work."
-pubDatetime: 2026-11-24T19:15:00Z
+pubDatetime: 2026-11-24T10:15:00+05:30
 tags:
   - Module 06
   - Futures Market
