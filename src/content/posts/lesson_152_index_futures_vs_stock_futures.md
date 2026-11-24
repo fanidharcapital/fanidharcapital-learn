@@ -1,7 +1,7 @@
 ---
 title: "Educational Series #152: Index Futures vs. Stock Futures — Liquidity, Lot Sizes, Tick Mechanics & Underlying Behavior"
 description: "Compare Index Futures and Stock Futures on NSE and BSE across liquidity, bid-ask spreads, lot sizes, gap behavior, and settlement characteristics."
-pubDatetime: 2026-11-24T18:30:00Z
+pubDatetime: 2026-11-24T09:30:00+05:30
 tags:
   - Module 06
   - Futures Market
