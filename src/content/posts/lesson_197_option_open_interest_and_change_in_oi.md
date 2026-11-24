@@ -9,7 +9,7 @@ tags:
 
 In **Lesson #196**, we learned how to navigate the layout of the option chain. In **Lesson #197**, we dive into the most critical data column within that chain: **Open Interest (`OI`) and Change in OI (`ΔOI`)**. While price reflects what traders are *doing*, OI reveals where they are **committed**—making it essential for identifying support, resistance, and market sentiment.
 
-![Educational Series #197: Option Open Interest (OI) & Change in OI](/images/lessons/lesson_197.png)
+![Educational Series #197: Option Open Interest (OI) & Change in OI](/images/lessons/lesson-197.png)
 
 ---
 
