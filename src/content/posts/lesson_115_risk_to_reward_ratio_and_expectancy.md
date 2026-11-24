@@ -9,6 +9,8 @@ tags:
 
 In Lesson #114, you learned how fixed fractional position sizing protects your capital against losing streaks. In **Lesson #115**, you examine the other half of the trading equation: **Risk-to-Reward Ratio (`R:R`) & Mathematical Expectancy**—why a trader can lose more often than they win and still compound steadily, or win frequently yet bleed capital if winners are small and losers are wide.
 
+![Educational Series #115: Risk-to-Reward Ratio & Expectancy](/images/lessons/lesson-115.png)
+
 ---
 
 ## 1. Risk-to-Reward Ratio (`R:R`) Explained
