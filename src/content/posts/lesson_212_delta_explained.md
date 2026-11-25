@@ -1,5 +1,5 @@
 ---
-title: "Educational Series #212: Delta (Δ) Explained — Directional Price Sensitivity, Implied Probability & Position Delta"
+title: "Educational Series #212: Option Delta Explained — Directional Price Sensitivity, Implied Probability & Position Delta"
 description: "Master Option Delta—how Call (0 to +1) and Put (-1 to 0) deltas work, how position delta aggregates across lots and legs, and how traders use delta for sensitivity and probability intuition."
 pubDatetime: 2026-11-25T10:10:00+05:30
 tags:
@@ -9,7 +9,7 @@ tags:
 
 In **Lesson #211**, we introduced the five Greeks as a connected risk toolkit. In **Lesson #212**, we zoom in on the first and most widely watched Greek: **Delta ($\Delta$)**—your primary measure of **directional price sensitivity** and **net position exposure**.
 
-![Educational Series #212: Delta Explained](/images/lessons/lesson-212.png)
+![Educational Series #212: Option Delta Explained](/images/lessons/lesson-212.png)
 
 ---
 
