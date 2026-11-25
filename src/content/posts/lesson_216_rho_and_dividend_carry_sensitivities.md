@@ -44,4 +44,3 @@ In Indian derivatives, option pricing connects closely to **cost of carry** (int
 1.  In general, does a **Long Call** have **positive or negative Rho**, and why is Rho usually less impactful than **Theta** or **Vega** on a short-term weekly trade?
 2.  How does an upcoming **expected dividend** on a stock typically affect Call vs. Put pricing?
 3.  When do interest-rate and cost-of-carry effects become more noticeable in option pricing?
-4.  
