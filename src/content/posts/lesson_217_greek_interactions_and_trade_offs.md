@@ -44,4 +44,3 @@ If a structure offers high **positive Theta** (steady daily decay income), ask: 
 1.  Explain the common trade-off between **positive Theta** and **negative Gamma** in a short-option position.
 2.  If you buy an option expecting a slow grind higher over two weeks, which Greek works against you each day?
 3.  Why does checking **both** spot direction (`Delta`) and volatility (`Vega`) prevent surprises around major announcements?
-4.  
