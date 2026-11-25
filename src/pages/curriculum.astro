@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import { FINAL_EXAM_CONFIG, FINAL_EXAM_QUESTIONS } from "@/data/finalExam";
 import SITE from "@/config";
 
 function getLessonNumber(post: any): number {
@@ -41,7 +42,7 @@ const learningPath = [
       <h1 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">The learning curriculum</h1>
       <p class="mt-4 max-w-2xl text-sm leading-6 text-[#e5ece7] sm:text-base">A self-paced roadmap through Indian markets, analysis, derivatives, and risk management. Read published lessons freely; new lessons will be added progressively.</p>
       <a href="#roadmap" class="mt-7 inline-flex min-h-11 items-center rounded-full bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#173426]">
-        Explore 12 modules <span aria-hidden="true" class="ml-2">↓</span>
+        Explore 12 modules + Final Quiz <span aria-hidden="true" class="ml-2">↓</span>
       </a>
     </section>
 
@@ -83,6 +84,33 @@ const learningPath = [
             </li>
           );
         })}
+
+        <li class="scroll-mt-24">
+          <a
+            href="/modules/module-13/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex h-full w-full flex-col rounded-2xl border-2 border-[#10201a] bg-[#0c3024] p-5 text-left text-[#f8f3e8] shadow-[0_3px_0_#10201a] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_5px_0_#10201a] focus:outline-none focus:ring-2 focus:ring-accent"
+          >
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span class="text-xs font-semibold uppercase tracking-[0.14em] text-[#d8bd7b]">
+                Module 13 · Final Quiz
+              </span>
+              <span class="rounded-full border border-[#d8bd7b]/40 bg-[#10201a] px-3 py-1 text-xs font-medium text-[#d8bd7b]">
+                {FINAL_EXAM_QUESTIONS.length} Questions · Pass {FINAL_EXAM_CONFIG.passingScore}/{FINAL_EXAM_QUESTIONS.length}
+              </span>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-white group-hover:text-[#d8bd7b]">
+              {FINAL_EXAM_CONFIG.title}
+            </h3>
+            <p class="mt-2 text-sm leading-6 text-[#e5ece7]">
+              Cumulative 20-question final certification assessment across all 12 modules with instant answers and explanations.
+            </p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#d8bd7b]">
+              Start final quiz <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">↗</span>
+            </span>
+          </a>
+        </li>
       </ol>
     </section>
 
