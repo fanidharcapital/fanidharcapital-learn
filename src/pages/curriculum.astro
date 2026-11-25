@@ -6,31 +6,42 @@ import Footer from "@/components/Footer.astro";
 import { FINAL_EXAM_CONFIG, FINAL_EXAM_QUESTIONS } from "@/data/finalExam";
 import SITE from "@/config";
 
+function isOverviewPost(post: any): boolean {
+  const title = (post.data.title ?? "").toLowerCase();
+  const idOrSlug = `${post.id ?? ""} ${post.slug ?? ""}`.toLowerCase();
+  return title.includes("overview") || idOrSlug.includes("overview");
+}
+
 function getLessonNumber(post: any): number {
-  const titleMatch = post.data.title?.match(/#(\d+)/);
-  if (titleMatch) return Number(titleMatch[1]);
-  const slugMatch =
-    post.slug?.match(/education-series-(\d+)/i) ||
-    post.id?.match(/education-series-(\d+)/i);
+  if (isOverviewPost(post)) return 9999;
+
+  const slugOrId = `${post.slug ?? ""} ${post.id ?? ""}`;
+  const slugMatch = slugOrId.match(/education-series-(\d+)/i);
   if (slugMatch) return Number(slugMatch[1]);
+
+  const titleMatch =
+    post.data.title?.match(/education(?:al)?\s+series\s*#?(\d+)/i) ||
+    post.data.title?.match(/#(\d+)/);
+  if (titleMatch) return Number(titleMatch[1]);
+
   return 9999;
 }
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
 
 const learningPath = [
-  { week: 1, number: 1, min: 1, max: 30, range: "01–30", title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
-  { week: 2, number: 2, min: 31, max: 60, range: "31–60", title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and market infrastructure." },
-  { week: 3, number: 3, min: 61, max: 90, range: "61–90", title: "Fundamental analysis", detail: "Businesses, financial statements, valuation, and key ratios." },
-  { week: 4, number: 4, min: 91, max: 120, range: "91–120", title: "Technical analysis", detail: "Charts, trends, support and resistance, and indicators." },
-  { week: 5, number: 5, min: 121, max: 150, range: "121–150", title: "Price action", detail: "Candles, market structure, and context." },
-  { week: 6, number: 6, min: 151, max: 180, range: "151–180", title: "Futures market", detail: "Contracts, margin, expiry, basis, and futures risk." },
-  { week: 7, number: 7, min: 181, max: 210, range: "181–210", title: "Options market", detail: "Calls, puts, payoff profiles, and option-chain terminology." },
-  { week: 8, number: 8, min: 211, max: 240, range: "211–240", title: "Greeks & strategies", detail: "Sensitivity measures and multi-leg position behaviour." },
-  { week: 9, number: 9, min: 241, max: 270, range: "241–270", title: "Risk & psychology", detail: "Position sizing, risk limits, discipline, and decision-making." },
-  { week: 10, number: 10, min: 271, max: 300, range: "271–300", title: "Institutions & macro", detail: "Economic data, global cues, and institutional activity." },
-  { week: 11, number: 11, min: 301, max: 330, range: "301–330", title: "Advanced concepts", detail: "Market structure, volatility, and advanced frameworks." },
-  { week: 12, number: 12, min: 331, max: 365, range: "331–365", title: "Case studies", detail: "Educational examples, application, and review exercises." },
+  { week: 1, number: 1, min: 1, max: 30, title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
+  { week: 2, number: 2, min: 31, max: 60, title: "Exchanges & operations", detail: "Trading sessions, clearing, settlement, and market infrastructure." },
+  { week: 3, number: 3, min: 61, max: 90, title: "Fundamental analysis", detail: "Businesses, financial statements, valuation, and key ratios." },
+  { week: 4, number: 4, min: 91, max: 120, title: "Technical analysis", detail: "Charts, trends, support and resistance, and indicators." },
+  { week: 5, number: 5, min: 121, max: 150, title: "Price action", detail: "Candles, market structure, and context." },
+  { week: 6, number: 6, min: 151, max: 180, title: "Futures market", detail: "Contracts, margin, expiry, basis, and futures risk." },
+  { week: 7, number: 7, min: 181, max: 210, title: "Options market", detail: "Calls, puts, payoff profiles, and option-chain terminology." },
+  { week: 8, number: 8, min: 211, max: 240, title: "Greeks & strategies", detail: "Sensitivity measures and multi-leg position behaviour." },
+  { week: 9, number: 9, min: 241, max: 270, title: "Risk & psychology", detail: "Position sizing, risk limits, discipline, and decision-making." },
+  { week: 10, number: 10, min: 271, max: 300, title: "Institutions & macro", detail: "Economic data, global cues, and institutional activity." },
+  { week: 11, number: 11, min: 301, max: 330, title: "Advanced concepts", detail: "Market structure, volatility, and advanced frameworks." },
+  { week: 12, number: 12, min: 331, max: 365, title: "Case studies", detail: "Educational examples, application, and review exercises." },
 ];
 ---
 
@@ -50,7 +61,7 @@ const learningPath = [
       <div class="mb-7 max-w-2xl">
         <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">12-week roadmap · 1 module per week</p>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Learn week by week</h2>
-        <p class="mt-3 text-sm leading-6 text-muted-foreground">Complete one module each week for 12 weeks, then take the 20-question final quiz in Week 13.</p>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">Module 01 is for Week 01, Module 02 is for Week 02, through Module 12 for Week 12—followed by the 20-question final quiz in Week 13.</p>
       </div>
 
       <ol class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
