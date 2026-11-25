@@ -18,9 +18,6 @@ import PostToc from "./_components/PostToc.astro";
 import PostEnd from "@/custom/PostEnd.astro";
 import config from "@/config";
 
-const stripSeriesPrefix = (value: string) =>
-  value.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
-
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   const sortedPosts = getSortedPosts(posts);
@@ -35,7 +32,9 @@ export async function getStaticPaths() {
         index > 0
           ? {
               id: sortedPosts[index - 1].id,
-              title: stripSeriesPrefix(sortedPosts[index - 1].data.title),
+              title: sortedPosts[index - 1].data.title
+                .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
+                .trim(),
               filePath: sortedPosts[index - 1].filePath,
             }
           : null,
@@ -43,7 +42,9 @@ export async function getStaticPaths() {
         index < sortedPosts.length - 1
           ? {
               id: sortedPosts[index + 1].id,
-              title: stripSeriesPrefix(sortedPosts[index + 1].data.title),
+              title: sortedPosts[index + 1].data.title
+                .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
+                .trim(),
               filePath: sortedPosts[index + 1].filePath,
             }
           : null,
@@ -79,7 +80,7 @@ const {
   hideToc,
 } = post.data;
 
-const displayTitle = stripSeriesPrefix(title);
+const displayTitle = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
 const lessonNumber = title.match(/(?:lesson|education series\s*#?)\s*(\d+)/i)?.[1];
 const moduleTag = tags.find(tag => /^module-\d+$/i.test(tag));
 const moduleNumber = moduleTag?.match(/\d+/)?.[0];
