@@ -41,4 +41,3 @@ In **Lesson #214**, we looked at how time decay (`Theta`) shapes option value. I
 1.  If a Call option has a Vega of **`₹12`** (per `1%` change in `IV`) and Implied Volatility rises by **`2%`** with spot unchanged, roughly how much does the option's value change?
 2.  Why is **Vega** typically smaller for a contract expiring **today** than for a monthly contract with weeks remaining?
 3.  How does a sudden post-earnings **IV crush** affect a **Long Straddle / Long Call** versus a **Short Option** position?
-4.  
