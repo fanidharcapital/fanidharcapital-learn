@@ -86,14 +86,14 @@ const chapters = [
           />
         </div>
 
-        <!-- Clickable 12 Chapters Grid (No Circle Bullets) -->
+        <!-- Clickable 12 Chapters Grid -->
         <div class="mt-8 border-t-2 border-[#10201a]/15 pt-7">
           <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
             <div>
-              <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
-                365-DAY ROADMAP ✓ QUICK JUMP
+              <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#9c7016]">
+                365-DAY ROADMAP · QUICK JUMP
               </p>
-              <h3 class="mt-1 text-xl font-bold tracking-tight text-[#10201a] sm:text-2xl">
+              <h3 class="mt-1 font-serif text-xl font-bold tracking-tight text-[#9c7016] sm:text-2xl">
                 All 12 Chapters
               </h3>
             </div>
@@ -107,20 +107,12 @@ const chapters = [
               <li class="m-0 p-0">
                 <a
                   href={`/modules/${chapter.slug}/`}
-                  class="group flex items-center justify-between gap-3 rounded-xl border-2 border-[#10201a] bg-[#faf8f3] px-4 py-3 text-sm font-semibold text-[#10201a] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#08241b] hover:text-[#f8f3e8]"
+                  class="flex items-center gap-2.5 rounded-xl border-2 border-[#10201a] bg-[#faf8f3] px-4 py-3 font-serif text-sm font-bold text-[#9c7016] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#08241b] hover:text-[#d8bd7b]"
                 >
-                  <span class="flex items-center gap-2.5 truncate">
-                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md bg-[#08241b] px-2 py-0.5 font-mono text-xs font-bold text-[#d8bd7b] group-hover:bg-[#d8bd7b] group-hover:text-[#08241b]">
-                      ✓ {chapter.num}
-                    </span>
-                    <span class="truncate">{chapter.title}</span>
+                  <span class="font-mono text-xs font-bold text-[#9c7016] group-hover:text-[#d8bd7b]">
+                    {chapter.num}
                   </span>
-                  <span
-                    aria-hidden="true"
-                    class="shrink-0 font-mono text-xs text-[#4b5d52] transition-transform group-hover:translate-x-0.5 group-hover:text-[#d8bd7b]"
-                  >
-                    →
-                  </span>
+                  <span class="truncate">{chapter.title}</span>
                 </a>
               </li>
             ))}
