@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -26,8 +26,16 @@ export async function getStaticPaths() {
   const sortedPosts = getSortedPosts(allPosts);
 
   return modules.map((mod, idx) => {
+    const introPost =
+      allPosts.find(
+        post =>
+          post.data.tags?.includes(mod.slug) &&
+          post.data.tags?.includes("module-overview")
+      ) ?? null;
+
     const modulePosts = sortedPosts
       .filter(post => {
+        if (post.data.tags?.includes("module-overview")) return false;
         const hasTag = post.data.tags?.includes(mod.slug);
         const match = post.data.title.match(/#(\d+)/);
         const lessonNum = match ? Number(match[1]) : null;
@@ -44,6 +52,7 @@ export async function getStaticPaths() {
       params: { slug: mod.slug },
       props: {
         mod,
+        introPost,
         modulePosts,
         prevMod: idx > 0 ? modules[idx - 1] : null,
         nextMod: idx < modules.length - 1 ? modules[idx + 1] : null,
@@ -52,7 +61,9 @@ export async function getStaticPaths() {
   });
 }
 
-const { mod, modulePosts, prevMod, nextMod } = Astro.props;
+const { mod, introPost, modulePosts, prevMod, nextMod } = Astro.props;
+const renderedIntro = introPost ? await render(introPost) : null;
+const IntroContent = renderedIntro?.Content ?? null;
 ---
 
 <Layout title={`Module ${mod.num}: ${mod.title} (Days ${mod.range}) | Shree Fanidhar Capital`}>
@@ -77,6 +88,17 @@ const { mod, modulePosts, prevMod, nextMod } = Astro.props;
   </section>
 
   <main id="main-content" class="module-page mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    {IntroContent && (
+      <section class="mb-12 rounded-2xl border border-[#c5d6cc] bg-[#f8faf8] p-6 sm:p-10">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#7c5d22]">
+          Module {mod.num} Introductory Overview
+        </p>
+        <div class="app-prose prose max-w-none text-[#142920]">
+          <IntroContent />
+        </div>
+      </section>
+    )}
+
     <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
       <div>
         <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#7c5d22]">Module Lessons</p>
