@@ -1,5 +1,5 @@
 ---
-title: "Educational Series #214: Theta (\Theta) Explained — Daily Time Decay Curves, Decay Acceleration & Seller vs. Buyer Impact"
+title: "Educational Series #214: Theta (Θ) Explained — Daily Time Decay Curves, Decay Acceleration & Seller vs. Buyer Impact"
 description: "Master Option Theta—how daily time decay erodes extrinsic value, why Theta accelerates near expiry for ATM options, and how positive vs. negative Theta shapes buyer and seller P&L."
 pubDatetime: 2026-11-25T10:10:00+05:30
 tags:
