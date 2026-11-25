@@ -36,7 +36,7 @@ const learningPath = [
 <Layout title={`Learning Curriculum | ${SITE.site.title}`}>
   <Header />
   <main id="main-content" class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-    <section class="rounded-3xl border border-border bg-[#0c3024] px-6 py-10 text-[#f8f3e8] sm:px-10 sm:py-14">
+    <section class="rounded-3xl border-2 border-[#10201a] bg-[#0c3024] px-6 py-10 text-[#f8f3e8] shadow-[0_4px_0_#10201a] sm:px-10 sm:py-14">
       <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">Shree Fanidhar Capital · Learning</p>
       <h1 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">The learning curriculum</h1>
       <p class="mt-4 max-w-2xl text-sm leading-6 text-[#e5ece7] sm:text-base">A self-paced roadmap through Indian markets, analysis, derivatives, and risk management. Read published lessons freely; new lessons will be added progressively.</p>
@@ -66,13 +66,13 @@ const learningPath = [
                 href={`/modules/${modSlug}/`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group flex h-full w-full flex-col rounded-2xl border border-border bg-background p-5 text-left shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#c9a45a]/70 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-accent"
+                class="group flex h-full w-full flex-col rounded-2xl border-2 border-[#10201a] bg-background p-5 text-left shadow-[0_3px_0_#10201a] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_5px_0_#10201a] focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <div class="flex flex-wrap items-center justify-between gap-3">
                   <span class="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
                     Module {String(module.number).padStart(2, "0")}
                   </span>
-                  <span class="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <span class="rounded-full border border-[#10201a]/25 bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
                     Days {module.range} · {count} {count === 1 ? "lesson" : "lessons"}
                   </span>
                 </div>
@@ -86,7 +86,7 @@ const learningPath = [
       </ol>
     </section>
 
-    <p class="mb-12 rounded-2xl border border-[#c9a45a]/40 bg-[#f5f0e4] p-6 text-sm leading-6 text-[#23382d]">
+    <p class="mb-12 rounded-2xl border-2 border-[#10201a] bg-[#f5f0e4] p-6 text-sm leading-6 text-[#23382d] shadow-[0_3px_0_#10201a]">
       Educational content only. This curriculum is not investment advice, a recommendation to buy or sell securities, or a promise of market outcomes.
     </p>
   </main>
