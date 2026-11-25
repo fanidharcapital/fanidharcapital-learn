@@ -141,11 +141,9 @@ function getLessonNumber(post: any): number {
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 
-const lessonPosts = allPosts
-  .filter(post => !(post.data.tags ?? []).includes("module-overview"))
-  .sort((a, b) => getLessonNumber(a) - getLessonNumber(b));
-
-const spotlightPosts = lessonPosts.slice(0, 4);
+const lessonPosts = allPosts.filter(
+  post => !(post.data.tags ?? []).includes("module-overview")
+);
 const lessonCount = lessonPosts.length;
 
 const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
@@ -222,64 +220,8 @@ const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
       </div>
     </section>
 
-    <!-- Lesson Spotlight -->
-    <section id="spotlight" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-      <p class="text-xs font-semibold uppercase tracking-widest text-[#4b5d52]">
-        LESSON SPOTLIGHT
-      </p>
-      <h2 class="mt-1 text-3xl font-bold tracking-tight text-[#10201a]">
-        Start your learning journey
-      </h2>
-      <p class="mt-2 max-w-2xl text-sm text-[#4b5d52]">
-        Build your knowledge step by step with structured lessons, clear explanations, and practical visual notes.
-      </p>
-
-      <ul class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-        {
-          spotlightPosts.map(post => {
-            const postSlug = post.id.replace(/\.[^/.]+$/, "");
-            const cleanTitle = (post.data.title ?? "")
-              .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
-              .trim();
-            const tags = (post.data.tags ?? []).slice(0, 3);
-
-            return (
-              <li>
-                <a
-                  href={`/posts/${postSlug}/`}
-                  class="group flex h-full flex-col justify-between rounded-2xl border-2 border-[#08241b] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_0_#10201a]"
-                >
-                  <div>
-                    {tags.length > 0 && (
-                      <div class="mb-3 flex flex-wrap gap-2">
-                        {tags.map(tag => (
-                          <span class="rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 font-mono text-xs text-[#95d5b2]">
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    <h3 class="text-lg font-bold leading-snug text-[#f8f3e8] group-hover:text-[#d8bd7b]">
-                      {cleanTitle}
-                    </h3>
-
-                    {post.data.description && (
-                      <p class="mt-2 line-clamp-2 text-sm leading-6 text-[#c5d3ca]">
-                        {post.data.description}
-                      </p>
-                    )}
-                  </div>
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </section>
-
     <!-- The 365-Day Curriculum -->
-    <section id="curriculum" class="mx-auto max-w-6xl border-t border-[#10201a]/15 px-4 py-12 sm:px-6 lg:px-8">
+    <section id="curriculum" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <p class="text-xs font-semibold uppercase tracking-widest text-[#4b5d52]">
         THE 365-DAY CURRICULUM
       </p>
