@@ -10,8 +10,6 @@ tags:
 
 Welcome to **Module 01: Foundations of Markets & Trading**. This single introductory page gives you the complete roadmap for **Lessons #001–#030**—so you can see every topic covered before starting Day 1.
 
-![Module 01 Introductory Overview]
-
 ---
 
 ## What You Will Master in Module 01
