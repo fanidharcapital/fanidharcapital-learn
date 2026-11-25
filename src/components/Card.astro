@@ -21,16 +21,17 @@ const href =
 
 const headerProps = {
   style: { viewTransitionName: slugifyStr(cleanTitle) },
-  class: "text-lg font-semibold leading-snug text-white hover:underline",
+  class:
+    "text-lg font-bold leading-snug text-[#10201a] transition group-hover:text-[#7c5d22] hover:underline",
 };
 ---
 
-<li class="flex flex-col justify-between rounded-2xl border border-[#1a4734] bg-[#0B3524] p-6 text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#c9a45a] hover:shadow-md">
+<li class="group flex flex-col justify-between rounded-2xl border border-[#10201a] bg-[#faf8f3] p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#c9a45a] hover:bg-[#f5f0e4] hover:shadow-md">
   <div>
     {tags.length > 0 && (
       <div class="mb-3 flex flex-wrap gap-2">
         {tags.slice(0, 3).map(tag => (
-          <span class="rounded-full border border-white/15 bg-white/15 px-3 py-1 font-mono text-xs font-medium text-white">
+          <span class="rounded-full border border-[#9a7b3c]/50 bg-[#efe3c4] px-3 py-1 font-mono text-xs font-semibold text-[#4f3910]">
             #{tag}
           </span>
         ))}
@@ -39,7 +40,7 @@ const headerProps = {
 
     <a
       href={href}
-      class="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d8bd7b]"
+      class="block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10201a]"
     >
       {
         variant === "h2" ? (
@@ -50,12 +51,12 @@ const headerProps = {
       }
     </a>
 
-    <div class="mt-2 text-xs text-[#e7d39d] [&_*]:!text-[#e7d39d]">
+    <div class="mt-2 text-xs font-medium text-[#80632b] [&_*]:!text-[#80632b]">
       <Datetime {pubDatetime} {modDatetime} {timezone} />
     </div>
 
     {description && (
-      <p class="mt-3 line-clamp-2 text-sm leading-6 text-white/90">
+      <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#23382d]">
         {description}
       </p>
     )}
