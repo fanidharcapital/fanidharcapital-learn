@@ -69,46 +69,62 @@ const IntroContent = renderedIntro?.Content ?? null;
 <Layout title={`Module ${mod.num}: ${mod.title} (Days ${mod.range}) | Shree Fanidhar Capital`}>
   <Header />
 
-  <section class="relative isolate w-full overflow-hidden border-y border-[#c5d6cc] bg-gradient-to-br from-[#e6efe9] via-[#eef3ec] to-[#f7f4eb] px-6 py-10 text-[#142920] sm:px-10 sm:py-14 lg:px-16">
+  <section class="border-b-2 border-[#10201a] bg-[#08241b] px-4 py-10 text-[#f8f3e8] sm:px-6 sm:py-14 lg:px-8">
     <div class="mx-auto max-w-6xl">
-      <div class="mb-4 flex flex-wrap items-center gap-3">
-        <a href="/#curriculum" class="inline-flex items-center text-xs font-semibold uppercase tracking-[0.18em] text-[#7c5d22] hover:underline">
+      <div class="mb-5 flex flex-wrap items-center gap-3">
+        <a
+          href="/curriculum/"
+          class="inline-flex min-h-9 items-center rounded-xl border border-[#d8bd7b]/50 bg-[#061c15] px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#d8bd7b] transition hover:border-[#d8bd7b] hover:bg-white/10"
+        >
           ← All Modules
         </a>
-        <span class="text-[#142920]/30">•</span>
-        <span class="rounded-full border border-[#b9cbbd] bg-white/80 px-3 py-1 text-xs font-semibold text-[#183328]">
+        <span class="rounded-full border border-[#52b788]/40 bg-[#1b4332] px-3.5 py-1 font-mono text-xs font-semibold text-[#95d5b2]">
           Days {mod.range}
+        </span>
+        <span class="rounded-full border border-white/15 bg-white/10 px-3.5 py-1 font-mono text-xs text-[#e5ece7]">
+          {modulePosts.length} {modulePosts.length === 1 ? "Lesson" : "Lessons"}
         </span>
       </div>
 
-      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#7c5d22]">Module {mod.num}</p>
-      <h1 class="mt-2 max-w-3xl text-3xl font-semibold tracking-tight text-[#12261e] sm:text-4xl lg:text-5xl">{mod.title}</h1>
-      <p class="mt-4 max-w-2xl text-base leading-7 text-[#2c463b]">{mod.detail}</p>
+      <p class="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[#d8bd7b]">
+        MODULE {mod.num} · SHREE FANIDHAR CAPITAL
+      </p>
+      <h1 class="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-[#f8f3e8] sm:text-4xl lg:text-5xl">
+        {mod.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-sm leading-7 text-[#dce6e0] sm:text-base">
+        {mod.detail}
+      </p>
     </div>
   </section>
 
-  <main id="main-content" class="module-page mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+  <main id="main-content" class="module-page mx-auto w-full max-w-6xl bg-[#faf8f3] px-4 py-12 text-[#10201a] sm:px-6 lg:px-8">
     {IntroContent && (
-      <section class="mb-12 rounded-2xl border border-[#c5d6cc] bg-[#f8faf8] p-6 sm:p-10">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#7c5d22]">
-          Module {mod.num} Introductory Overview
+      <section class="mb-12 rounded-2xl border-2 border-[#10201a] bg-white p-6 shadow-[0_4px_0_#10201a] sm:p-10">
+        <p class="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
+          MODULE {mod.num} INTRODUCTORY OVERVIEW
         </p>
-        <div class="app-prose prose max-w-none text-[#142920]">
+        <div class="app-prose prose max-w-none text-[#10201a]">
           <IntroContent />
         </div>
       </section>
     )}
 
-    <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+    <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#10201a]/15 pb-6">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#7c5d22]">Module Lessons</p>
-        <h2 class="mt-1 text-2xl font-semibold tracking-tight text-[#12261e]">
+        <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
+          MODULE LESSONS
+        </p>
+        <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#10201a]">
           {modulePosts.length > 0
             ? `${modulePosts.length} published ${modulePosts.length === 1 ? "lesson" : "lessons"} (Days ${mod.range})`
             : `Upcoming Module (Days ${mod.range})`}
         </h2>
       </div>
-      <a href="/posts/" class="inline-flex min-h-11 items-center rounded-full border border-[#c5d6cc] bg-[#f5f8f5] px-4 py-2 text-sm font-semibold text-[#163126] transition hover:border-[#9a7b3c]">
+      <a
+        href="/posts/"
+        class="inline-flex min-h-11 items-center rounded-xl border-2 border-[#10201a] bg-white px-4 py-2 text-sm font-semibold text-[#10201a] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#f5f0e4]"
+      >
         Browse all lessons ↗
       </a>
     </div>
@@ -119,30 +135,39 @@ const IntroContent = renderedIntro?.Content ?? null;
           {modulePosts.map(post => <Card variant="h3" {...post} />)}
         </ul>
       ) : (
-        <div class="rounded-2xl border border-[#dce5df] bg-[#f5f8f5] p-8">
-          <p class="text-lg font-semibold text-[#12261e]">Lessons for Module {mod.num} are coming soon</p>
-          <p class="mt-2 max-w-2xl text-sm leading-6 text-[#3e544a]">
+        <div class="rounded-2xl border-2 border-[#10201a] bg-white p-8 shadow-[0_3px_0_#10201a]">
+          <p class="text-lg font-bold text-[#10201a]">Lessons for Module {mod.num} are coming soon</p>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-[#3b4d43]">
             New lessons in the 365-Day Learning Roadmap are added sequentially. Explore the published modules in the meantime.
           </p>
-          <a href="/#curriculum" class="mt-5 inline-flex items-center rounded-full bg-[#dcebe3] px-5 py-2.5 text-sm font-semibold text-[#142d23] transition hover:bg-[#cde0d5]">
+          <a
+            href="/curriculum/"
+            class="mt-5 inline-flex min-h-11 items-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-5 py-2.5 text-sm font-semibold text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#10201a]"
+          >
             ← Back to 12 Modules
           </a>
         </div>
       )
     }
 
-    <nav aria-label="Module navigation" class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-8">
+    <nav aria-label="Module navigation" class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t-2 border-[#10201a]/15 pt-8">
       {prevMod ? (
-        <a href={`/modules/${prevMod.slug}/`} class="inline-flex flex-col rounded-xl border border-[#dce5df] bg-[#f8faf8] px-5 py-3 transition hover:border-[#9a7b3c]">
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#4b6358]">← Previous Module</span>
-          <span class="mt-1 font-semibold text-[#163126]">Module {prevMod.num}: {prevMod.title}</span>
+        <a
+          href={`/modules/${prevMod.slug}/`}
+          class="inline-flex flex-col rounded-xl border-2 border-[#10201a] bg-white px-5 py-3 shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
+        >
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-[#4b5d52]">← Previous Module</span>
+          <span class="mt-1 font-bold text-[#10201a]">Module {prevMod.num}: {prevMod.title}</span>
         </a>
       ) : <div />}
 
       {nextMod && (
-        <a href={`/modules/${nextMod.slug}/`} class="inline-flex flex-col rounded-xl border border-[#dce5df] bg-[#f8faf8] px-5 py-3 text-right transition hover:border-[#9a7b3c]">
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#4b6358]">Next Module →</span>
-          <span class="mt-1 font-semibold text-[#163126]">Module {nextMod.num}: {nextMod.title}</span>
+        <a
+          href={`/modules/${nextMod.slug}/`}
+          class="inline-flex flex-col rounded-xl border-2 border-[#10201a] bg-white px-5 py-3 text-right shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
+        >
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-[#4b5d52]">Next Module →</span>
+          <span class="mt-1 font-bold text-[#10201a]">Module {nextMod.num}: {nextMod.title}</span>
         </a>
       )}
     </nav>
