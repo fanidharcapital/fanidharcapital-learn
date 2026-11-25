@@ -1,7 +1,7 @@
 import type { CollectionEntry } from "astro:content";
-import postFilter from "./postFilter";
+import { postFilter } from "./postFilter";
 
-const getSortedPosts = (posts: CollectionEntry<"posts">[]) => {
+export const getSortedPosts = (posts: CollectionEntry<"posts">[]) => {
   return posts
     .filter(postFilter)
     .filter(({ data }) => !data.tags?.includes("module-overview"))
