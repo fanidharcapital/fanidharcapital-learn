@@ -46,4 +46,3 @@ When you open an option chain or analytics screen showing `Delta`, `Theta`, `Gam
 1.  On an option chain, roughly where does a **Delta of `±0.50`** usually sit relative to the current underlying spot price?
 2.  How can checking **net position Delta** help when you hold more than one option leg or lot?
 3.  Why should Greeks support—rather than replace—your **chart structure and `1R` stop-loss discipline**?
-4.  
