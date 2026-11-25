@@ -53,5 +53,4 @@ Let $\text{Net Debit} = P_{\text{low}} - P_{\text{high}}$ (per unit) and $\text{
 
 1.  If a Bull Call Spread costs a **net debit of `₹65`** across a **`150`-point** strike spread, what are the **max loss**, **max profit**, and **breakeven** (using lower strike $K_{\text{low}}$)?
 2.  Why is a Bull Call Spread often preferred over a naked Long Call when expecting a **measured/target-capped rally** rather than an explosive runaway move?
-3.  How does the short higher-strike call alter **Theta** and **Vega** compared to buying the lower call alone?
-4.  
+3.  How does the short higher-strike call alter **Theta** and **Vega** compared to buying the lower call alone.
