@@ -43,4 +43,3 @@ Gamma is **not** uniform across all strikes or dates:
 1.  If a Call option has **Delta `+0.50`** and **Gamma `+0.04`**, roughly what is the new Delta if the underlying rises by **`5` points**?
 2.  Why do **short option sellers** face heightened **negative Gamma** danger on fast, trending moves?
 3.  Why is Gamma typically much lower on a deep `ITM` option than on an `ATM` option?
-4.  
