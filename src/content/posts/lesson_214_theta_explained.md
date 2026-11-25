@@ -39,5 +39,4 @@ In **Lesson #213**, we examined Gamma acceleration as spot moves. In **Lesson #2
 
 1.  Why does a **Long Call** experience **negative Theta** even if the underlying index doesn't drop?
 2.  Does **Theta** erode the **intrinsic value** of an `ITM` option, or only its **extrinsic value**?
-3.  Why does daily decay on an `ATM` option typically accelerate in the final days before expiry?
-4.  
+3.  Why does daily decay on an `ATM` option typically accelerate in the final days before expiry.
