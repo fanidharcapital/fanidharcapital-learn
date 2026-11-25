@@ -18,6 +18,9 @@ import PostToc from "./_components/PostToc.astro";
 import PostEnd from "@/custom/PostEnd.astro";
 import config from "@/config";
 
+const stripSeriesPrefix = (value: string) =>
+  value.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
+
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   const sortedPosts = getSortedPosts(posts);
@@ -32,7 +35,7 @@ export async function getStaticPaths() {
         index > 0
           ? {
               id: sortedPosts[index - 1].id,
-              title: sortedPosts[index - 1].data.title,
+              title: stripSeriesPrefix(sortedPosts[index - 1].data.title),
               filePath: sortedPosts[index - 1].filePath,
             }
           : null,
@@ -40,7 +43,7 @@ export async function getStaticPaths() {
         index < sortedPosts.length - 1
           ? {
               id: sortedPosts[index + 1].id,
-              title: sortedPosts[index + 1].data.title,
+              title: stripSeriesPrefix(sortedPosts[index + 1].data.title),
               filePath: sortedPosts[index + 1].filePath,
             }
           : null,
@@ -76,6 +79,7 @@ const {
   hideToc,
 } = post.data;
 
+const displayTitle = stripSeriesPrefix(title);
 const lessonNumber = title.match(/(?:lesson|education series\s*#?)\s*(\d+)/i)?.[1];
 const moduleTag = tags.find(tag => /^module-\d+$/i.test(tag));
 const moduleNumber = moduleTag?.match(/\d+/)?.[0];
@@ -105,7 +109,7 @@ const ogImage = ogImageUrl
 ---
 
 <PostLayout
-  title={`${title} | ${config.site.title}`}
+  title={`${displayTitle} | ${config.site.title}`}
   description={description}
   ogImage={ogImage}
   canonicalURL={canonicalURL}
@@ -146,7 +150,7 @@ const ogImage = ogImageUrl
         style={{ viewTransitionName: toTransitionName(post.id) }}
         class="text-accent text-3xl font-bold leading-tight sm:text-4xl"
       >
-        {title}
+        {displayTitle}
       </h1>
 
       <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -182,7 +186,7 @@ const ogImage = ogImageUrl
       <PostToc headings={tocHeadings} />
       <article
         id="article"
-        aria-label={title}
+        aria-label={displayTitle}
         class:list={[
           "app-prose mx-auto w-full max-w-3xl",
           "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
