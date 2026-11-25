@@ -48,7 +48,6 @@ const isActive = (path: string) => {
       class="flex flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-2.5 text-sm"
     >
       <div class="flex items-center gap-4 font-medium sm:gap-6">
-        <a href="/posts/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/posts") }]}>Lessons</a>
         <a href="/curriculum/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/curriculum") }]}>Curriculum</a>
         <a href="/about/" class:list={["nav-straight-link hover:text-accent", { "nav-active": isActive("/about") }]}>About</a>
       </div>
@@ -73,7 +72,6 @@ const isActive = (path: string) => {
       </div>
 
       <ul id="menu-items" class="hidden w-full flex-col gap-2 border-t border-border/40 pt-2.5 pb-1 font-medium">
-        <li><a href="/posts/" class="block py-1 hover:text-accent">All Lessons</a></li>
         <li><a href="/curriculum/" class="block py-1 hover:text-accent">Curriculum</a></li>
         <li><a href="/tags/" class="block py-1 hover:text-accent">Browse by Tags</a></li>
         <li><a href="/archives/" class="block py-1 hover:text-accent">Archives</a></li>
