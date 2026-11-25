@@ -1,5 +1,5 @@
 ---
-title: "Educational Series #212: Delta (\Delta) Explained — Directional Price Sensitivity, Implied Probability & Position Delta"
+title: "Educational Series #212: Delta (Δ) Explained — Directional Price Sensitivity, Implied Probability & Position Delta"
 description: "Master Option Delta—how Call (0 to +1) and Put (-1 to 0) deltas work, how position delta aggregates across lots and legs, and how traders use delta for sensitivity and probability intuition."
 pubDatetime: 2026-11-25T10:10:00+05:30
 tags:
@@ -36,7 +36,7 @@ To find **Net Position Delta** across lots and multiple option legs:
 $$\text{Position Delta} = \sum (\Delta_{\text{unit}} \times \text{Contracts/Lots} \times \text{Lot Size})$$
 
 *   *Example:* Buying **2 lots** (`Lot Size = 50`, total `100` units) of a Call with **`+0.50` Delta** gives a **Position Delta of `+50`** (`0.50 × 100`). If Nifty moves up `+40` points, the position gains roughly `50 × 40 = ₹2,000` (before Gamma/Theta/Vega shifts).
-*   *Probability Intuition:* Traders often read `|Delta|` (e.g., a `0.25` or `0.30` strike) as a **rough rough-and-ready gauge** of the odds of finishing `ITM`—useful for strike selection, though never an exact forecast.
+*   *Probability Intuition:* Traders often read `|Delta|` (e.g., a `0.25` or `0.30` strike) as a **rough-and-ready gauge** of the odds of finishing `ITM`—useful for strike selection, though never an exact forecast.
 
 ---
 
