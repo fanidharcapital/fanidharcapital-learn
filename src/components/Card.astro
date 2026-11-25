@@ -11,6 +11,7 @@ const { variant = "h2", data, id } = Astro.props;
 
 const { title, description, pubDatetime, modDatetime, timezone, tags = [] } = data;
 
+const cleanTitle = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
 const postSlug = id.replace(/\.[^/.]+$/, "");
 const moduleTag = tags.find(t => /^module-\d{2}$/.test(t));
 const href =
@@ -19,7 +20,7 @@ const href =
     : `/posts/${postSlug}/`;
 
 const headerProps = {
-  style: { viewTransitionName: slugifyStr(title) },
+  style: { viewTransitionName: slugifyStr(cleanTitle) },
   class: "text-lg font-semibold leading-snug text-white hover:underline",
 };
 ---
@@ -42,9 +43,9 @@ const headerProps = {
     >
       {
         variant === "h2" ? (
-          <h2 {...headerProps}>{title}</h2>
+          <h2 {...headerProps}>{cleanTitle}</h2>
         ) : (
-          <h3 {...headerProps}>{title}</h3>
+          <h3 {...headerProps}>{cleanTitle}</h3>
         )
       }
     </a>
