@@ -6,20 +6,35 @@ export interface Props extends CollectionEntry<"posts"> {
   variant?: "h2" | "h3";
 }
 
+const MODULE_NAMES: Record<string, string> = {
+  "01": "Market Foundations",
+  "02": "Exchanges & Operations",
+  "03": "Fundamental Analysis",
+  "04": "Technical Analysis",
+  "05": "Derivatives & F&O",
+  "06": "Risk & Portfolio Management",
+};
+
 const { variant = "h2", data, id } = Astro.props;
 
 const { title, description, tags = [] } = data;
 
-const cleanTitle = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
+const chapterName = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
 const postSlug = id.replace(/\.[^/.]+$/, "");
-const moduleTag = tags.find(t => /^module-\d{2}$/.test(t));
+const moduleTag = tags.find(t => /^module-\d{1,2}$/i.test(t));
+const moduleNumber = moduleTag?.match(/\d+/)?.[0]?.padStart(2, "0");
+const moduleLabel = moduleNumber
+  ? MODULE_NAMES[moduleNumber]
+    ? `Module ${moduleNumber} · ${MODULE_NAMES[moduleNumber]}`
+    : `Module ${moduleNumber}`
+  : null;
 const href =
   tags.includes("module-overview") && moduleTag
-    ? `/modules/${moduleTag}/`
+    ? `/modules/${moduleTag.toLowerCase()}/`
     : `/posts/${postSlug}/`;
 
 const headerProps = {
-  style: { viewTransitionName: slugifyStr(cleanTitle) },
+  style: { viewTransitionName: slugifyStr(chapterName) },
   class:
     "text-lg font-bold leading-snug text-[#10201a] transition group-hover:text-[#0c3024] hover:underline",
 };
@@ -27,15 +42,23 @@ const headerProps = {
 
 <li class="group flex flex-col justify-between rounded-2xl border border-[#10201a]/20 bg-white p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#10201a] hover:shadow-md">
   <div>
+    {moduleLabel && (
+      <div class="mb-3 flex flex-wrap gap-2">
+        <span class="rounded-full bg-[#10201a] px-3 py-1 font-mono text-xs font-medium text-white">
+          {moduleLabel}
+        </span>
+      </div>
+    )}
+
     <a
       href={href}
       class="block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10201a]"
     >
       {
         variant === "h2" ? (
-          <h2 {...headerProps}>{cleanTitle}</h2>
+          <h2 {...headerProps}>{chapterName}</h2>
         ) : (
-          <h3 {...headerProps}>{cleanTitle}</h3>
+          <h3 {...headerProps}>{chapterName}</h3>
         )
       }
     </a>
