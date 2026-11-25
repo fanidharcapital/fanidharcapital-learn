@@ -1,7 +1,6 @@
 ---
 import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
-import Datetime from "./Datetime.astro";
 
 export interface Props extends CollectionEntry<"posts"> {
   variant?: "h2" | "h3";
@@ -9,7 +8,7 @@ export interface Props extends CollectionEntry<"posts"> {
 
 const { variant = "h2", data, id } = Astro.props;
 
-const { title, description, pubDatetime, modDatetime, timezone, tags = [] } = data;
+const { title, description, tags = [] } = data;
 
 const cleanTitle = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
 const postSlug = id.replace(/\.[^/.]+$/, "");
@@ -22,16 +21,23 @@ const href =
 const headerProps = {
   style: { viewTransitionName: slugifyStr(cleanTitle) },
   class:
-    "text-lg font-bold leading-snug text-[#10201a] transition group-hover:text-[#7c5d22] hover:underline",
+    "text-lg font-bold leading-snug text-[#10201a] transition group-hover:text-[#0c3024] hover:underline",
 };
 ---
 
-<li class="group flex flex-col justify-between rounded-2xl border border-[#10201a] bg-[#faf8f3] p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#c9a45a] hover:bg-[#f5f0e4] hover:shadow-md">
+<li class="group flex flex-col justify-between rounded-2xl border border-[#10201a]/20 bg-white p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#10201a] hover:shadow-md">
   <div>
     {tags.length > 0 && (
       <div class="mb-3 flex flex-wrap gap-2">
-        {tags.slice(0, 3).map(tag => (
-          <span class="rounded-full border border-[#9a7b3c]/50 bg-[#efe3c4] px-3 py-1 font-mono text-xs font-semibold text-[#4f3910]">
+        {tags.slice(0, 3).map((tag, idx) => (
+          <span
+            class:list={[
+              "rounded-full px-3 py-1 font-mono text-xs font-medium",
+              idx === 0
+                ? "bg-[#10201a] text-white"
+                : "border border-[#10201a]/15 bg-[#f4f5f4] text-[#23382d]",
+            ]}
+          >
             #{tag}
           </span>
         ))}
@@ -51,12 +57,8 @@ const headerProps = {
       }
     </a>
 
-    <div class="mt-2 text-xs font-medium text-[#80632b] [&_*]:!text-[#80632b]">
-      <Datetime {pubDatetime} {modDatetime} {timezone} />
-    </div>
-
     {description && (
-      <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#23382d]">
+      <p class="mt-3 line-clamp-2 text-sm leading-6 text-[#3b4d43]">
         {description}
       </p>
     )}
