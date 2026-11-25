@@ -27,23 +27,6 @@ const headerProps = {
 
 <li class="group flex flex-col justify-between rounded-2xl border border-[#10201a]/20 bg-white p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#10201a] hover:shadow-md">
   <div>
-    {tags.length > 0 && (
-      <div class="mb-3 flex flex-wrap gap-2">
-        {tags.slice(0, 3).map((tag, idx) => (
-          <span
-            class:list={[
-              "rounded-full px-3 py-1 font-mono text-xs font-medium",
-              idx === 0
-                ? "bg-[#10201a] text-white"
-                : "border border-[#10201a]/15 bg-[#f4f5f4] text-[#23382d]",
-            ]}
-          >
-            #{tag}
-          </span>
-        ))}
-      </div>
-    )}
-
     <a
       href={href}
       class="block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10201a]"
