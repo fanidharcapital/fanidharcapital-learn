@@ -18,4 +18,3 @@ Welcome to **Module 01: Foundations of Markets & Trading**. This introductory pa
 * **Reading Charts & Price Action (`#009–#016`):** Chart types, candlestick anatomy, bullish/bearish signals, market structure (`HH/HL`, `LH/LL`, range), support/resistance zones, trendlines/channels, gaps, and noise vs. signal.
 * **Early Risk & Discipline (`#017–#023`):** Avoiding beginner traps, capital preservation, position sizing and stop-losses, risk-to-reward ratio, emotional control, transaction costs, and early journaling habits.
 * **Integration & Routine (`#024–#030`):** Left-to-right chart reading, clean vs. messy price action, trade planning walkthroughs, daily observation routines, case studies, and the Module 01 Capstone checklist.
-* 
