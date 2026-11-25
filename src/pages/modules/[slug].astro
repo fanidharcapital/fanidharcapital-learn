@@ -3,8 +3,9 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import ModuleQuiz from "@/components/ModuleQuiz.astro";
 import { MODULE_QUIZZES } from "@/data/moduleQuizzes";
+import { FINAL_EXAM_CONFIG, FINAL_EXAM_QUESTIONS } from "@/data/finalExam";
+import type { QuizQuestion } from "@/data/moduleQuizzes";
 import "@/config";
 
 export async function getStaticPaths() {
@@ -14,7 +15,7 @@ export async function getStaticPaths() {
       posts
         .map((post) => {
           const slug = post.id.toLowerCase();
-          const match = slug.match(/module[-_\s]?0?([1-9]|1[0-2])/i);
+          const match = slug.match(/module[-_\s]?0?([1-9]|1[0-3])/i);
           if (match) {
             return `module-${match[1].padStart(2, "0")}`;
           }
@@ -24,7 +25,7 @@ export async function getStaticPaths() {
     )
   );
 
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 13; i++) {
     const slug = `module-${String(i).padStart(2, "0")}`;
     if (!moduleSlugs.includes(slug)) {
       moduleSlugs.push(slug);
@@ -34,44 +35,54 @@ export async function getStaticPaths() {
   moduleSlugs.sort();
 
   return moduleSlugs.map((slug) => {
+    const isFinalChapter = slug === "module-13";
     const quiz = MODULE_QUIZZES[slug];
     return {
       params: { slug },
       props: {
         slug,
-        title: quiz?.moduleTitle ?? slug.replace("-", " ").toUpperCase(),
-        quiz,
+        title: isFinalChapter
+          ? FINAL_EXAM_CONFIG.title
+          : (quiz?.moduleTitle ?? slug.replace("-", " ").toUpperCase()),
+        isFinalChapter,
       },
     };
   });
 }
 
-const { slug, title, quiz } = Astro.props;
+const { slug, title, isFinalChapter } = Astro.props;
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 
-const modulePosts = allPosts
-  .filter((post) => {
-    const combined = `${post.id} ${post.data.title} ${(post.data.tags ?? []).join(" ")}`.toLowerCase();
-    const num = slug.replace("module-", "");
-    const unpadded = String(Number(num));
-    return (
-      combined.includes(`module-${num}`) ||
-      combined.includes(`module ${num}`) ||
-      combined.includes(`module ${unpadded}`) ||
-      combined.includes(`module-${unpadded}`)
-    );
-  })
-  .sort((a, b) => a.data.pubDatetime.valueOf() - b.data.pubDatetime.valueOf());
+const modulePosts = isFinalChapter
+  ? []
+  : allPosts
+      .filter((post) => {
+        const combined = `${post.id} ${post.data.title} ${(post.data.tags ?? []).join(" ")}`.toLowerCase();
+        const num = slug.replace("module-", "");
+        const unpadded = String(Number(num));
+        return (
+          combined.includes(`module-${num}`) ||
+          combined.includes(`module ${num}`) ||
+          combined.includes(`module ${unpadded}`) ||
+          combined.includes(`module-${unpadded}`)
+        );
+      })
+      .sort((a, b) => a.data.pubDatetime.valueOf() - b.data.pubDatetime.valueOf());
 
 const currentNum = Number(slug.replace("module-", ""));
 const prevSlug = currentNum > 1 ? `module-${String(currentNum - 1).padStart(2, "0")}` : null;
-const nextSlug = currentNum < 12 ? `module-${String(currentNum + 1).padStart(2, "0")}` : null;
-const isLastModule = currentNum === 12;
+const nextSlug = currentNum < 13 ? `module-${String(currentNum + 1).padStart(2, "0")}` : null;
+
+const finalExamPayload = JSON.stringify({
+  passingScore: FINAL_EXAM_CONFIG.passingScore,
+  storageKey: FINAL_EXAM_CONFIG.storageKey,
+  questions: FINAL_EXAM_QUESTIONS,
+});
 ---
 
 <Layout title={`${title} | Shree Fanidhar Capital`}>
   <Header />
-  <main id="main-content" class="mx-auto w-full max-w-4xl px-4 pb-16 pt-8 sm:px-6">
+  <main id="main-content" class="mx-auto w-full max-w-5xl px-4 pb-16 pt-8 sm:px-6">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <a
         href="/curriculum/"
@@ -80,59 +91,167 @@ const isLastModule = currentNum === 12;
         ← Back to 365-Day Curriculum
       </a>
       <span class="rounded-full border-2 border-[#10201a] bg-[#faf8f3] px-4 py-1.5 font-mono text-xs font-semibold uppercase text-[#4b5d52]">
-        {slug.replace("-", " ")}
+        {isFinalChapter ? "MODULE 13 · FINAL QUIZ" : slug.replace("-", " ")}
       </span>
     </div>
 
-    <header class="mt-5 rounded-3xl border-4 border-[#10201a] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_4px_0_#10201a] sm:p-8">
+    <header class="mt-5 rounded-3xl border-2 border-[#10201a] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_4px_0_#10201a] sm:p-8">
       <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d8bd7b]">
-        SHREE FANIDHAR CAPITAL · {slug.replace("-", " ").toUpperCase()}
+        SHREE FANIDHAR CAPITAL · {isFinalChapter ? "MODULE 13 · CERTIFICATION QUIZ" : slug.replace("-", " ").toUpperCase()}
       </p>
       <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
         {title}
       </h1>
       <p class="mt-2 text-sm text-[#f8f3e8]/85">
-        {modulePosts.length} published lessons in this chapter. Read in sequence and complete the module checkpoint quiz below.
+        {isFinalChapter
+          ? `${FINAL_EXAM_QUESTIONS.length} comprehensive questions covering Modules 01–12. Passing score: ${FINAL_EXAM_CONFIG.passingScore}/${FINAL_EXAM_QUESTIONS.length}.`
+          : `${modulePosts.length} published lessons in this module. Select any lesson card below to read in sequence.`}
       </p>
     </header>
 
-    <section class="mt-8">
-      <h2 class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#9c7016]">
-        CHAPTER LESSONS
-      </h2>
-      {modulePosts.length > 0 ? (
-        <ul class="mt-4 space-y-3.5">
-          {modulePosts.map((post, idx) => (
-            <li>
-              <a
-                href={`/posts/${post.id}/`}
-                class="flex items-center justify-between gap-4 rounded-xl border-4 border-[#10201a] bg-white px-4 py-3.5 text-[#10201a] shadow-[0_4px_0_#10201a] transition hover:-translate-y-0.5"
-              >
-                <span class="text-sm font-bold leading-snug sm:text-base">
-                  <span class="mr-2.5 font-mono text-xs text-[#9c7016]">{String(idx + 1).padStart(2, "0")}.</span>
-                  {post.data.title}
-                </span>
-                <span class="shrink-0 rounded-lg border-2 border-[#10201a] bg-[#faf8f3] px-3 py-1 font-mono text-xs font-semibold text-[#9c7016]">
-                  Read →
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="mt-3 rounded-xl border-4 border-[#10201a] bg-[#faf8f3] p-4 text-sm text-[#4b5d52]">
-          Lessons for this chapter are being published progressively across the 365-day roadmap. You can still practice the module quiz below.
+    {!isFinalChapter && (
+      <section class="mt-8">
+        <p class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#9c7016]">
+          CHAPTER LESSONS
         </p>
-      )}
-    </section>
+        <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#10201a]">
+          Read in sequence
+        </h2>
 
-    {quiz && <ModuleQuiz quiz={quiz} />}
+        {modulePosts.length > 0 ? (
+          <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {modulePosts.map((post, idx) => {
+              const dayMatch = post.data.title.match(/#(\d+)/);
+              const badgeText = dayMatch ? `Lesson #${dayMatch[1]}` : `Part ${String(idx + 1).padStart(2, "0")}`;
+              return (
+                <a
+                  href={`/posts/${post.id}/`}
+                  class="group flex flex-col justify-between rounded-2xl border-2 border-[#10201a] bg-[#faf8f3] p-5 text-[#10201a] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-white"
+                >
+                  <div>
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#4b5d52]">
+                        LESSON {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <span class="rounded-full border border-[#10201a]/20 bg-white px-2.5 py-0.5 font-mono text-[11px] font-medium text-[#4b5d52]">
+                        {badgeText}
+                      </span>
+                    </div>
+
+                    <h3 class="mt-3 text-base font-bold leading-snug text-[#10201a] sm:text-lg">
+                      {post.data.title}
+                    </h3>
+
+                    {post.data.description && (
+                      <p class="mt-2 line-clamp-2 text-xs leading-5 text-[#4b5d52] sm:text-sm">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <span class="mt-4 inline-flex items-center gap-1 font-mono text-xs font-semibold text-[#10201a] group-hover:text-[#9c7016]">
+                    Read lesson ↗
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          <p class="mt-4 rounded-2xl border-2 border-[#10201a] bg-[#faf8f3] p-5 text-sm text-[#4b5d52] shadow-[0_3px_0_#10201a]">
+            Lessons for this module are being published progressively across the 365-day roadmap.
+          </p>
+        )}
+      </section>
+    )}
+
+    {isFinalChapter && (
+      <section
+        id="module-13-final-exam"
+        class="mt-8 rounded-3xl border-2 border-[#10201a] bg-white p-5 shadow-[0_4px_0_#10201a] sm:p-8"
+        data-exam={finalExamPayload}
+      >
+        <div class="flex flex-col justify-between gap-3 border-b-2 border-[#10201a]/15 pb-5 sm:flex-row sm:items-center">
+          <div>
+            <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#9c7016]">
+              MODULE 13 · {FINAL_EXAM_QUESTIONS.length} QUESTIONS · PASS: {FINAL_EXAM_CONFIG.passingScore}/{FINAL_EXAM_QUESTIONS.length}
+            </p>
+            <h2 class="mt-1 text-xl font-bold tracking-tight text-[#10201a] sm:text-2xl">
+              Final Certification Assessment
+            </h2>
+          </div>
+          <span
+            id="m13-saved-badge"
+            class="hidden self-start rounded-full border-2 border-[#10201a] bg-[#08241b] px-3.5 py-1.5 font-mono text-xs font-semibold text-[#d8bd7b] sm:self-auto"
+          ></span>
+        </div>
+
+        <form id="m13-exam-form" class="mt-6 space-y-5">
+          {FINAL_EXAM_QUESTIONS.map((q: QuizQuestion, qIdx: number) => (
+            <fieldset
+              class="m13-question-card rounded-2xl border-2 border-[#10201a] bg-[#faf8f3] p-4 shadow-[0_3px_0_#10201a] sm:p-5"
+              data-question-index={qIdx}
+            >
+              <legend class="rounded-full border border-[#10201a]/25 bg-white px-3 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-[#4b5d52]">
+                Question {qIdx + 1} of {FINAL_EXAM_QUESTIONS.length}
+              </legend>
+              <p class="mt-2 text-base font-bold leading-snug text-[#10201a]">
+                {q.question}
+              </p>
+
+              <div class="mt-3.5 space-y-2.5">
+                {q.options.map((opt: string, optIdx: number) => (
+                  <label class="m13-option flex cursor-pointer items-start gap-3 rounded-xl border-2 border-[#10201a]/25 bg-white px-4 py-2.5 text-sm font-medium text-[#10201a] transition hover:border-[#10201a]">
+                    <input
+                      type="radio"
+                      name={`m13-q-${qIdx}`}
+                      value={optIdx}
+                      class="mt-0.5 size-4 shrink-0 accent-[#08241b]"
+                    />
+                    <span>{opt}</span>
+                  </label>
+                ))}
+              </div>
+
+              <div class="m13-answer-box mt-3.5 hidden rounded-xl border-2 border-[#10201a] bg-white px-4 py-3 text-xs leading-5 text-[#10201a]">
+                <p class="m13-verdict font-mono text-xs font-bold uppercase tracking-wider"></p>
+                <p class="m13-correct-answer mt-1 font-semibold text-[#08241b]"></p>
+                <p class="m13-explanation mt-1 text-[#2d3e35]"></p>
+              </div>
+            </fieldset>
+          ))}
+
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+            <div class="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                class="inline-flex min-h-11 cursor-pointer items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#d8bd7b] px-6 py-3 text-sm font-bold text-[#08241b] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
+              >
+                Submit Final Quiz
+              </button>
+              <button
+                type="button"
+                id="m13-reset-btn"
+                class="hidden min-h-11 cursor-pointer items-center justify-center rounded-xl border-2 border-[#10201a] bg-white px-5 py-3 text-sm font-bold text-[#10201a] transition hover:bg-[#faf8f3]"
+              >
+                Retake Quiz
+              </button>
+            </div>
+
+            <div
+              id="m13-result-box"
+              class="hidden rounded-xl border-2 border-[#10201a] bg-[#08241b] px-4 py-2.5 text-sm font-semibold text-[#f8f3e8]"
+              aria-live="polite"
+            ></div>
+          </div>
+        </form>
+      </section>
+    )}
 
     <nav aria-label="Chapter navigation" class="mt-8 flex flex-wrap items-center justify-between gap-3">
       {prevSlug ? (
         <a
           href={`/modules/${prevSlug}/`}
-          class="inline-flex min-h-11 items-center justify-center rounded-xl border-4 border-[#10201a] bg-white px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#10201a] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
+          class="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-[#10201a] bg-white px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#10201a] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
         >
           ← {prevSlug.replace("-", " ")}
         </a>
@@ -143,30 +262,102 @@ const isLastModule = currentNum === 12;
       {nextSlug && (
         <a
           href={`/modules/${nextSlug}/`}
-          class="inline-flex min-h-11 items-center justify-center rounded-xl border-4 border-[#10201a] bg-[#08241b] px-6 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#d8bd7b] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
+          class="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-6 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#d8bd7b] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
         >
-          Next: {nextSlug.replace("-", " ")} →
+          {nextSlug === "module-13" ? "Next: Module 13 · Final Quiz →" : `Next: ${nextSlug.replace("-", " ")} →`}
         </a>
       )}
     </nav>
-
-    {isLastModule && (
-      <div class="mt-10 rounded-3xl border-4 border-[#10201a] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_4px_0_#10201a]">
-        <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d8bd7b]">
-          FINAL STEP · 20-QUESTION EXAM
-        </p>
-        <h3 class="mt-1 text-xl font-bold">Ready for the 365-Day Capstone Assessment?</h3>
-        <p class="mt-1.5 text-sm text-[#f8f3e8]/85">
-          Test cumulative mastery across all 12 modules before wrapping up the roadmap.
-        </p>
-        <a
-          href="/final-exam/"
-          class="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#d8bd7b] px-6 py-2.5 text-sm font-semibold text-[#08241b] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5"
-        >
-          Start Final Exam →
-        </a>
-      </div>
-    )}
   </main>
   <Footer />
 </Layout>
+
+<script>
+  function initModule13Exam() {
+    const section = document.getElementById("module-13-final-exam");
+    if (!section) return;
+
+    const rawData = section.getAttribute("data-exam");
+    if (!rawData) return;
+
+    const exam = JSON.parse(rawData);
+    const form = document.getElementById("m13-exam-form") as HTMLFormElement | null;
+    const resetBtn = document.getElementById("m13-reset-btn");
+    const resultBox = document.getElementById("m13-result-box");
+    const savedBadge = document.getElementById("m13-saved-badge");
+    if (!form || !resetBtn || !resultBox || !savedBadge) return;
+
+    const updateBadge = (score: number) => {
+      const passed = score >= exam.passingScore;
+      savedBadge.textContent = `${passed ? "✓ Certified" : "Best Score"}: ${score} / ${exam.questions.length}`;
+      savedBadge.classList.remove("hidden");
+    };
+
+    const existing = localStorage.getItem(exam.storageKey);
+    if (existing !== null) updateBadge(Number(existing));
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let score = 0;
+
+      exam.questions.forEach((q: any, qIdx: number) => {
+        const card = form.querySelector(`[data-question-index="${qIdx}"]`);
+        if (!card) return;
+
+        const selected = form.querySelector(`input[name="m13-q-${qIdx}"]:checked`) as HTMLInputElement | null;
+        const chosenIdx = selected ? Number(selected.value) : -1;
+        const optionLabels = card.querySelectorAll(".m13-option");
+        const answerBox = card.querySelector(".m13-answer-box");
+        const verdictEl = card.querySelector(".m13-verdict");
+        const correctAnswerEl = card.querySelector(".m13-correct-answer");
+        const explanationEl = card.querySelector(".m13-explanation");
+
+        optionLabels.forEach((label, optIdx) => {
+          label.classList.remove("border-emerald-700", "bg-emerald-50", "border-red-700", "bg-red-50");
+          if (optIdx === q.correctIndex) {
+            label.classList.add("border-emerald-700", "bg-emerald-50");
+          } else if (optIdx === chosenIdx && chosenIdx !== q.correctIndex) {
+            label.classList.add("border-red-700", "bg-red-50");
+          }
+        });
+
+        const isCorrect = chosenIdx === q.correctIndex;
+        if (isCorrect) score += 1;
+
+        if (answerBox && verdictEl && correctAnswerEl && explanationEl) {
+          verdictEl.textContent = isCorrect ? "✓ CORRECT" : chosenIdx === -1 ? "⚠ NOT ATTEMPTED" : "✕ INCORRECT";
+          verdictEl.className = `m13-verdict font-mono text-xs font-bold uppercase tracking-wider ${
+            isCorrect ? "text-emerald-800" : "text-red-800"
+          }`;
+          correctAnswerEl.textContent = `Answer: ${q.options[q.correctIndex]}`;
+          explanationEl.textContent = q.explanation;
+          answerBox.classList.remove("hidden");
+        }
+      });
+
+      const passed = score >= exam.passingScore;
+      resultBox.textContent = passed
+        ? `Final Score: ${score} / ${exam.questions.length} — Certification Quiz Passed!`
+        : `Final Score: ${score} / ${exam.questions.length} — Need ${exam.passingScore}/${exam.questions.length} to pass. Review all 20 answers below and retry.`;
+      resultBox.classList.remove("hidden");
+      resetBtn.classList.remove("hidden");
+
+      const prevBest = Number(localStorage.getItem(exam.storageKey) ?? -1);
+      if (score > prevBest) localStorage.setItem(exam.storageKey, String(score));
+      updateBadge(Math.max(score, prevBest));
+    });
+
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      resultBox.classList.add("hidden");
+      resetBtn.classList.add("hidden");
+      form.querySelectorAll(".m13-option").forEach((label) => {
+        label.classList.remove("border-emerald-700", "bg-emerald-50", "border-red-700", "bg-red-50");
+      });
+      form.querySelectorAll(".m13-answer-box").forEach((el) => el.classList.add("hidden"));
+    });
+  }
+
+  initModule13Exam();
+  document.addEventListener("astro:after-swap", initModule13Exam);
+</script>
