@@ -9,7 +9,11 @@ import { getSortedPosts } from "@/utils/getSortedPosts";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+
+// Pull all 12 Module Overview files in Module 01 -> Module 12 order
+const moduleOverviews = posts
+  .filter(({ data }) => data.tags?.includes("module-overview"))
+  .sort((a, b) => a.id.localeCompare(b.id));
 
 const learningPath = [
   { range: "01–30", title: "Market foundations", detail: "How India’s equity markets work, from shares and indices to order types." },
@@ -56,23 +60,17 @@ const learningPath = [
     <section id="start-learning" class="py-12 sm:py-16">
       <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Lesson Spotlight</p>
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Module Overviews</p>
           <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Start your learning journey</h2>
-          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Build your knowledge step by step with structured lessons, clear explanations, and practical visual notes.</p>
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Explore the complete overview of all 12 modules first, then step into each module’s lessons at your own pace.</p>
         </div>
         <a href="/posts/" class="inline-flex min-h-11 items-center rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-accent transition hover:border-[#c9a45a]">Browse all lessons ↗</a>
       </div>
       {
-        featuredPosts.length > 0 ? (
+        moduleOverviews.length > 0 && (
           <ul class="grid gap-5 md:grid-cols-2">
-            {featuredPosts.map(post => <Card variant="h3" {...post} />)}
+            {moduleOverviews.map(post => <Card variant="h3" {...post} />)}
           </ul>
-        ) : (
-          <div class="rounded-2xl border border-border bg-muted/40 p-6">
-            <p class="font-semibold">Lesson 01 is ready to explore</p>
-            <p class="mt-2 text-sm text-muted-foreground">Visit the lesson library to open the first published visual learning note.</p>
-            <a href="/posts/" class="mt-4 inline-block text-sm font-semibold text-accent underline underline-offset-4">Open lesson library →</a>
-          </div>
         )
       }
     </section>
