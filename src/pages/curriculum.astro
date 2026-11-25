@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Card from "@/components/Card.astro";
 import SITE from "@/config";
 
 function getLessonNumber(post: any): number {
@@ -16,8 +15,7 @@ function getLessonNumber(post: any): number {
   return 9999;
 }
 
-const rawPosts = await getCollection("posts", ({ data }) => !data.draft);
-const posts = rawPosts.sort((a, b) => getLessonNumber(a) - getLessonNumber(b));
+const posts = await getCollection("posts", ({ data }) => !data.draft);
 
 const learningPath = [
   { number: 1, min: 1, max: 30, range: "01–30", title: "Market foundations", detail: "Shares, indices, market participants, and order types." },
@@ -42,12 +40,12 @@ const learningPath = [
       <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">Shree Fanidhar Capital · Learning</p>
       <h1 class="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">The learning curriculum</h1>
       <p class="mt-4 max-w-2xl text-sm leading-6 text-[#e5ece7] sm:text-base">A self-paced roadmap through Indian markets, analysis, derivatives, and risk management. Read published lessons freely; new lessons will be added progressively.</p>
-      <a href="#published-lessons" class="mt-7 inline-flex min-h-11 items-center rounded-full bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#173426]">
-        Explore published lessons <span aria-hidden="true" class="ml-2">↓</span>
+      <a href="#roadmap" class="mt-7 inline-flex min-h-11 items-center rounded-full bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#173426]">
+        Explore 12 modules <span aria-hidden="true" class="ml-2">↓</span>
       </a>
     </section>
 
-    <section class="py-12 sm:py-16">
+    <section id="roadmap" class="scroll-mt-24 py-12 sm:py-16">
       <div class="mb-7 max-w-2xl">
         <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">365-day roadmap</p>
         <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Learn in stages</h2>
@@ -88,70 +86,9 @@ const learningPath = [
       </ol>
     </section>
 
-    <section id="published-lessons" class="scroll-mt-24 border-t border-border py-12 sm:py-16">
-      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Available now</p>
-          <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Published lessons</h2>
-          <p class="mt-2 text-sm leading-6 text-muted-foreground">Open any lesson below. New lessons will appear here as they are published.</p>
-        </div>
-      </div>
-
-      {posts.length > 0 ? (
-        <div id="lessons-grid" class="curriculum-3col-grid">
-          {posts.map((post) => {
-            const lessonNum = getLessonNumber(post);
-            return (
-              <div data-lesson-item data-lesson-number={lessonNum} class="curriculum-3col-cell">
-                <Card variant="h3" {...post} />
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <p class="rounded-2xl border border-border p-6 text-sm text-muted-foreground">Lessons are being prepared. Please check back soon.</p>
-      )}
-    </section>
-
     <p class="mb-12 rounded-2xl border border-[#c9a45a]/40 bg-[#f5f0e4] p-6 text-sm leading-6 text-[#23382d]">
       Educational content only. This curriculum is not investment advice, a recommendation to buy or sell securities, or a promise of market outcomes.
     </p>
   </main>
   <Footer />
 </Layout>
-
-<style>
-  .curriculum-3col-grid {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 1.25rem;
-    align-items: stretch;
-  }
-
-  @media (min-width: 640px) {
-    .curriculum-3col-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 768px) {
-    .curriculum-3col-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .curriculum-3col-cell {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .curriculum-3col-cell > :global(*) {
-    flex: 1 1 auto;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-  }
-</style>
