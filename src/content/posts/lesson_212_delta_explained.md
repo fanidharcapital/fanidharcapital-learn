@@ -52,4 +52,3 @@ $$\text{Position Delta} = \sum (\Delta_{\text{unit}} \times \text{Contracts/Lots
 1.  If you **sell** 1 lot (`Lot Size = 50`) of a Put option with a unit Delta of **`-0.25`**, what is your **Position Delta** (positive or negative, and what number)?
 2.  A Call option has a Delta of **`+0.60`**. Roughly how much might its per-unit price change if the underlying index rises by **`50` points** (ignoring second-order effects)?
 3.  Why does **Position Delta** matter when holding multiple lots or combining Call and Put legs?
-4.  
