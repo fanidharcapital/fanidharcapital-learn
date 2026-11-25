@@ -1,5 +1,5 @@
 ---
-title: "Educational Series #213: Gamma (\Gamma) Explained — Rate of Change of Delta, Acceleration & Expiry Gamma Risk"
+title: "Educational Series #213: Gamma (Γ) Explained — Rate of Change of Delta, Acceleration & Expiry Gamma Risk"
 description: "Understand Option Gamma—how it measures the rate at which Delta changes as price moves, why Gamma peaks near ATM close to expiry, and how it creates acceleration and whipsaw risk."
 pubDatetime: 2026-11-25T10:10:00+05:30
 tags:
