@@ -1,80 +1,42 @@
 ---
+import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
-import { getPostUrl } from "@/utils/getPostPaths";
-import { toTransitionName } from "@/utils/toTransitionName";
+import { getPath } from "@/utils/getPath";
+import Datetime from "./Datetime.astro";
 
-type Props = {
+export interface Props extends CollectionEntry<"posts"> {
   variant?: "h2" | "h3";
-} & CollectionEntry<"posts">;
+}
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const { variant = "h2", data, id, filePath } = Astro.props;
 
-const { title, description, tags = [] } = data;
-const formattedTitle = title.replace(/^(?:Education|Educational)\s+Series\s*/i, "");
-const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
+const { title, description, pubDatetime, modDatetime, timezone, tags = [] } = data;
+
+const moduleTag = tags.find(t => /^module-\d{2}$/.test(t));
+const href =
+  tags.includes("module-overview") && moduleTag
+    ? `/modules/${moduleTag}/`
+    : getPath(id, filePath);
+
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(title) },
+  class: "text-lg font-medium decoration-dashed hover:underline",
+};
 ---
 
-<li class="sfc-card group rounded-xl border border-[#c9a45a] bg-[#0c3024] p-4 text-[#f8f3e8] transition hover:border-[#e0be79] sm:p-5">
-  {
-    tags.length > 0 && (
-      <div class="sfc-card-meta flex flex-wrap gap-1.5 text-[#e6d5ad]">
-        {tags.slice(0, 3).map(tag => (
-          <span class="sfc-card-tag rounded-full border border-[#c9a45a]/50 bg-[#144233] px-2 py-0.5 text-[11px] font-medium text-[#e6c885]">
-            #{tag}
-          </span>
-        ))}
-      </div>
-    )
-  }
-
+<li class="my-6">
   <a
-    href={postUrl}
-    class:list={[
-      "sfc-card-link mt-2.5 block text-base font-semibold leading-snug text-[#f8f3e8] transition group-hover:text-[#e6c885] sm:text-lg",
-      "focus-visible:underline focus-visible:outline-none",
-    ]}
+    href={href}
+    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
   >
-    <Heading transition:name={toTransitionName(id)}>
-      {formattedTitle}
-    </Heading>
+    {
+      variant === "h2" ? (
+        <h2 {...headerProps}>{title}</h2>
+      ) : (
+        <h3 {...headerProps}>{title}</h3>
+      )
+    }
   </a>
-
-  <p class="sfc-card-desc mt-1.5 line-clamp-2 text-sm leading-relaxed text-[#d9e5df]">
-    {description}
-  </p>
+  <Datetime {pubDatetime} {modDatetime} {timezone} />
+  <p>{description}</p>
 </li>
-
-<style>
-  :global(.module-page) .sfc-card {
-    background-color: #f5f8f5;
-    color: #142820;
-    border-color: #10201a;
-  }
-
-  :global(.module-page) .sfc-card:hover {
-    background-color: #edf3ee;
-    border-color: #9a7b3c;
-  }
-
-  :global(.module-page) .sfc-card-meta {
-    color: #41594e;
-  }
-
-  :global(.module-page) .sfc-card-tag {
-    background-color: #e1ede6;
-    color: #173328;
-    border-color: #bdd1c5;
-  }
-
-  :global(.module-page) .sfc-card-link {
-    color: #12261e;
-  }
-
-  :global(.module-page) .sfc-card:hover .sfc-card-link {
-    color: #7c5d22;
-  }
-
-  :global(.module-page) .sfc-card-desc {
-    color: #384f45;
-  }
-</style>
