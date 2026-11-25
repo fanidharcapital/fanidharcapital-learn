@@ -1,14 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import SITE from "@/config";
-
-const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-const lessonCount = allPosts.filter(
-  post => !(post.data.tags ?? []).includes("module-overview")
-).length;
 ---
 
 <Layout title={SITE.site.title}>
@@ -54,48 +48,18 @@ const lessonCount = allPosts.filter(
           </span>
         </div>
       </div>
-
-      <!-- Curriculum Live Strip -->
-      <div class="border-t border-white/10 bg-[#061c15]">
-        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <div class="flex flex-wrap items-center gap-3 text-sm">
-            <span class="rounded-full border border-[#52b788]/40 bg-[#1b4332] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-[#95d5b2]">
-              ● CURRICULUM LIVE
-            </span>
-            <span class="font-semibold text-[#d8bd7b]">{lessonCount} Lessons Published</span>
-            <span class="text-[#c5d3ca]">·</span>
-            <span class="text-[#dce6e0]">Start your structured market learning sessions now.</span>
-          </div>
-
-          <a
-            href="/curriculum/"
-            class="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold text-[#f8f3e8] transition hover:bg-white/20"
-          >
-            Open Curriculum →
-          </a>
-        </div>
-      </div>
     </section>
 
     <!-- Visual Roadmap & Curriculum CTA -->
     <section id="curriculum-visual" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div class="rounded-3xl border-2 border-[#10201a] bg-white p-5 shadow-[0_4px_0_#10201a] sm:p-8 lg:p-10">
-        <div class="flex flex-col justify-between gap-4 border-b-2 border-[#10201a]/15 pb-6 sm:flex-row sm:items-end">
-          <div>
-            <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
-              12-MODULE VISUAL OVERVIEW
-            </p>
-            <h2 class="mt-1.5 text-2xl font-bold tracking-tight text-[#10201a] sm:text-3xl">
-              From market foundations to case studies
-            </h2>
-          </div>
-
-          <a
-            href="/curriculum/"
-            class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-5 py-3 text-sm font-semibold text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#10201a]"
-          >
-            Go to Curriculum →
-          </a>
+        <div class="border-b-2 border-[#10201a]/15 pb-6">
+          <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
+            12-MODULE VISUAL OVERVIEW
+          </p>
+          <h2 class="mt-1.5 text-2xl font-bold tracking-tight text-[#10201a] sm:text-3xl">
+            From market foundations to case studies
+          </h2>
         </div>
 
         <div class="mt-6 overflow-hidden rounded-2xl border-2 border-[#10201a] bg-[#faf8f3]">
