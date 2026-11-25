@@ -4,6 +4,8 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
+import ModuleQuiz from "@/components/ModuleQuiz.astro";
+import { MODULE_QUIZZES } from "@/data/moduleQuizzes";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 
 export async function getStaticPaths() {
@@ -64,6 +66,7 @@ export async function getStaticPaths() {
 const { mod, introPost, modulePosts, prevMod, nextMod } = Astro.props;
 const renderedIntro = introPost ? await render(introPost) : null;
 const IntroContent = renderedIntro?.Content ?? null;
+const moduleQuiz = MODULE_QUIZZES[mod.slug];
 ---
 
 <Layout title={`Module ${mod.num}: ${mod.title} (Days ${mod.range}) | Shree Fanidhar Capital`}>
@@ -149,6 +152,8 @@ const IntroContent = renderedIntro?.Content ?? null;
         </div>
       )
     }
+
+    {moduleQuiz && <ModuleQuiz quiz={moduleQuiz} />}
 
     <nav aria-label="Module navigation" class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t-2 border-[#10201a]/15 pt-8">
       {prevMod ? (
