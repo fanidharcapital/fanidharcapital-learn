@@ -3,6 +3,21 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import SITE from "@/config";
+
+const chapters = [
+  { slug: "module-01", num: "01", title: "Market foundations" },
+  { slug: "module-02", num: "02", title: "Exchanges & operations" },
+  { slug: "module-03", num: "03", title: "Fundamental analysis" },
+  { slug: "module-04", num: "04", title: "Technical analysis" },
+  { slug: "module-05", num: "05", title: "Price action" },
+  { slug: "module-06", num: "06", title: "Futures market" },
+  { slug: "module-07", num: "07", title: "Options market" },
+  { slug: "module-08", num: "08", title: "Greeks & strategies" },
+  { slug: "module-09", num: "09", title: "Risk & psychology" },
+  { slug: "module-10", num: "10", title: "Institutions & macro" },
+  { slug: "module-11", num: "11", title: "Advanced concepts" },
+  { slug: "module-12", num: "12", title: "Case studies" },
+];
 ---
 
 <Layout title={SITE.site.title}>
@@ -50,7 +65,7 @@ import SITE from "@/config";
       </div>
     </section>
 
-    <!-- Visual Roadmap & Curriculum CTA -->
+    <!-- Visual Roadmap & Clickable 12 Chapters -->
     <section id="curriculum-visual" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div class="rounded-3xl border-2 border-[#10201a] bg-white p-5 shadow-[0_4px_0_#10201a] sm:p-8 lg:p-10">
         <div class="border-b-2 border-[#10201a]/15 pb-6">
@@ -71,9 +86,50 @@ import SITE from "@/config";
           />
         </div>
 
-        <div class="mt-6 flex flex-col justify-between gap-4 pt-2 sm:flex-row sm:items-center">
+        <!-- Clickable 12 Chapters Grid (No Circle Bullets) -->
+        <div class="mt-8 border-t-2 border-[#10201a]/15 pt-7">
+          <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+            <div>
+              <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
+                365-DAY ROADMAP ✓ QUICK JUMP
+              </p>
+              <h3 class="mt-1 text-xl font-bold tracking-tight text-[#10201a] sm:text-2xl">
+                All 12 Chapters
+              </h3>
+            </div>
+            <p class="text-xs text-[#4b5d52] sm:text-sm">
+              Tap any chapter heading to open its module page.
+            </p>
+          </div>
+
+          <ul class="mt-5 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {chapters.map((chapter) => (
+              <li class="m-0 p-0">
+                <a
+                  href={`/modules/${chapter.slug}/`}
+                  class="group flex items-center justify-between gap-3 rounded-xl border-2 border-[#10201a] bg-[#faf8f3] px-4 py-3 text-sm font-semibold text-[#10201a] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#08241b] hover:text-[#f8f3e8]"
+                >
+                  <span class="flex items-center gap-2.5 truncate">
+                    <span class="inline-flex shrink-0 items-center gap-1 rounded-md bg-[#08241b] px-2 py-0.5 font-mono text-xs font-bold text-[#d8bd7b] group-hover:bg-[#d8bd7b] group-hover:text-[#08241b]">
+                      ✓ {chapter.num}
+                    </span>
+                    <span class="truncate">{chapter.title}</span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="shrink-0 font-mono text-xs text-[#4b5d52] transition-transform group-hover:translate-x-0.5 group-hover:text-[#d8bd7b]"
+                  >
+                    →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-8 flex flex-col justify-between gap-4 border-t-2 border-[#10201a]/15 pt-6 sm:flex-row sm:items-center">
           <p class="text-sm leading-6 text-[#3b4d43]">
-            Select <strong>Explore the Curriculum</strong> to open any module and study lessons step by step at your own pace.
+            Select <strong>Explore the Curriculum</strong> to view full module details and study lessons step by step.
           </p>
           <a
             href="/curriculum/"
