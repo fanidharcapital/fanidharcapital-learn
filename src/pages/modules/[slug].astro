@@ -5,7 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import ModuleQuiz from "@/components/ModuleQuiz.astro";
 import { MODULE_QUIZZES } from "@/data/moduleQuizzes";
-import SITE from "@/config";
+import "@/config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -66,7 +66,7 @@ const modulePosts = allPosts
 const isLastModule = slug === "module-12";
 ---
 
-<Layout title={`${title} | ${SITE.title}`}>
+<Layout title={`${title} | Shree Fanidhar Capital`}>
   <Header />
   <main id="main-content" class="mx-auto w-full max-w-4xl px-4 pb-16 pt-8 sm:px-6">
     <div class="flex flex-wrap items-center justify-between gap-3">
