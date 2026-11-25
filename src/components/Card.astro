@@ -12,7 +12,13 @@ const MODULE_NAMES: Record<string, string> = {
   "03": "Fundamental Analysis",
   "04": "Technical Analysis",
   "05": "Derivatives & F&O",
-  "06": "Risk & Portfolio Management",
+  "06": "Options Pricing & Greeks",
+  "07": "Options Strategies",
+  "08": "Risk & Portfolio Management",
+  "09": "Trading Psychology & Discipline",
+  "10": "Quantitative & Algo Concepts",
+  "11": "Taxation, Compliance & Journaling",
+  "12": "Capstone & Live Execution",
 };
 
 const { variant = "h2", data, id } = Astro.props;
@@ -21,16 +27,29 @@ const { title, description, tags = [] } = data;
 
 const chapterName = title.replace(/^(?:Education(?:al)?\s+Series\s*)/i, "").trim();
 const postSlug = id.replace(/\.[^/.]+$/, "");
+
 const moduleTag = tags.find(t => /^module-\d{1,2}$/i.test(t));
-const moduleNumber = moduleTag?.match(/\d+/)?.[0]?.padStart(2, "0");
+const lessonMatch =
+  chapterName.match(/^#?(\d{1,3})\b/) ||
+  id.match(/(?:day|series)-(\d{1,3})\b/i);
+const lessonNum = lessonMatch ? parseInt(lessonMatch[1], 10) : null;
+
+const derivedModuleNum = moduleTag
+  ? moduleTag.match(/\d+/)?.[0]
+  : lessonNum && lessonNum >= 1 && lessonNum <= 365
+    ? String(Math.ceil(lessonNum / 30))
+    : null;
+
+const moduleNumber = derivedModuleNum ? derivedModuleNum.padStart(2, "0") : null;
 const moduleLabel = moduleNumber
   ? MODULE_NAMES[moduleNumber]
     ? `Module ${moduleNumber} · ${MODULE_NAMES[moduleNumber]}`
     : `Module ${moduleNumber}`
   : null;
+
 const href =
-  tags.includes("module-overview") && moduleTag
-    ? `/modules/${moduleTag.toLowerCase()}/`
+  tags.includes("module-overview") && moduleNumber
+    ? `/modules/module-${moduleNumber}/`
     : `/posts/${postSlug}/`;
 
 const headerProps = {
@@ -40,11 +59,11 @@ const headerProps = {
 };
 ---
 
-<li class="group flex flex-col justify-between rounded-2xl border border-[#10201a]/20 bg-white p-6 text-[#10201a] shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[#10201a] hover:shadow-md">
+<li class="group flex flex-col justify-between rounded-2xl border-2 border-[#10201a] bg-white p-6 text-[#10201a] shadow-[0_2px_0_#10201a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#faf8f3] hover:shadow-[0_4px_0_#10201a]">
   <div>
     {moduleLabel && (
       <div class="mb-3 flex flex-wrap gap-2">
-        <span class="rounded-full bg-[#10201a] px-3 py-1 font-mono text-xs font-medium text-white">
+        <span class="rounded-full bg-[#10201a] px-3 py-1 font-mono text-xs font-semibold text-white">
           {moduleLabel}
         </span>
       </div>
