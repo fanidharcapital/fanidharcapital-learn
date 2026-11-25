@@ -126,28 +126,37 @@ const MODULES: Omit<ModuleCardItem, "count">[] = [
   },
 ];
 
+function getLessonNumber(post: any): number {
+  const cleanTitle = (post.data.title ?? "")
+    .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
+    .trim();
+  const titleMatch = cleanTitle.match(/^#?(\d{1,3})\b/);
+  if (titleMatch) return Number(titleMatch[1]);
+  const slugMatch =
+    post.slug?.match(/(?:day|series)-(\d{1,3})\b/i) ||
+    post.id?.match(/(?:day|series)-(\d{1,3})\b/i);
+  if (slugMatch) return Number(slugMatch[1]);
+  return 9999;
+}
+
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
 
-const lessonCount = allPosts.filter(
-  post => !(post.data.tags ?? []).includes("module-overview")
-).length;
+const lessonPosts = allPosts
+  .filter(post => !(post.data.tags ?? []).includes("module-overview"))
+  .sort((a, b) => getLessonNumber(a) - getLessonNumber(b));
+
+const spotlightPosts = lessonPosts.slice(0, 4);
+const lessonCount = lessonPosts.length;
 
 const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
-  const count = allPosts.filter(post => {
+  const count = lessonPosts.filter(post => {
     const tags = post.data.tags ?? [];
-    if (tags.includes("module-overview")) return false;
     if (tags.includes(mod.id)) return true;
 
-    const cleanTitle = post.data.title
-      .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
-      .trim();
-    const numMatch =
-      cleanTitle.match(/^#?(\d{1,3})\b/) ||
-      post.id.match(/(?:day|series)-(\d{1,3})\b/i);
-    const num = numMatch ? parseInt(numMatch[1], 10) : null;
+    const num = getLessonNumber(post);
     const modNum = parseInt(mod.id.replace("module-", ""), 10);
 
-    return num !== null && Math.ceil(num / 30) === modNum;
+    return num !== 9999 && Math.ceil(num / 30) === modNum;
   }).length;
 
   return { ...mod, count };
@@ -156,24 +165,24 @@ const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
 
 <Layout title={SITE.site.title}>
   <Header />
-  <main id="main-content" class="bg-[#f8f3e8] text-[#10201a]">
-    <!-- Top Dark Green Hero Banner -->
-    <section class="border-b border-[#10201a] bg-[#09261c] text-[#f8f3e8]">
+  <main id="main-content" class="bg-[#faf8f3] text-[#10201a]">
+    <!-- Top Dark Green Banner -->
+    <section class="border-b border-[#10201a] bg-[#08241b] text-[#f8f3e8]">
       <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">
-          SHREE FANIDHAR CAPITAL · EDUCATIONAL SERIES
+          SHREE FANIDHAR CAPITAL · 365-DAY LEARNING ROADMAP
         </p>
         <h1 class="mt-3 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-          Learn Indian markets step by step
+          Build your market knowledge, one lesson at a time.
         </h1>
         <p class="mt-4 max-w-2xl text-sm leading-6 text-[#dce6e0] sm:text-base">
-          Structured lessons across equity markets, exchange operations, fundamental and technical analysis, derivatives, and risk management.
+          A self-paced roadmap through Indian markets, analysis, derivatives, and risk management—with clear explanations, visual examples, and practical exercises. Lessons are being published progressively.
         </p>
 
         <div class="mt-7 flex flex-wrap items-center gap-3">
           <a
             href="/posts/"
-            class="inline-flex min-h-11 items-center rounded-xl bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#09261c] transition hover:opacity-95"
+            class="inline-flex min-h-11 items-center rounded-xl bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#08241b] transition hover:opacity-95"
           >
             Start learning →
           </a>
@@ -199,7 +208,7 @@ const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
       </div>
 
       <!-- Curriculum Live Strip -->
-      <div class="border-t border-white/10 bg-[#071f17]">
+      <div class="border-t border-white/10 bg-[#061c15]">
         <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div class="flex flex-wrap items-center gap-3 text-sm">
             <span class="rounded-full border border-[#52b788]/40 bg-[#1b4332] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-[#95d5b2]">
@@ -220,28 +229,73 @@ const moduleCards: ModuleCardItem[] = MODULES.map(mod => {
       </div>
     </section>
 
-    <!-- 12 Modules Grid -->
-    <section id="curriculum" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#4b5d52]">
-            MODULE OVERVIEWS
-          </p>
-          <h2 class="mt-1 text-3xl font-bold tracking-tight text-[#10201a]">
-            Start your learning journey
-          </h2>
-          <p class="mt-2 max-w-2xl text-sm text-[#4b5d52]">
-            Explore all 12 structured modules across the curriculum, then step into each module's lessons at your own pace.
-          </p>
-        </div>
+    <!-- Lesson Spotlight -->
+    <section id="spotlight" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <p class="text-xs font-semibold uppercase tracking-widest text-[#4b5d52]">
+        LESSON SPOTLIGHT
+      </p>
+      <h2 class="mt-1 text-3xl font-bold tracking-tight text-[#10201a]">
+        Start your learning journey
+      </h2>
+      <p class="mt-2 max-w-2xl text-sm text-[#4b5d52]">
+        Build your knowledge step by step with structured lessons, clear explanations, and practical visual notes.
+      </p>
 
-        <a
-          href="/posts/"
-          class="inline-flex items-center rounded-xl border border-[#10201a] bg-white px-4 py-2 text-xs font-semibold text-[#10201a] transition hover:bg-[#faf8f3]"
-        >
-          Browse all lessons ↗
-        </a>
-      </div>
+      <ul class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {
+          spotlightPosts.map(post => {
+            const postSlug = post.id.replace(/\.[^/.]+$/, "");
+            const cleanTitle = (post.data.title ?? "")
+              .replace(/^(?:Education(?:al)?\s+Series\s*)/i, "")
+              .trim();
+            const tags = (post.data.tags ?? []).slice(0, 3);
+
+            return (
+              <li>
+                <a
+                  href={`/posts/${postSlug}/`}
+                  class="group flex h-full flex-col justify-between rounded-2xl border-2 border-[#08241b] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_0_#10201a]"
+                >
+                  <div>
+                    {tags.length > 0 && (
+                      <div class="mb-3 flex flex-wrap gap-2">
+                        {tags.map(tag => (
+                          <span class="rounded-full border border-white/15 bg-white/10 px-2.5 py-0.5 font-mono text-xs text-[#95d5b2]">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <h3 class="text-lg font-bold leading-snug text-[#f8f3e8] group-hover:text-[#d8bd7b]">
+                      {cleanTitle}
+                    </h3>
+
+                    {post.data.description && (
+                      <p class="mt-2 line-clamp-2 text-sm leading-6 text-[#c5d3ca]">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </div>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+
+    <!-- The 365-Day Curriculum -->
+    <section id="curriculum" class="mx-auto max-w-6xl border-t border-[#10201a]/15 px-4 py-12 sm:px-6 lg:px-8">
+      <p class="text-xs font-semibold uppercase tracking-widest text-[#4b5d52]">
+        THE 365-DAY CURRICULUM
+      </p>
+      <h2 class="mt-1 text-3xl font-bold tracking-tight text-[#10201a]">
+        Twelve structured modules
+      </h2>
+      <p class="mt-2 text-sm text-[#4b5d52]">
+        Select any module to browse its lessons and overview.
+      </p>
 
       <ul class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         {
