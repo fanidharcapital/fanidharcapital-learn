@@ -15,22 +15,22 @@ const lessonCount = allPosts.filter(
   <Header />
   <main id="main-content" class="bg-[#faf8f3] text-[#10201a]">
     <!-- Top Dark Green Banner -->
-    <section class="border-b border-[#10201a] bg-[#08241b] text-[#f8f3e8]">
+    <section class="border-b-2 border-[#10201a] bg-[#08241b] text-[#f8f3e8]">
       <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d8bd7b]">
           SHREE FANIDHAR CAPITAL · 365-DAY LEARNING ROADMAP
         </p>
         <h1 class="mt-3 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-          Build your market knowledge, one lesson at a time.
+          Master the Structure of Today’s Stock Market
         </h1>
         <p class="mt-4 max-w-2xl text-sm leading-6 text-[#dce6e0] sm:text-base">
-          A self-paced roadmap through Indian markets, analysis, derivatives, and risk management—with clear explanations, visual examples, and practical exercises. Lessons are being published progressively.
+          Understand the markets. Navigate complexity. Build disciplined execution—through 12 structured, knowledge-based modules built for Indian equity and derivatives learners.
         </p>
 
         <div class="mt-7 flex flex-wrap items-center gap-3">
           <a
             href="/curriculum/"
-            class="inline-flex min-h-11 items-center rounded-xl bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#08241b] transition hover:opacity-95"
+            class="inline-flex min-h-11 items-center rounded-xl border-2 border-[#d8bd7b] bg-[#d8bd7b] px-5 py-3 text-sm font-semibold text-[#08241b] shadow-[0_3px_0_#04120d] transition hover:-translate-y-0.5 hover:opacity-95"
           >
             Explore the Curriculum →
           </a>
@@ -71,65 +71,49 @@ const lessonCount = allPosts.filter(
             href="/curriculum/"
             class="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold text-[#f8f3e8] transition hover:bg-white/20"
           >
-            Explore the Curriculum →
+            Open Curriculum →
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Welcome Note -->
-    <section id="welcome-note" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <div class="rounded-3xl border-2 border-[#10201a] bg-white p-6 shadow-[0_4px_0_#10201a] sm:p-10 lg:p-12">
-        <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
-          WELCOME NOTE
-        </p>
-        <h2 class="mt-2 text-2xl font-bold leading-snug tracking-tight text-[#10201a] sm:text-4xl">
-          Master the Structure of Today’s Stock Market
-        </h2>
-        <p class="mt-2 text-base font-medium text-[#4b5d52] sm:text-lg">
-          Understand the markets. Navigate complexity. Build disciplined execution.
-        </p>
-
-        <p class="mt-5 max-w-4xl text-sm leading-7 text-[#3b4d43] sm:text-base">
-          Successful participation in today’s Indian equity and derivatives markets requires more than isolated trading tips—it demands a clear understanding of market structure, order execution, capital flows, price behaviour, and risk management. Our curriculum builds this foundation through <strong>12 structured, knowledge-based learning modules</strong>, taking you systematically from core market mechanics to advanced derivatives and disciplined execution.
-        </p>
-
-        <div class="mt-8 border-t border-[#10201a]/15 pt-8">
-          <h3 class="text-xl font-bold tracking-tight text-[#10201a]">
-            A Structured Learning Journey
-          </h3>
-
-          <ul class="mt-5 space-y-4 text-sm leading-7 text-[#3b4d43] sm:text-base">
-            <li class="rounded-2xl border border-[#10201a]/15 bg-[#faf8f3] p-4 sm:p-5">
-              <strong class="font-semibold text-[#10201a]">12 Knowledge-Based Learning Modules:</strong>
-              Follow a logical, progressive path covering market fundamentals, clearing and settlement, fundamental and technical analysis, price action, futures and options, option Greeks, risk management, trading psychology, and institutional and macroeconomic influences.
-            </li>
-
-            <li class="rounded-2xl border border-[#10201a]/15 bg-[#faf8f3] p-4 sm:p-5">
-              <strong class="font-semibold text-[#10201a]">Visual Learning Through Graphics and Infographics:</strong>
-              Explore market structures, derivatives payoff profiles, order execution processes, and trading workflows through clear visual diagrams and structured infographics that simplify complex concepts.
-            </li>
-
-            <li class="rounded-2xl border border-[#10201a]/15 bg-[#faf8f3] p-4 sm:p-5">
-              <strong class="font-semibold text-[#10201a]">Focused on Indian Financial Markets:</strong>
-              Learn within the real framework of NSE and BSE market structures, T+1 settlement, SEBI regulations, and practical risk principles—prioritising clarity and informed decision-making without unnecessary noise or hype.
-            </li>
-
-            <li class="rounded-2xl border border-[#10201a]/15 bg-[#faf8f3] p-4 sm:p-5">
-              <strong class="font-semibold text-[#10201a]">Learn at Your Own Pace:</strong>
-              Begin with Module 01 to establish a strong foundation, or move directly to the learning stage that aligns with your existing market knowledge.
-            </li>
-          </ul>
-        </div>
-
-        <div class="mt-8 flex flex-col justify-between gap-4 border-t border-[#10201a]/15 pt-6 sm:flex-row sm:items-center">
-          <p class="text-sm font-semibold text-[#10201a] sm:text-base">
-            Start with the fundamentals. Progress with purpose. Build your market knowledge.
-          </p>
+    <!-- Visual Roadmap & Curriculum CTA -->
+    <section id="curriculum-visual" class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div class="rounded-3xl border-2 border-[#10201a] bg-white p-5 shadow-[0_4px_0_#10201a] sm:p-8 lg:p-10">
+        <div class="flex flex-col justify-between gap-4 border-b-2 border-[#10201a]/15 pb-6 sm:flex-row sm:items-end">
+          <div>
+            <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#4b5d52]">
+              12-MODULE VISUAL OVERVIEW
+            </p>
+            <h2 class="mt-1.5 text-2xl font-bold tracking-tight text-[#10201a] sm:text-3xl">
+              From market foundations to case studies
+            </h2>
+          </div>
 
           <a
             href="/curriculum/"
-            class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-6 py-3 text-sm font-semibold text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#10201a]"
+            class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-5 py-3 text-sm font-semibold text-[#f8f3e8] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5 hover:bg-[#10201a]"
+          >
+            Go to Curriculum →
+          </a>
+        </div>
+
+        <div class="mt-6 overflow-hidden rounded-2xl border-2 border-[#10201a] bg-[#faf8f3]">
+          <img
+            src="/images/curriculum-overview.png"
+            alt="Shree Fanidhar Capital — Master the Structure of Today’s Stock Market: 12-module learning roadmap from Market foundations to Case studies."
+            class="block h-auto w-full object-cover"
+            loading="eager"
+          />
+        </div>
+
+        <div class="mt-6 flex flex-col justify-between gap-4 pt-2 sm:flex-row sm:items-center">
+          <p class="text-sm leading-6 text-[#3b4d43]">
+            Select <strong>Explore the Curriculum</strong> to open any module and study lessons step by step at your own pace.
+          </p>
+          <a
+            href="/curriculum/"
+            class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#d8bd7b] px-6 py-3 text-sm font-semibold text-[#08241b] shadow-[0_2px_0_#10201a] transition hover:-translate-y-0.5"
           >
             Explore the Curriculum →
           </a>
