@@ -10,7 +10,7 @@ tags:
   - institutional-flows
 ---
 
-![Sector Rotation & Relative Strength](/image/lessons/lesson-289.png)
+![Sector Rotation & Relative Strength](/images/lessons/lesson-289.png)
 
 Large institutions cannot deploy thousands of crores in a single session without moving prices. Instead, they accumulate leading sectors over weeks while trimming underperforming ones. Trading stocks inside a weak sector because they "look cheap" often traps capital in sideways chop, whereas focusing on relative-strength leaders puts institutional momentum behind your setups.
 
