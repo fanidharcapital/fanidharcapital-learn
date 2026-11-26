@@ -10,7 +10,7 @@ tags:
   - risk-management
 ---
 
-![Trading Around RBI Policy, Budget & CPI Releases](/image/lessons/lesson-287.png)
+![Trading Around RBI Policy, Budget & CPI Releases](/images/lessons/lesson-287.png)
 
 Scheduled macro releases—such as the RBI Monetary Policy Committee (MPC) announcement at 10:00 AM IST, Union Budget speech, or domestic and US CPI prints—compress weeks of repricing into minutes. In the first few minutes after a release, bid-ask spreads widen, option implied volatility spikes, and false breakouts sweep liquidity on both sides.
 
