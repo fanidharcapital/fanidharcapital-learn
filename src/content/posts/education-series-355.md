@@ -1,6 +1,6 @@
-​---
+---
 title: "Education Series #355: Review Exercise 1 — Market Foundations, Exchanges, Clearing & Settlement"
-pubDatetime: 2026-11-26T11:52:00+05:30
+pubDatetime: 2026-11-26T12:05:00+05:30
 description: "Test and reinforce core concepts across primary and secondary markets, NSE/BSE order matching, clearing corporations, T+1 settlement, and depository mechanics."
 tags:
   - education-series
