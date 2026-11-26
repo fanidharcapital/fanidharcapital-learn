@@ -10,7 +10,7 @@ tags:
   - portfolio-management
 ---
 
-![Macro Risk Budgets & Gap Controls](/image/lessons/lesson-292.png)
+![Macro Risk Budgets & Gap Controls](/images/lessons/lesson-292.png)
 
 Stop-loss orders only protect you while the exchange is open and liquid. When an unexpected geopolitical shock, weekend policy announcement, or global overnight sell-off hits, Nifty and Bank Nifty can open 2%–5% away from the previous close—skipping right past resting stop orders. A **macro risk budget** ensures no single overnight gap can threaten your trading capital.
 
