@@ -476,7 +476,7 @@ export const MODULE_QUIZZES: Record<string, ModuleQuizData> = {
         explanation: "Respecting loss limits protects capital during unfavorable sessions.",
       },
       {
-        question: "Core takeaway of the 12-module 365-day curriculum?",
+        question: "Core takeaway of the 13-week curriculum?",
         options: [
           "Structure, risk control, and self-review build sustainable habits",
           "Chart patterns guarantee daily profits",
@@ -488,5 +488,65 @@ export const MODULE_QUIZZES: Record<string, ModuleQuizData> = {
       },
     ],
   },
-};
-    
+  "module-13": {
+    moduleSlug: "module-13",
+    moduleTitle: "Asset allocation, tax reality & execution engineering",
+    passingScore: 2,
+    questions: [
+      {
+        question: "What is the main advantage of separating emergency cash, long-term lock-ins, and active trading capital?",
+        options: [
+          "It prevents forced liquidation of long-term or emergency funds during trading drawdowns",
+          "It eliminates taxes on all F&O gains",
+          "It guarantees higher returns than index funds",
+          "It removes margin requirements in derivatives",
+        ],
+        correctIndex: 0,
+        explanation: "Multi-bucket allocation isolates short-term liquidity and long-term goals from active market risk.",
+      },
+      {
+        question: "Why evaluate post-tax real return rather than nominal yield alone?",
+        options: [
+          "Taxes and inflation erode actual purchasing power over time",
+          "Nominal yield is only calculated on savings accounts",
+          "Post-tax return ignores brokerage and STT",
+          "Inflation never affects fixed-income schemes",
+        ],
+        correctIndex: 0,
+        explanation: "Real return adjusts after-tax gains for inflation to reflect true purchasing power.",
+      },
+      {
+        question: "How should position sizing adapt when market volatility expands?",
+        options: [
+          "Scale down position size or throttle risk so dollar volatility stays controlled",
+          "Increase leverage to recover faster",
+          "Disable stop-losses until volatility drops",
+          "Ignore regime shifts if a setup looks familiar",
+        ],
+        correctIndex: 0,
+        explanation: "Volatility scaling and drawdown throttles keep risk exposure proportional in shifting regimes.",
+      },
+    ],
+  },
+  "module-14": {
+    moduleSlug: "module-14",
+    moduleTitle: "Final certification quiz",
+    passingScore: 2,
+    questions: [
+      {
+        question: "What ties together asset allocation, tax awareness, and execution engineering across the 13-week track?",
+        options: [
+          "Protecting capital first while executing repeatable setups within clear risk limits",
+          "Maximizing daily trade count regardless of slippage",
+          "Relying on a single indicator for every timeframe",
+          "Treating active trading capital and emergency cash as one pool",
+        ],
+        correctIndex: 0,
+        explanation: "Sustainable trading pairs disciplined execution and risk controls with sound capital allocation.",
+      },
+      {
+        question: "Why is live trade auditing and journaling essential after execution?",
+        options: [
+          "It separates rule-following errors from normal variance and improves execution consistency",
+          "It changes past fill prices after market close",
+          "It replaces pre-trad
