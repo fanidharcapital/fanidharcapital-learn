@@ -10,7 +10,7 @@ tags:
   - trading-discipline
 ---
 
-![Common Macro & Flow Mistakes](/image/lessons/lesson-291.png)
+![Common Macro & Flow Mistakes](/images/lessons/lesson-291.png)
 
 Access to daily FII/DII cash numbers, participant-wise OI tables, and real-time macro feeds is an advantage only if you avoid misusing the data. Most losses around macro and flow analysis come from a handful of repeatable mistakes.
 
