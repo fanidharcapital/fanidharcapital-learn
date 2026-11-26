@@ -22,11 +22,6 @@ const MODULE_RANGES: Record<number, { min: number; max: number }> = {
   10: { min: 271, max: 300 },
   11: { min: 301, max: 330 },
   12: { min: 331, max: 365 },
-  13: { min: 366, max: 375 },
-};
-
-const MODULE_TITLES: Record<number, string> = {
-  13: "Asset Allocation, Tax Reality & Execution Engineering",
 };
 
 function isOverviewPost(post: any): boolean {
@@ -59,13 +54,12 @@ function cleanLessonTitle(title: string): string {
 }
 
 export async function getStaticPaths() {
-  const moduleSlugs = Array.from({ length: 14 }, (_, i) =>
+  const moduleSlugs = Array.from({ length: 13 }, (_, i) =>
     `module-${String(i + 1).padStart(2, "0")}`
   );
 
   return moduleSlugs.map((slug) => {
-    const isFinalChapter = slug === "module-14";
-    const num = Number(slug.replace("module-", ""));
+    const isFinalChapter = slug === "module-13";
     const quiz = MODULE_QUIZZES[slug];
     return {
       params: { slug },
@@ -73,7 +67,7 @@ export async function getStaticPaths() {
         slug,
         title: isFinalChapter
           ? FINAL_EXAM_CONFIG.title
-          : (quiz?.moduleTitle ?? MODULE_TITLES[num] ?? slug.replace("-", " ").toUpperCase()),
+          : (quiz?.moduleTitle ?? slug.replace("-", " ").toUpperCase()),
         quiz,
         isFinalChapter,
       },
@@ -100,7 +94,7 @@ const moduleLessons = isFinalChapter
       .sort((a, b) => a.lessonNum - b.lessonNum);
 
 const prevSlug = currentNum > 1 ? `module-${String(currentNum - 1).padStart(2, "0")}` : null;
-const nextSlug = currentNum < 14 ? `module-${String(currentNum + 1).padStart(2, "0")}` : null;
+const nextSlug = currentNum < 13 ? `module-${String(currentNum + 1).padStart(2, "0")}` : null;
 
 const finalExamPayload = JSON.stringify({
   passingScore: FINAL_EXAM_CONFIG.passingScore,
@@ -117,24 +111,24 @@ const finalExamPayload = JSON.stringify({
         href="/curriculum/"
         class="inline-flex items-center gap-1.5 rounded-full border-2 border-[#10201a] bg-white px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#9c7016] transition hover:bg-[#faf8f3]"
       >
-        ← Back to 13-Week Curriculum
+        ← Back to 12-Week Curriculum
       </a>
       <span class="rounded-full border-2 border-[#10201a] bg-[#faf8f3] px-4 py-1.5 font-mono text-xs font-semibold uppercase text-[#4b5d52]">
-        {isFinalChapter ? `${weekLabel} · MODULE 14 · FINAL QUIZ` : `${weekLabel} · ${slug.replace("-", " ")}`}
+        {isFinalChapter ? `${weekLabel} · MODULE 13 · FINAL QUIZ` : `${weekLabel} · ${slug.replace("-", " ")}`}
       </span>
     </div>
 
     <header class="mt-5 rounded-3xl border-2 border-[#10201a] bg-[#08241b] p-6 text-[#f8f3e8] shadow-[0_4px_0_#10201a] sm:p-8">
       <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#d8bd7b]">
-        SHREE FANIDHAR CAPITAL · {weekLabel.toUpperCase()} · {isFinalChapter ? "MODULE 14 · CERTIFICATION QUIZ" : slug.replace("-", " ").toUpperCase()}
+        SHREE FANIDHAR CAPITAL · {weekLabel.toUpperCase()} · {isFinalChapter ? "MODULE 13 · CERTIFICATION QUIZ" : slug.replace("-", " ").toUpperCase()}
       </p>
       <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
         {title}
       </h1>
       <p class="mt-2 text-sm text-[#f8f3e8]/85">
         {isFinalChapter
-          ? `${FINAL_EXAM_QUESTIONS.length} comprehensive questions covering Modules 01–13 (13-week track). Passing score: ${FINAL_EXAM_CONFIG.passingScore}/${FINAL_EXAM_QUESTIONS.length}.`
-          : `${weekLabel} of 13 · ${moduleLessons.length} published lessons in this module (Lessons #${range?.min ?? 1}–#${range?.max ?? 30}). Complete this module in 1 week and take the quiz below.`}
+          ? `${FINAL_EXAM_QUESTIONS.length} comprehensive questions covering Modules 01–12 (12-week track). Passing score: ${FINAL_EXAM_CONFIG.passingScore}/${FINAL_EXAM_QUESTIONS.length}.`
+          : `${weekLabel} of 12 · ${moduleLessons.length} published lessons in this module (Days ${String(range?.min ?? 1).padStart(2, "0")}–${range?.max ?? 30}). Complete this module in 1 week and take the quiz below.`}
       </p>
       {!isFinalChapter && quiz && (
         <a
@@ -195,29 +189,29 @@ const finalExamPayload = JSON.stringify({
 
     {isFinalChapter && (
       <section
-        id="module-14-final-exam"
+        id="module-13-final-exam"
         class="mt-8 rounded-3xl border-2 border-[#10201a] bg-white p-5 shadow-[0_4px_0_#10201a] sm:p-8"
         data-exam={finalExamPayload}
       >
         <div class="flex flex-col justify-between gap-3 border-b-2 border-[#10201a]/15 pb-5 sm:flex-row sm:items-center">
           <div>
             <p class="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#9c7016]">
-              {weekLabel.toUpperCase()} · MODULE 14 · {FINAL_EXAM_QUESTIONS.length} QUESTIONS · PASS: {FINAL_EXAM_CONFIG.passingScore}/{FINAL_EXAM_QUESTIONS.length}
+              {weekLabel.toUpperCase()} · MODULE 13 · {FINAL_EXAM_QUESTIONS.length} QUESTIONS · PASS: {FINAL_EXAM_CONFIG.passingScore}/{FINAL_EXAM_QUESTIONS.length}
             </p>
             <h2 class="mt-1 text-xl font-bold tracking-tight text-[#10201a] sm:text-2xl">
               Final Certification Assessment
             </h2>
           </div>
           <span
-            id="m14-saved-badge"
+            id="m13-saved-badge"
             class="hidden self-start rounded-full border-2 border-[#10201a] bg-[#08241b] px-3.5 py-1.5 font-mono text-xs font-semibold text-[#d8bd7b] sm:self-auto"
           ></span>
         </div>
 
-        <form id="m14-exam-form" class="mt-6 space-y-5">
+        <form id="m13-exam-form" class="mt-6 space-y-5">
           {FINAL_EXAM_QUESTIONS.map((q: QuizQuestion, qIdx: number) => (
             <fieldset
-              class="m14-question-card rounded-2xl border-2 border-[#10201a] bg-[#faf8f3] p-4 shadow-[0_3px_0_#10201a] sm:p-5"
+              class="m13-question-card rounded-2xl border-2 border-[#10201a] bg-[#faf8f3] p-4 shadow-[0_3px_0_#10201a] sm:p-5"
               data-question-index={qIdx}
             >
               <legend class="rounded-full border border-[#10201a]/25 bg-white px-3 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-[#4b5d52]">
@@ -229,10 +223,10 @@ const finalExamPayload = JSON.stringify({
 
               <div class="mt-3.5 space-y-2.5">
                 {q.options.map((opt: string, optIdx: number) => (
-                  <label class="m14-option flex cursor-pointer items-start gap-3 rounded-xl border-2 border-[#10201a]/25 bg-white px-4 py-2.5 text-sm font-medium text-[#10201a] transition hover:border-[#10201a]">
+                  <label class="m13-option flex cursor-pointer items-start gap-3 rounded-xl border-2 border-[#10201a]/25 bg-white px-4 py-2.5 text-sm font-medium text-[#10201a] transition hover:border-[#10201a]">
                     <input
                       type="radio"
-                      name={`m14-q-${qIdx}`}
+                      name={`m13-q-${qIdx}`}
                       value={optIdx}
                       class="mt-0.5 size-4 shrink-0 accent-[#08241b]"
                     />
@@ -241,10 +235,10 @@ const finalExamPayload = JSON.stringify({
                 ))}
               </div>
 
-              <div class="m14-answer-box mt-3.5 hidden rounded-xl border-2 border-[#10201a] bg-white px-4 py-3 text-xs leading-5 text-[#10201a]">
-                <p class="m14-verdict font-mono text-xs font-bold uppercase tracking-wider"></p>
-                <p class="m14-correct-answer mt-1 font-semibold text-[#08241b]"></p>
-                <p class="m14-explanation mt-1 text-[#2d3e35]"></p>
+              <div class="m13-answer-box mt-3.5 hidden rounded-xl border-2 border-[#10201a] bg-white px-4 py-3 text-xs leading-5 text-[#10201a]">
+                <p class="m13-verdict font-mono text-xs font-bold uppercase tracking-wider"></p>
+                <p class="m13-correct-answer mt-1 font-semibold text-[#08241b]"></p>
+                <p class="m13-explanation mt-1 text-[#2d3e35]"></p>
               </div>
             </fieldset>
           ))}
@@ -259,7 +253,7 @@ const finalExamPayload = JSON.stringify({
               </button>
               <button
                 type="button"
-                id="m14-reset-btn"
+                id="m13-reset-btn"
                 class="hidden min-h-11 cursor-pointer items-center justify-center rounded-xl border-2 border-[#10201a] bg-white px-5 py-3 text-sm font-bold text-[#10201a] transition hover:bg-[#faf8f3]"
               >
                 Retake Quiz
@@ -267,7 +261,7 @@ const finalExamPayload = JSON.stringify({
             </div>
 
             <div
-              id="m14-result-box"
+              id="m13-result-box"
               class="hidden rounded-xl border-2 border-[#10201a] bg-[#08241b] px-4 py-2.5 text-sm font-semibold text-[#f8f3e8]"
               aria-live="polite"
             ></div>
@@ -293,8 +287,8 @@ const finalExamPayload = JSON.stringify({
           href={`/modules/${nextSlug}/`}
           class="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-[#10201a] bg-[#08241b] px-6 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-[#d8bd7b] shadow-[0_3px_0_#10201a] transition hover:-translate-y-0.5"
         >
-          {nextSlug === "module-14"
-            ? `Next: Week ${String(currentNum + 1).padStart(2, "0")} · Module 14 Quiz →`
+          {nextSlug === "module-13"
+            ? `Next: Week ${String(currentNum + 1).padStart(2, "0")} · Module 13 Quiz →`
             : `Next: Week ${String(currentNum + 1).padStart(2, "0")} · ${nextSlug.replace("-", " ")} →`}
         </a>
       )}
@@ -304,18 +298,18 @@ const finalExamPayload = JSON.stringify({
 </Layout>
 
 <script>
-  function initModule14Exam() {
-    const section = document.getElementById("module-14-final-exam");
+  function initModule13Exam() {
+    const section = document.getElementById("module-13-final-exam");
     if (!section) return;
 
     const rawData = section.getAttribute("data-exam");
     if (!rawData) return;
 
     const exam = JSON.parse(rawData);
-    const form = document.getElementById("m14-exam-form") as HTMLFormElement | null;
-    const resetBtn = document.getElementById("m14-reset-btn");
-    const resultBox = document.getElementById("m14-result-box");
-    const savedBadge = document.getElementById("m14-saved-badge");
+    const form = document.getElementById("m13-exam-form") as HTMLFormElement | null;
+    const resetBtn = document.getElementById("m13-reset-btn");
+    const resultBox = document.getElementById("m13-result-box");
+    const savedBadge = document.getElementById("m13-saved-badge");
     if (!form || !resetBtn || !resultBox || !savedBadge) return;
 
     const updateBadge = (score: number) => {
@@ -335,13 +329,13 @@ const finalExamPayload = JSON.stringify({
         const card = form.querySelector(`[data-question-index="${qIdx}"]`);
         if (!card) return;
 
-        const selected = form.querySelector(`input[name="m14-q-${qIdx}"]:checked`) as HTMLInputElement | null;
+        const selected = form.querySelector(`input[name="m13-q-${qIdx}"]:checked`) as HTMLInputElement | null;
         const chosenIdx = selected ? Number(selected.value) : -1;
-        const optionLabels = card.querySelectorAll(".m14-option");
-        const answerBox = card.querySelector(".m14-answer-box");
-        const verdictEl = card.querySelector(".m14-verdict");
-        const correctAnswerEl = card.querySelector(".m14-correct-answer");
-        const explanationEl = card.querySelector(".m14-explanation");
+        const optionLabels = card.querySelectorAll(".m13-option");
+        const answerBox = card.querySelector(".m13-answer-box");
+        const verdictEl = card.querySelector(".m13-verdict");
+        const correctAnswerEl = card.querySelector(".m13-correct-answer");
+        const explanationEl = card.querySelector(".m13-explanation");
 
         optionLabels.forEach((label, optIdx) => {
           label.classList.remove("border-emerald-700", "bg-emerald-50", "border-red-700", "bg-red-50");
@@ -357,7 +351,7 @@ const finalExamPayload = JSON.stringify({
 
         if (answerBox && verdictEl && correctAnswerEl && explanationEl) {
           verdictEl.textContent = isCorrect ? "✓ CORRECT" : chosenIdx === -1 ? "⚠ NOT ATTEMPTED" : "✕ INCORRECT";
-          verdictEl.className = `m14-verdict font-mono text-xs font-bold uppercase tracking-wider ${
+          verdictEl.className = `m13-verdict font-mono text-xs font-bold uppercase tracking-wider ${
             isCorrect ? "text-emerald-800" : "text-red-800"
           }`;
           correctAnswerEl.textContent = `Answer: ${q.options[q.correctIndex]}`;
@@ -382,13 +376,13 @@ const finalExamPayload = JSON.stringify({
       form.reset();
       resultBox.classList.add("hidden");
       resetBtn.classList.add("hidden");
-      form.querySelectorAll(".m14-option").forEach((label) => {
+      form.querySelectorAll(".m13-option").forEach((label) => {
         label.classList.remove("border-emerald-700", "bg-emerald-50", "border-red-700", "bg-red-50");
       });
-      form.querySelectorAll(".m14-answer-box").forEach((el) => el.classList.add("hidden"));
+      form.querySelectorAll(".m13-answer-box").forEach((el) => el.classList.add("hidden"));
     });
   }
 
-  initModule14Exam();
-  document.addEventListener("astro:after-swap", initModule14Exam);
+  initModule13Exam();
+  document.addEventListener("astro:after-swap", initModule13Exam);
 </script>
