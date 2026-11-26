@@ -10,7 +10,7 @@ tags:
   - rate-sensitives
 ---
 
-![Case Study 1 — RBI Monetary Policy & Rate/Liquidity Reaction](/image/lessons/lesson-293.png)
+![Case Study 1 — RBI Monetary Policy & Rate/Liquidity Reaction](/images/lessons/lesson-293.png)
 
 When the Reserve Bank of India (RBI) shifts either its policy stance or banking-system liquidity operations (such as CRR adjustments or Variable Rate Repo auctions), equity markets react not just to the headline repo rate, but to the **forward path of funding costs**.
 
