@@ -1,6 +1,6 @@
 ---
 title: "Education Series #302: Auction Market Theory — Value Areas, Point of Control (POC), Balance vs. Imbalance"
-pubDatetime: 2026-11-27T09:15:00+05:30
+pubDatetime: 2026-11-26T09:00:00+05:30
 description: "Apply Auction Market Theory to spot balanced consolidation versus directional imbalance using Point of Control (POC) and Value Area boundaries."
 tags:
   - education-series
