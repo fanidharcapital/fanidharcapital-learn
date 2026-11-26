@@ -10,7 +10,7 @@ tags:
   - implied-volatility
 ---
 
-![Earnings & Event Playbooks](/image/lessons/lesson-288.png)
+![Earnings & Event Playbooks](/images/lessons/lesson-288.png)
 
 Quarterly earnings on heavyweights like Reliance, HDFC Bank, Infosys, or TCS routinely trigger 3%–7% overnight gaps. Buying naked ATM calls or puts ahead of results is one of the most common traps in options trading because implied volatility (IV) drops sharply the moment numbers are released—a phenomenon known as **IV crush**.
 
