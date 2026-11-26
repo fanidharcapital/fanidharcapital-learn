@@ -489,3 +489,4 @@ export const MODULE_QUIZZES: Record<string, ModuleQuizData> = {
     ],
   },
 };
+    
