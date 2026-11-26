@@ -1,6 +1,6 @@
 ---
 title: "Education Series #305: VWAP Bands, Standard Deviation Channels & Institutional Execution Benchmarks"
-pubDatetime: 2026-11-27T10:00:00+05:30
+pubDatetime: 2026-11-26T10:00:00+05:30
 description: "Use Volume-Weighted Average Price (VWAP) and standard deviation bands to gauge intraday institutional benchmark positioning and overextended price extremes."
 tags:
   - education-series
