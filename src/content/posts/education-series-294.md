@@ -10,7 +10,7 @@ tags:
   - fii-dii-flows
 ---
 
-![Case Study 2 — Global Cues, Crude/INR Shifts & FII/DII Flow Inflections](/image/lessons/lesson-294.png)
+![Case Study 2 — Global Cues, Crude/INR Shifts & FII/DII Flow Inflections](/images/lessons/lesson-294.png)
 
 Because India imports over 80% of its crude oil requirements, an overnight geopolitical spike in Brent crude paired with a stronger US Dollar Index (DXY) creates an immediate cross-asset shock across Indian equities, currency, and institutional flows.
 
