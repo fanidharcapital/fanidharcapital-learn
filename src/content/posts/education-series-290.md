@@ -10,7 +10,7 @@ tags:
   - expiry-gamma
 ---
 
-![Options Positioning Around Macro Events](/image/lessons/lesson-290.png)
+![Options Positioning Around Macro Events](/images/lessons/lesson-290.png)
 
 Before major macro events, the options chain reveals where institutions are buying protection and which expiry is absorbing the event premium. Reading **volatility skew**, **term structure**, and **expiry proximity** helps you pick the right strike and expiration rather than overpaying for decaying time value.
 
