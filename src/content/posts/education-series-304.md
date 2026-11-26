@@ -1,6 +1,6 @@
 ---
 title: "Education Series #304: Order Book Depth, Tape Reading & Absorption vs. Exhaustion at Key Levels"
-pubDatetime: 2026-11-27T09:45:00+05:30
+pubDatetime: 2026-11-26T09:45:00+05:30
 description: "Distinguish institutional absorption from trend exhaustion at major support and resistance levels using volume, price reaction, and execution context."
 tags:
   - education-series
