@@ -1,6 +1,6 @@
 ---
 title: "Education Series #301: Multi-Timeframe Market Structure — Liquidity Sweeps, Break of Structure (BOS) & Change of Character (CHoCH)"
-pubDatetime: 2026-11-27T09:00:00+05:30
+pubDatetime: 2026-11-26T09:00:00+05:30
 description: "Read higher-timeframe trend direction, spot stop-hunt liquidity sweeps, and distinguish trend continuation (BOS) from structural reversals (CHoCH)."
 tags:
   - education-series
