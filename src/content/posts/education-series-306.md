@@ -1,6 +1,6 @@
 ---
 title: "Education Series #306: Gap Fill Mechanics vs. Breakaway Gaps — Structural Context & Volume Confirmation"
-pubDatetime: 2026-11-27T10:15:00+05:30
+pubDatetime: 2026-11-26T10:00:00+05:30
 description: "Tell the difference between gaps that tend to fill and breakaway gaps that start new trends using structural context, open price action, and volume."
 tags:
   - education-series
