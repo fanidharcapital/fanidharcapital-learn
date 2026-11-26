@@ -10,7 +10,7 @@ tags:
   - market-structure
 ---
 
-![education-series-286](/image/lessons/lesson-286.png)
+![Top-Down Macro-to-Chart Alignment](/image/lessons/lesson-286.png)
 
 Macro headlines and institutional flow numbers only become actionable when they agree with what price is actually doing on the chart. A bullish RBI liquidity stance or strong DII buying does not justify buying a breakdown below major weekly support, just as a hawkish global cue does not automatically mean shorting an index holding higher lows.
 
