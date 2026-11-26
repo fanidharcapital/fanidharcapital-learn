@@ -1,6 +1,6 @@
 ---
 title: "Education Series #303: Opening Range, Initial Balance & Intraday Liquidity Pools on Nifty & Bank Nifty"
-pubDatetime: 2026-11-27T09:30:00+05:30
+pubDatetime: 2026-11-26T09:30:00+05:30
 description: "Structure your NSE morning session using the Opening Range, the 9:15–10:15 AM Initial Balance, and key intraday liquidity pools on Nifty and Bank Nifty."
 tags:
   - education-series
